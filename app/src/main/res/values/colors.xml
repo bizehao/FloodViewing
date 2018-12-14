@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#353333</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#e1940f</color>
+    <color name="blue">#177ed3</color>
+    <!-- 保险蓝色字体颜色 3598da-->
+    <color name="surance_blue">#4aabf6</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#08f246</color>
+    <color name="button_up">#37dd63</color>
+    <color name="button_down">#29b74f</color>
+    <color name="tran_green">#b41a8fe8</color>
+    <color name="black">#262222</color>
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="tab_checked">#ED6A2C</color><!-- 选中-->
+    <color name="tab_unchecked">#757575</color><!-- 未选中 -->
+    <color name="gray_light">#e8e8e8</color>
+    <color name="colorNavigation">#2B2B2B</color>
+    <color name="gray">#ab7e7979</color>
+    <color name="dark_grey">#7F7A7A</color>
+    <color name="yello">#f3f700</color>
+    <color name="circle">#d11a4b</color>
+    <color name="rect">#1d9dd9</color>
+    <color name="triangle">#66d731</color>
+    <color name="blink_color">#b1b1b1</color>
+    <color name="shimmer_color">#a2878787</color>
+    <color name="orange">#f46444</color>
+    <!-- 默认背景颜色，灰白 -->
+    <color name="base_bg">#FBFBFB</color>
+    <color name="white_bg_10531M">#ffffffff</color>
+    <!-- 标题、内容 -->
+    <color name="text_normal">#5b5b5b</color>
+    <!-- 首页上方环形进度条的默认颜色，灰色 -->
+    <color name="home_round_progress_bar_default_gray">#D1D1D1</color>
+    <color name="dialog_pressed_bg_color">#919191</color>
+    <color name="bg_blue">#0195ff</color>
+    <color name="windows_bg">#f6f6f6</color>
+    <color name="content_bg">#eeeeee</color>
+    <color name="map_line">#AA00FF00</color>
+    <color name="map_over">#51ffff00</color>
+</resources>

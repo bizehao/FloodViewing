@@ -1,0 +1,143 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/surance_blue"
+        android:layout_marginBottom="2dp">
+        <TextView
+            android:id="@+id/fragment_left_datetv"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text=""/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/left_notDatas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/left_sas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/notdatas"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/left_sas"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="#434141"
+            android:text="没有数据"/>
+    </RelativeLayout>
+
+    <com.mingle.widget.LoadingView
+        android:id="@+id/left_loadView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="正在加载..." />
+    </com.mingle.widget.LoadingView>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="240dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/jingjie"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="100dp"
+            app:cbd_strokeColor="#F50A0A"
+            android:visibility="gone"
+            android:text="警戒水位"/>
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/baozheng"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_weight="1"
+            app:cbd_strokeColor="#0AF518"
+            android:visibility="gone"
+            android:text="保证水位" />
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/xunxian"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cbd_strokeColor="#F50A0A"
+            android:visibility="gone"
+            android:text="汛限水位"/>
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/ruku"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cbd_strokeColor="#7f1ce2"
+            android:visibility="gone"
+            android:text="入库流量" />
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/chuku"
+            style="@style/Material.Drawable.CheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cbd_strokeColor="#ebc312"
+            android:visibility="gone"
+            android:text="出库流量"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/title_model"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#69c4c8">
+        <TextView
+            android:id="@+id/left_jilu"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text=""/>
+    </LinearLayout>
+
+    <com.bin.david.form.core.SmartTable
+            android:id="@+id/smart_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+</LinearLayout>

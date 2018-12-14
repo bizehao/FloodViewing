@@ -1,0 +1,132 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/fragment_left_topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/surance_blue"
+        android:layout_marginBottom="2dp">
+        <TextView
+            android:id="@+id/fragment_left_rain_datetv"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text=""/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/left_notDatas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/left_sas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/notdatas"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/left_sas"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textColor="#434141"
+            android:text="没有数据"/>
+    </RelativeLayout>
+
+    <com.mingle.widget.LoadingView
+        android:id="@+id/left_loadView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="正在加载..." />
+    </com.mingle.widget.LoadingView>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+
+    <LinearLayout
+        android:id="@+id/title_model"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/fragment_left_rain_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/surance_blue"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="01小时" />
+
+        <Button
+            android:id="@+id/fragment_left_rain_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/surance_blue"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="03小时" />
+
+        <Button
+            android:id="@+id/fragment_left_rain_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/surance_blue"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="06小时" />
+
+        <Button
+            android:id="@+id/fragment_left_rain_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/surance_blue"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="12小时" />
+
+        <Button
+            android:id="@+id/fragment_left_rain_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/surance_blue"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="24小时" />
+    </LinearLayout>
+
+    <com.bin.david.form.core.SmartTable
+            android:id="@+id/smart_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+</LinearLayout>

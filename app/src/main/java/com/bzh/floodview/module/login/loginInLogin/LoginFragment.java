@@ -1,0 +1,84 @@
+package com.bzh.floodview.module.login.loginInLogin;
+
+import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.AppCompatButton;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import com.bzh.floodview.R;
+import com.bzh.floodview.base.fragment.BaseFragment;
+import com.bzh.floodview.module.login.loginInRegister.RegisterFragment;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+public class LoginFragment extends BaseFragment implements LoginContract.View {
+
+    @BindView(R.id.rout_register)
+    TextView mTextView;
+
+    @BindView(R.id.login_user_text)
+    TextInputEditText loginUserText;
+
+    @BindView(R.id.password_text)
+    TextInputEditText passwordText;
+
+    @BindView(R.id.login_but)
+    AppCompatButton loginBut;
+
+    @Inject
+    LoginContract.Presenter mPresenter;
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.fragment_login;
+    }
+
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+    }
+
+    @OnClick(R.id.rout_register) //跳转到注册
+    public void setmTextViewClick(View view){
+        FrameLayout frameLayout = getActivity().findViewById(R.id.login_fragment);
+        frameLayout.setPadding(0,0,0,0);
+        RegisterFragment registerFragment = new RegisterFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.login_fragment,registerFragment).commit();
+    }
+
+    @OnClick(R.id.login_but) //点击登录
+    public void setmLoginButClick(View view){
+        mPresenter.login();
+    }
+
+    @Override
+    public String getUsername() {
+        return loginUserText.getText().toString();
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordText.getText().toString();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.takeView(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.dropView();
+    }
+
+}
