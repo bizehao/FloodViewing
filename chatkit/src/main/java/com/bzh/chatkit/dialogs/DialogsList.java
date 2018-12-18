@@ -36,7 +36,7 @@ import com.bzh.chatkit.commons.models.IDialog;
 
 
 /**
- * Component for displaying list of dialogs
+ * Component for displaying list of dialogs 弹框
  */
 public class DialogsList extends RecyclerView {
 
