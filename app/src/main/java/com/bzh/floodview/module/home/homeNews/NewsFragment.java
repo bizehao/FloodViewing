@@ -3,9 +3,11 @@ package com.bzh.floodview.module.home.homeNews;
 import android.arch.lifecycle.Observer;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -386,6 +388,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
         dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar calendar = Calendar.getInstance();
