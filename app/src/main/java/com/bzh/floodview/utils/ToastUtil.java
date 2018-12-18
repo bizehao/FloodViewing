@@ -9,9 +9,7 @@ import com.bzh.apilibrary.badge.BGABadgeViewUtil;
 import com.bzh.floodview.R;
 
 /**
- * 作者:王浩 邮件:bingoogolapple@gmail.com
- * 创建时间:15/12/5 上午11:50
- * 描述:
+ * 工具 toast
  */
 public class ToastUtil {
     private static Toast sToast;

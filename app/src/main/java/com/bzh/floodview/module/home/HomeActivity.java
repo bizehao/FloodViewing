@@ -191,7 +191,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 .setHideOnSelect(false);
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED).setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
                 .addItem(new BottomNavigationItem(R.drawable.home_unchecked, "主页").setActiveColorResource(R.color.blue))
-                .addItem(new BottomNavigationItem(R.drawable.patrol_unchecked, "移动巡查").setActiveColorResource(R.color.blue))
+                .addItem(new BottomNavigationItem(R.drawable.patrol_unchecked, "监测预警").setActiveColorResource(R.color.blue))
                 .addItem(new BottomNavigationItem(R.drawable.maillist_unchecked, "通讯录").setActiveColorResource(R.color.blue)
                         .setBadgeItem(numberBadgeItem))
                 .setFirstSelectedPosition(0).initialise();
