@@ -84,6 +84,7 @@ public class SubRsvrMapFragment extends BaseFragment {
             public void onClick(View v) {
                 Class<?> searchViewClass = mSearchView.getClass();
                 try {
+                    String mm = "你好";
                     Method method = searchViewClass.getDeclaredMethod("onSearchClicked");
                     method.setAccessible(true);
                     method.invoke(mSearchView);
