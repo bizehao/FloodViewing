@@ -15,7 +15,7 @@ import com.bzh.floodview.model.ApiCommon;
 import com.bzh.floodview.model.ApiFriends;
 import com.bzh.floodview.model.ApiUserInfo;
 import com.bzh.floodview.module.login.LoginActivity;
-import com.bzh.floodview.module.talk.WebSocketChatClient;
+import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
 
 import org.java_websocket.WebSocket;
 

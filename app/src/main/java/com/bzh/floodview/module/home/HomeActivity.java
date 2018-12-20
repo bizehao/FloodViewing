@@ -47,11 +47,11 @@ import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.module.home.homeIndex.IndexFragment;
-import com.bzh.floodview.module.home.homeNews.NewsFragment;
-import com.bzh.floodview.module.home.homePlan.TalkFragment;
+import com.bzh.floodview.module.home.homeMap.MapFragment;
+import com.bzh.floodview.module.home.homeChat.TalkFragment;
 import com.bzh.floodview.module.login.LoginActivity;
 import com.bzh.floodview.module.setting.SettingActivity;
-import com.bzh.floodview.module.talk.talkFriends.FriendsActivity;
+import com.bzh.floodview.module.home.homeChat.talk.talkFriends.FriendsActivity;
 import com.bzh.floodview.utils.AppManager;
 import com.bzh.floodview.utils.CommonUtil;
 import com.bzh.floodview.utils.FileUtil;
@@ -67,7 +67,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import timber.log.Timber;
 
 import static com.bzh.floodview.utils.FileUtil.getRealFilePathFromUri;
 
@@ -104,7 +103,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Inject
     IndexFragment sportFragment;
     @Inject
-    NewsFragment newsFragment;
+    MapFragment mapFragment;
     @Inject
     TalkFragment talkFragment;
     @Inject
@@ -147,7 +146,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         drawerToggle.syncState();
 
         fragments[0] = sportFragment;
-        fragments[1] = newsFragment;
+        fragments[1] = mapFragment;
         fragments[2] = talkFragment;
         //侧滑菜单 menu
         //mNavigationView.setCheckedItem(R.id.nav_login);

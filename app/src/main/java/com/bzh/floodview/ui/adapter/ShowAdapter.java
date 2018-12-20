@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bzh.floodview.R;
 import com.bzh.floodview.model.floodsituation.Submenu;
-import com.bzh.floodview.module.content.ContentActivity;
-import com.bzh.floodview.module.content.ShowitemActivity;
+import com.bzh.floodview.module.home.homeIndex.content.ContentActivity;
+import com.bzh.floodview.module.home.homeIndex.content.ShowitemActivity;
 import com.bzh.floodview.utils.MapIntent;
 
 import java.util.LinkedHashMap;

@@ -64,16 +64,16 @@
         <activity android:name="com.bzh.floodview.module.home.HomeActivity" />
         <activity android:name="com.bzh.floodview.module.setup.SetupActivity" />
         <activity
-            android:name="com.bzh.floodview.module.talk.talkMessage.MessageActivity"
+            android:name=".module.home.homeChat.talk.talkMessage.MessageActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="com.bzh.floodview.module.talk.talkFriends.FriendsActivity"
+            android:name=".module.home.homeChat.talk.talkFriends.FriendsActivity"
             android:launchMode="singleTop" />
         <activity android:name="com.bzh.floodview.module.home.ClipImageActivity" />
         <activity android:name="com.bzh.floodview.module.setting.SettingActivity" />
-        <activity android:name=".module.content.ShowitemActivity" />
-        <activity android:name=".module.content.ContentActivity" />
-        <activity android:name=".module.content.McontentActivity" />
+        <activity android:name=".module.home.homeIndex.content.ShowitemActivity" />
+        <activity android:name=".module.home.homeIndex.content.ContentActivity" />
+        <activity android:name=".module.home.homeIndex.content.McontentActivity" />
 
         <service
             android:name="com.baidu.location.f"

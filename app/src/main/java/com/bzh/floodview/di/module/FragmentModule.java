@@ -1,8 +1,8 @@
 package com.bzh.floodview.di.module;
 
-import com.bzh.floodview.module.home.homeNews.subFram.SubRainMapFragment;
-import com.bzh.floodview.module.home.homeNews.subFram.SubRiverMapFragment;
-import com.bzh.floodview.module.home.homeNews.subFram.SubRsvrMapFragment;
+import com.bzh.floodview.module.home.homeMap.subFram.SubRainMapFragment;
+import com.bzh.floodview.module.home.homeMap.subFram.SubRiverMapFragment;
+import com.bzh.floodview.module.home.homeMap.subFram.SubRsvrMapFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bzh.floodview.R;
 import com.bzh.floodview.model.floodsituation.Submenu;
-import com.bzh.floodview.module.content.ContentActivity;
+import com.bzh.floodview.module.home.homeIndex.content.ContentActivity;
 import java.util.List;
 
 //子菜单适配器

@@ -1,7 +1,7 @@
 package com.bzh.floodview.di.module;
 
 import com.bzh.floodview.api.RetrofitHelper;
-import com.bzh.floodview.module.home.homeNews.MapSubViewModle;
+import com.bzh.floodview.module.home.homeMap.MapSubViewModle;
 
 import javax.inject.Singleton;
 

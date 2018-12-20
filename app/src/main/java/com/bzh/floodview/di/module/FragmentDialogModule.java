@@ -1,9 +1,9 @@
 package com.bzh.floodview.di.module;
 
-import com.bzh.floodview.module.home.homeNews.subDialog.MapDialog;
-import com.bzh.floodview.module.home.homeNews.subDialog.MapRainDialog;
-import com.bzh.floodview.module.home.homeNews.subDialog.MapRiverDialog;
-import com.bzh.floodview.module.home.homeNews.subDialog.MapRsvrDialog;
+import com.bzh.floodview.module.home.homeMap.subDialog.MapDialog;
+import com.bzh.floodview.module.home.homeMap.subDialog.MapRainDialog;
+import com.bzh.floodview.module.home.homeMap.subDialog.MapRiverDialog;
+import com.bzh.floodview.module.home.homeMap.subDialog.MapRsvrDialog;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

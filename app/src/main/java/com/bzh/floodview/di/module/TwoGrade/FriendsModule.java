@@ -1,7 +1,7 @@
 package com.bzh.floodview.di.module.TwoGrade;
 
-import com.bzh.floodview.module.talk.talkFriends.FriendsDiaFrag;
-import com.bzh.floodview.module.talk.talkFriends.RedFriendDiaFrag;
+import com.bzh.floodview.module.home.homeChat.talk.talkFriends.FriendsDiaFrag;
+import com.bzh.floodview.module.home.homeChat.talk.talkFriends.RedFriendDiaFrag;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

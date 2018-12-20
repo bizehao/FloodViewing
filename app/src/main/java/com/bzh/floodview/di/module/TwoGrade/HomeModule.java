@@ -4,8 +4,8 @@ import com.bzh.floodview.di.module.TwoGrade.ThreeGrade.SportModule;
 import com.bzh.floodview.module.home.HomeContract;
 import com.bzh.floodview.module.home.HomePresenter;
 import com.bzh.floodview.module.home.homeIndex.IndexFragment;
-import com.bzh.floodview.module.home.homeNews.NewsFragment;
-import com.bzh.floodview.module.home.homePlan.TalkFragment;
+import com.bzh.floodview.module.home.homeMap.MapFragment;
+import com.bzh.floodview.module.home.homeChat.TalkFragment;
 
 import dagger.Binds;
 import dagger.Module;
@@ -20,7 +20,7 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class HomeModule {
 
     @ContributesAndroidInjector
-    abstract NewsFragment providesNewsFragment();
+    abstract MapFragment providesNewsFragment();
 
     @ContributesAndroidInjector
     abstract TalkFragment providesTalkFragment();
