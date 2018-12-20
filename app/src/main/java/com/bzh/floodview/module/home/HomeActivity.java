@@ -121,12 +121,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     protected void beforeInit() {
         super.beforeInit();
+        Log.e(TAG, "beforeInit: -------------" );
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); //固定页面压制 bug:底部状态栏跟随键盘
     }
 
+    private static final String TAG = "HomeActivity";
+
     @Override
     protected void initView(Bundle savedInstanceState) {
-
+        Log.e(TAG, "initView: ------------" );
         setSupportActionBar(mToolbar);
         View navigationHeadView = mNavigationView.getHeaderView(0);
         mCircleImageView = navigationHeadView.findViewById(R.id.user_icon);

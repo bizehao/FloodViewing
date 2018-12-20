@@ -61,6 +61,19 @@ public class SubRsvrMapFragment extends BaseFragment {
                 mMapSubViewModle.setStcd(adapter.getList().get(i).getStcd());
             });
         });
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class<?> searchViewClass = mSearchView.getClass();
+                try {
+                    Method method = searchViewClass.getDeclaredMethod("onSearchClicked");
+                    method.setAccessible(true);
+                    method.invoke(mSearchView);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         mMapSubViewModle.getRsvrInfo().observeForever(dataBeans -> {
             adapter.setList(dataBeans);

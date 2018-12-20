@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import com.bzh.apilibrary.badge.BGABadgeable;
 import com.bzh.apilibrary.badge.BGADragDismissDelegate;
 import com.bzh.floodview.module.home.HomeActivity;
 import com.bzh.floodview.ui.widget.PopupList;
+import com.bzh.floodview.utils.TimeUtils;
 import com.bzh.floodview.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> popupMenuItemList = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e(TAG, "onCreate: ---------------------------");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ToastUtil.init(this);
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 ToastUtil.show("气泡消失了");
             }
         });
+
         startActivity(new Intent(MainActivity.this, HomeActivity.class));
         finish();
     }

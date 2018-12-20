@@ -64,6 +64,19 @@ public class SubRiverMapFragment extends BaseFragment {
         mMapSubViewModle.getRiverInfo().observeForever(beans -> {
             adapter.setList(beans);
         });
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class<?> searchViewClass = mSearchView.getClass();
+                try {
+                    Method method = searchViewClass.getDeclaredMethod("onSearchClicked");
+                    method.setAccessible(true);
+                    method.invoke(mSearchView);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         mSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
