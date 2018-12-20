@@ -2,22 +2,33 @@ package com.bzh.floodview.module.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.TextInputEditText;
 import android.os.Bundle;
-import android.widget.FrameLayout;
+import android.support.v7.widget.AppCompatButton;
+import android.view.View;
+import android.widget.TextView;
 
 import com.bzh.floodview.R;
 import com.bzh.floodview.base.activity.BaseActivity;
-import com.bzh.floodview.module.login.loginInLogin.LoginFragment;
+import com.bzh.floodview.module.home.HomeActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements LoginContract.View {
 
-    @BindView(R.id.login_fragment)
-    FrameLayout mFrameLayout;
+    @BindView(R.id.login_user_text)
+    TextInputEditText loginUserText;
+
+    @BindView(R.id.password_text)
+    TextInputEditText passwordText;
+
+    @BindView(R.id.login_but)
+    AppCompatButton loginBut;
+
+    LoginContract.Presenter mPresenter;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -26,48 +37,39 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        LoginFragment fragment = new LoginFragment();
-        replaceFragment(fragment);
+        mPresenter = new LoginPresenter();
+        loginBut.setOnClickListener(v -> mPresenter.login());
     }
 
-    @Override
-    public void showErrorMsg(String errorMsg) {
-
-    }
-
-    @Override
-    public void showNormal() {
-
-    }
-
-    @Override
-    public void showError() {
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void shutDownLoading() {
-
-    }
-
-    public static void open(Context context){
-        Intent intent = new Intent(context,LoginActivity.class);
+    public static void open(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 
-    /**
-     * 添加登录fragment
-     * @param fragment
-     */
-    public void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.login_fragment,fragment).commit();
+    @Override
+    public String getUsername() {
+        return loginUserText.getText().toString();
     }
 
+    @Override
+    public String getPassword() {
+        return passwordText.getText().toString();
+    }
+
+    @Override
+    public void goHome() {
+        HomeActivity.open(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.takeView(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.dropView();
+    }
 }

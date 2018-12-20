@@ -3,7 +3,6 @@ package com.bzh.floodview.di.module;
 import com.bzh.floodview.MainActivity;
 import com.bzh.floodview.di.module.TwoGrade.FriendsModule;
 import com.bzh.floodview.di.module.TwoGrade.HomeModule;
-import com.bzh.floodview.di.module.TwoGrade.LoginModule;
 import com.bzh.floodview.module.home.homeIndex.content.ContentActivity;
 import com.bzh.floodview.module.home.homeIndex.content.McontentActivity;
 import com.bzh.floodview.module.home.homeIndex.content.ShowitemActivity;
@@ -23,7 +22,7 @@ public abstract class ActivityModule {
     @ContributesAndroidInjector(modules = HomeModule.class)
     abstract HomeActivity providesHomeActivity();
 
-    @ContributesAndroidInjector(modules = LoginModule.class)
+    @ContributesAndroidInjector
     abstract LoginActivity providesLoginActivity();
 
     @ContributesAndroidInjector(modules = FriendsModule.class)

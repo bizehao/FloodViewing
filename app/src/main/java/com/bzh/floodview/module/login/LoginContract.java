@@ -1,4 +1,4 @@
-package com.bzh.floodview.module.login.loginInLogin;
+package com.bzh.floodview.module.login;
 
 import com.bzh.floodview.base.presenter.BasePresenter;
 import com.bzh.floodview.base.view.BaseView;
@@ -17,6 +17,9 @@ public interface LoginContract {
 
         //获取密码
         String getPassword();
+
+        //跳转到主页
+        void goHome();
 
     }
 

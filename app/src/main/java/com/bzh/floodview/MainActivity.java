@@ -13,6 +13,7 @@ import com.bzh.apilibrary.badge.BGABadgeTextView;
 import com.bzh.apilibrary.badge.BGABadgeable;
 import com.bzh.apilibrary.badge.BGADragDismissDelegate;
 import com.bzh.floodview.module.home.HomeActivity;
+import com.bzh.floodview.module.login.LoginActivity;
 import com.bzh.floodview.ui.widget.PopupList;
 import com.bzh.floodview.utils.TimeUtils;
 import com.bzh.floodview.utils.ToastUtil;
@@ -32,49 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private List<String> popupMenuItemList = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.e(TAG, "onCreate: ---------------------------");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ToastUtil.init(this);
-        fancyButton = findViewById(R.id.btn_spotify);
-        bgaBadgeTextView = findViewById(R.id.bgabadgetextview);
-        PopupList popupList = new PopupList(this);
-        popupMenuItemList.add("复制");
-        popupMenuItemList.add("删除");
-        popupMenuItemList.add("分享");
-        popupMenuItemList.add("更多");
-        fancyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialDialog.Builder(MainActivity.this)
-                        .title("弹框")
-                        .content("内容")
-                        .positiveText("确定")
-                        .negativeText("取消")
-                        .show();
-            }
-        });
-        popupList.bind(fancyButton, popupMenuItemList, new PopupList.PopupListListener() {
-            @Override
-            public boolean showPopupList(View adapterView, View contextView, int contextPosition) {
-                return false;
-            }
-
-            @Override
-            public void onPopupListClick(View contextView, int contextPosition, int position) {
-                System.out.println("显示");
-                Toast.makeText(MainActivity.this, contextPosition + "," + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        bgaBadgeTextView.showTextBadge("20");
-        bgaBadgeTextView.setDragDismissDelegate(new BGADragDismissDelegate() {
-            @Override
-            public void onDismiss(BGABadgeable badgeable) {
-                ToastUtil.show("气泡消失了");
-            }
-        });
-
-        startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
     }
 
