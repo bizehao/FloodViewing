@@ -1,5 +1,6 @@
 package com.bzh.floodview.module.home.homeNews;
 
+import android.annotation.TargetApi;
 import android.arch.lifecycle.Observer;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -153,6 +155,8 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
         return R.layout.fragment_map;
     }
 
+    @TargetApi(Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void initView(Bundle savedInstanceState) {
 
@@ -433,6 +437,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
             if (beans != null) {
                 List<OverlayOptions> options = new ArrayList<>();
                 //构建Marker图标
+
                 BitmapDescriptor bitmapRain = BitmapDescriptorFactory.fromResource(R.drawable.rain_sign);
                 BitmapDescriptor bitmapRiver = BitmapDescriptorFactory.fromResource(R.drawable.river_sign);
                 BitmapDescriptor bitmapRsvr = BitmapDescriptorFactory.fromResource(R.drawable.rsvr_sign);
