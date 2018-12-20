@@ -10,8 +10,9 @@ import com.bzh.floodview.R;
 import com.bzh.floodview.base.fragment.BaseFragment;
 import com.bzh.floodview.model.mapData.ApiRainTable;
 import com.bzh.floodview.module.home.homeNews.MapSubViewModle;
-import com.bzh.floodview.ui.widget.LoadingView;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -38,6 +39,7 @@ public class SubRainMapFragment extends BaseFragment {
     MapSubViewModle mMapSubViewModle;
 
     private List<ApiRainTable.DataBean> listDataBeanAB = new ArrayList<>();
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_subrainmap;
@@ -63,6 +65,20 @@ public class SubRainMapFragment extends BaseFragment {
             adapter.setList(dataBeans);
         });
 
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class<?> searchViewClass = mSearchView.getClass();
+                try {
+                    Method method = searchViewClass.getDeclaredMethod("onSearchClicked");
+                    method.setAccessible(true);
+                    method.invoke(mSearchView);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         //搜索框
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -74,7 +90,7 @@ public class SubRainMapFragment extends BaseFragment {
             public boolean onQueryTextChange(String s) {
                 listDataBeanAB.clear();
                 String name = s.trim();
-                if(!s.equals("")){
+                if (!s.equals("")) {
                     Pattern pattern = Pattern.compile(name, Pattern.CASE_INSENSITIVE);
                     for (ApiRainTable.DataBean dataBean : mMapSubViewModle.getRainInfoAB()) {
                         Matcher matcher = pattern.matcher(dataBean.getStnm());
@@ -82,8 +98,8 @@ public class SubRainMapFragment extends BaseFragment {
                             listDataBeanAB.add(dataBean);
                         }
                     }
-                }else {
-                    if(mMapSubViewModle.getRainInfoAB() != null){
+                } else {
+                    if (mMapSubViewModle.getRainInfoAB() != null) {
                         listDataBeanAB.addAll(mMapSubViewModle.getRainInfoAB());
                     }
                 }

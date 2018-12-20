@@ -3,9 +3,11 @@ package com.bzh.floodview.module.home.homeNews;
 import android.arch.lifecycle.Observer;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -142,6 +144,19 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
     private Marker oldMarker; //上一个站点
     private BitmapDescriptor oldBitmapDescriptor; //上一个站点图表
 
+    //构建Marker图标
+    BitmapDescriptor bitmapRain = BitmapDescriptorFactory.fromResource(R.drawable.rain_sign);
+    BitmapDescriptor bitmapRiver = BitmapDescriptorFactory.fromResource(R.drawable.river_sign);
+    BitmapDescriptor bitmapRsvr = BitmapDescriptorFactory.fromResource(R.drawable.rsvr_sign);
+    BitmapDescriptor bitmapOther = BitmapDescriptorFactory.fromResource(R.drawable.other_sign);
+    //构建Marker图标
+    BitmapDescriptor bitmapRainBig = BitmapDescriptorFactory.fromResource(R.drawable.rain_sign_big);
+    BitmapDescriptor bitmapRiverBig = BitmapDescriptorFactory.fromResource(R.drawable.river_sign_big);
+    BitmapDescriptor bitmapRsvrBig = BitmapDescriptorFactory.fromResource(R.drawable.rsvr_sign_big);
+    BitmapDescriptor bitmapOtherBig = BitmapDescriptorFactory.fromResource(R.drawable.other_sign_big);
+
+    boolean bigOrSmall = false; //大还是小  true=大  false=小
+
     @Inject
     public NewsFragment() {
     }
@@ -151,6 +166,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
         return R.layout.fragment_map;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void initView(Bundle savedInstanceState) {
 
@@ -160,7 +176,8 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
         mDistrictSearch.setOnDistrictSearchListener(this);
         //获取地图控件引用
         mBaiduMap = mMapView.getMap();
-
+        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+        mBaiduMap.setBuildingsEnabled(false);
         initData();
 
         List<Fragment> fragmentList = new ArrayList<>();
@@ -174,7 +191,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
 
         mViewPager.setAdapter(new MyFragmentAdapter(getChildFragmentManager(), fragmentList, titleList));
         mTabLayout.setupWithViewPager(mViewPager);
-        mSlidingUpPanelLayout.setScrollableViewHelper(new RecyclerViewHelper());
+        mSlidingUpPanelLayout.setScrollableViewHelper(new RecyclerViewHelper());//拖动面板的嵌套recyclerview处理
         setTime(); //设置默认时间
 
         stEditText.setOnClickListener(v -> {
@@ -231,10 +248,10 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
         });
 
         mMapSubViewModle.getLoading().observe(this, integer -> {
-            if(integer == 3){
+            if (integer == 3) {
                 pageViewLoadingView.setVisibility(View.GONE);
                 mViewPager.setVisibility(View.VISIBLE);
-            }else if(integer == 0){
+            } else if (integer == 0) {
                 mViewPager.setVisibility(View.GONE);
                 pageViewLoadingView.setVisibility(View.VISIBLE);
             }
@@ -247,26 +264,84 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
 
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
-                if(newState == SlidingUpPanelLayout.PanelState.COLLAPSED){ //坍塌
+                if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) { //坍塌
                     Glide.with(getActivity()).load(R.drawable.ic_expand_less_black_24dp).into(mImageView);
-                }else if(newState == SlidingUpPanelLayout.PanelState.EXPANDED){ //扩大
+                } else if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) { //扩大
                     Glide.with(getActivity()).load(R.drawable.ic_expand_more_black_24dp).into(mImageView);
                 }
             }
         });
 
         mImageButton.setOnClickListener(v -> {
-            if(tubiaoLayout.getVisibility() == View.VISIBLE){
+            if (tubiaoLayout.getVisibility() == View.VISIBLE) {
                 tubiaoLayout.setVisibility(View.GONE);
                 Glide.with(getActivity()).load(R.drawable.ic_chevron_right_black_24dp).into(mImageButton);
-            }else {
+            } else {
                 tubiaoLayout.setVisibility(View.VISIBLE);
                 Glide.with(getActivity()).load(R.drawable.ic_chevron_left_black_24dp).into(mImageButton);
             }
         });
+
+        mBaiduMap.setOnMapStatusChangeListener(new MapStatusChangeListener() {
+            @Override
+            public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                if (mapStatus.zoom >= 12.0) {
+                    if (!bigOrSmall) {
+                        Timber.e("图标放大");
+                        bigOrSmall = !bigOrSmall;
+                        for (Map.Entry<String, Marker> markerMap : overlayMap.entrySet()) {
+                            Marker marker = markerMap.getValue();
+                            String sttp = marker.getExtraInfo().getString("sttp");
+                            switch (sttp) {
+                                case "PP":
+                                    marker.setIcon(bitmapRainBig);
+                                    break;
+                                case "ZZ":
+                                    marker.setIcon(bitmapRiverBig);
+                                    break;
+                                case "RR":
+                                    marker.setIcon(bitmapRsvrBig);
+                                    break;
+                                default:
+                                    marker.setIcon(bitmapOtherBig);
+                                    break;
+                            }
+                        }
+                        /*MapStatus mapStatu = new MapStatus.Builder().target();
+                        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus()
+                        //改变地图状态
+                        mBaiduMap.setMapStatus(mMapStatusUpdate);*/
+                    }
+                } else {
+                    if (bigOrSmall) {
+                        Timber.e("图标缩小");
+                        bigOrSmall = !bigOrSmall;
+                        for (Map.Entry<String, Marker> markerMap : overlayMap.entrySet()) {
+                            Marker marker = markerMap.getValue();
+                            String sttp = marker.getExtraInfo().getString("sttp");
+                            switch (sttp) {
+                                case "PP":
+                                    marker.setIcon(bitmapRain);
+                                    break;
+                                case "ZZ":
+                                    marker.setIcon(bitmapRiver);
+                                    break;
+                                case "RR":
+                                    marker.setIcon(bitmapRsvr);
+                                    break;
+                                default:
+                                    marker.setIcon(bitmapOther);
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
-    //获取数据
+    //获取地图站点数据
     private void initData() {
         AppDatabase appDatabase = AppDatabase.getAppDatabase();
         List<StationInfo> stationInfos = appDatabase.stationInfoDao().getStations();
@@ -278,7 +353,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
                         stationInfo.getLgtd(), stationInfo.getStnm()));
             }
             mDistrictSearch.searchDistrict(new DistrictSearchOption().cityName("河北").districtName("邢台"));
-        }else {
+        } else {
             Observable<ApiStcd> observable = retrofitHelper.getServer().getAoordinate();
             retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
                 @Override
@@ -296,11 +371,6 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
                 }
             });
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 
     @Override
@@ -386,6 +456,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
         dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Calendar calendar = Calendar.getInstance();
@@ -429,11 +500,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
             }
             if (beans != null) {
                 List<OverlayOptions> options = new ArrayList<>();
-                //构建Marker图标
-                BitmapDescriptor bitmapRain = BitmapDescriptorFactory.fromResource(R.drawable.rain_sign);
-                BitmapDescriptor bitmapRiver = BitmapDescriptorFactory.fromResource(R.drawable.river_sign);
-                BitmapDescriptor bitmapRsvr = BitmapDescriptorFactory.fromResource(R.drawable.rsvr_sign);
-                BitmapDescriptor bitmapOther = BitmapDescriptorFactory.fromResource(R.drawable.other_sign);
+
                 for (ApiStcd.DataBean dataBean : beans) {
                     if (dataBean.getLgtd() != null && dataBean.getLttd() != null) {
                         //定义Maker坐标点
@@ -530,7 +597,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
         }
     }
 
-    private void offlineMap(){
+    private void offlineMap() {
         MKOfflineMap mOffline = new MKOfflineMap();
         mOffline.init(this);
         mOffline.start(266);
@@ -538,7 +605,7 @@ public class NewsFragment extends BaseFragment implements DatePickerDialog.OnDat
 
     @Override
     public void onGetOfflineMapState(int i, int i1) {
-        Timber.e("第一  "+i);
-        Timber.e("第二  "+i1);
+        Timber.e("第一  " + i);
+        Timber.e("第二  " + i1);
     }
 }
