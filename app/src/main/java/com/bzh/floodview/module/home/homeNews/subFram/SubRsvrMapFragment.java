@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.View;
 
 import com.bzh.floodview.R;
 import com.bzh.floodview.base.fragment.BaseFragment;
@@ -11,6 +12,8 @@ import com.bzh.floodview.model.mapData.ApiRainTable;
 import com.bzh.floodview.model.mapData.ApiRsvrTable;
 import com.bzh.floodview.module.home.homeNews.MapSubViewModle;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -58,6 +61,19 @@ public class SubRsvrMapFragment extends BaseFragment {
             viewHolder.mLinearLayout.setOnClickListener(v -> {
                 mMapSubViewModle.setStcd(adapter.getList().get(i).getStcd());
             });
+        });
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class<?> searchViewClass = mSearchView.getClass();
+                try {
+                    Method method = searchViewClass.getDeclaredMethod("onSearchClicked");
+                    method.setAccessible(true);
+                    method.invoke(mSearchView);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         mMapSubViewModle.getRsvrInfo().observeForever(dataBeans -> {

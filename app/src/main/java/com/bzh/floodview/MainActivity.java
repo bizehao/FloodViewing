@@ -14,6 +14,7 @@ import com.bzh.apilibrary.badge.BGABadgeable;
 import com.bzh.apilibrary.badge.BGADragDismissDelegate;
 import com.bzh.floodview.module.home.HomeActivity;
 import com.bzh.floodview.ui.widget.PopupList;
+import com.bzh.floodview.utils.TimeUtils;
 import com.bzh.floodview.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 ToastUtil.show("气泡消失了");
             }
         });
+
         startActivity(new Intent(MainActivity.this, HomeActivity.class));
         finish();
     }
