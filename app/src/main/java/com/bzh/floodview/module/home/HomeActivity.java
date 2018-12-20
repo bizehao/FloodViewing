@@ -158,25 +158,11 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Intent instant;
                 switch (menuItem.getItemId()) {
-                    case R.id.nav_login: //登录
-                        System.out.println("测试");
-                        LoginActivity.open(HomeActivity.this);
-                        break;
-                    case R.id.nav_loginout: //注销
-                        mPresenter.loginOut(App.getUsername());
-                        break;
-                    case R.id.nav_nocturnal_pattern:
-                        showToast("夜间模式");
-                        break;
                     case R.id.nav_feedback_feedback:
                         showToast("意见反馈");
                         break;
                     case R.id.nav_adout_me:
                         showToast("关于我们");
-                        break;
-                    case R.id.nav_setup:
-                        showToast("设置");
-                        SettingActivity.open(HomeActivity.this);
                         break;
                     case R.id.nav_sign_out:
                         showToast("退出");
@@ -315,11 +301,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         mPresenter.dropView();
     }
 
-    @Override // menu
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -360,19 +342,13 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @Override
     public void successSetting() {
-        mNavigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
-        mNavigationView.getMenu().findItem(R.id.nav_loginout).setVisible(true);
         //加载用户信息
         mPresenter.loadData(App.getUsername());
     }
 
     @Override
     public void failSettring() {
-        mNavigationView.getMenu().findItem(R.id.nav_login).setVisible(true);
-        mNavigationView.getMenu().findItem(R.id.nav_loginout).setVisible(false);
         Glide.with(this).load(ContextCompat.getDrawable(getApplication(), R.mipmap.no_login_user)).into(mCircleImageView);
-        mTextViewName.setText("未登录");
-        mTextViewMotto.setText("");
     }
 
     /**

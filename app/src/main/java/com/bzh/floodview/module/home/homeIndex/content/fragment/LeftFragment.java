@@ -769,7 +769,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if(!(address.equals(Route + "rainInfo/rainfalls_one") || address.equals(Route + "rainInfo/rainIntensity_one"))){
-            inflater.inflate(R.menu.toolbar, menu);
+            //inflater.inflate(R.menu.toolbar, menu);
         }
     }
 
