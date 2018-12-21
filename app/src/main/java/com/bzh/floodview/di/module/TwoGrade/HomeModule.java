@@ -1,12 +1,10 @@
 package com.bzh.floodview.di.module.TwoGrade;
 
-import com.bzh.floodview.di.module.TwoGrade.ThreeGrade.SportModule;
 import com.bzh.floodview.module.home.HomeContract;
 import com.bzh.floodview.module.home.HomePresenter;
 import com.bzh.floodview.module.home.homeIndex.IndexFragment;
 import com.bzh.floodview.module.home.homeMap.MapFragment;
 import com.bzh.floodview.module.home.homeChat.TalkFragment;
-
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -25,7 +23,7 @@ public abstract class HomeModule {
     @ContributesAndroidInjector
     abstract TalkFragment providesTalkFragment();
 
-    @ContributesAndroidInjector(modules = SportModule.class)
+    @ContributesAndroidInjector
     abstract IndexFragment providesSportFragment();
 
     @Binds

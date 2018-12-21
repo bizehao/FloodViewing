@@ -8,7 +8,9 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.R;
+import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.module.home.HomeActivity;
 
@@ -28,6 +30,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @BindView(R.id.login_but)
     AppCompatButton loginBut;
 
+    @Inject
+    MainAttrs mainAttrs;
+
+    @Inject
+    RetrofitHelper retrofitHelper;
+
     LoginContract.Presenter mPresenter;
 
     @Override
@@ -37,8 +45,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        mPresenter = new LoginPresenter();
-        loginBut.setOnClickListener(v -> mPresenter.login());
+        mPresenter = new LoginPresenter(retrofitHelper, mainAttrs);
+        loginBut.setOnClickListener((View v) -> {
+            mPresenter.login();
+        });
     }
 
     public static void open(Context context) {

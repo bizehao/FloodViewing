@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
+
+import com.bzh.floodview.utils.ToastUtil;
 import com.bzh.sofialibrary.Sofia;
 import com.bzh.floodview.R;
 import com.bzh.floodview.base.view.BaseView;
@@ -43,6 +45,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         unBinder = ButterKnife.bind(this); //设置 ButterKnife
+        ToastUtil.init(this);
     }
 
     @Override
@@ -90,13 +93,9 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
     }
 
     @Override
-    public void showErrorMsg(String errorMsg) {
-        showToast(errorMsg);
-    }
-
-    @Override
-    public void showNormal() {
-
+    public void showMessage(String message) {
+        //showToast(message);
+        ToastUtil.show(message);
     }
 
     @Override

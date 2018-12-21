@@ -16,6 +16,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
 
 /**
  * 网络处理类
@@ -76,7 +77,7 @@ public class RetrofitHelper {
     public <T> void successHandler(Observable<T> observable, callBack callBack) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(t -> {
+                .subscribe((T t) -> {
                     callBack.run(t);
                 }, throwable -> {
                     callBack.handError();

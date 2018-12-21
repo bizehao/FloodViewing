@@ -6,15 +6,10 @@ package com.bzh.floodview.base.view;
 public interface BaseView {
 
     /**
-     *  显示错误消失
-     * @param errorMsg 错误消失
+     * 展示消息
+     * @param message
      */
-    void showErrorMsg(String errorMsg);
-
-    /**
-     * 显示正常
-     */
-    void showNormal();
+    void showMessage(String message);
 
     /**
      * 显示错误

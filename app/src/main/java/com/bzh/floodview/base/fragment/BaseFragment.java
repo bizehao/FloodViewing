@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.bzh.floodview.base.view.BaseView;
+import com.bzh.floodview.utils.ToastUtil;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.DaggerFragment;
@@ -65,14 +68,9 @@ public abstract class BaseFragment extends DaggerFragment implements BaseView {
     }
 
     @Override
-    public void showErrorMsg(String errorMsg) {
-        showToast(errorMsg);
-        //showToast(errorMsg);
-    }
-
-    @Override
-    public void showNormal() {
-        //showToast("显示正常，正常框");
+    public void showMessage(String message) {
+        //showToast(message);
+        //ToastUtil.show(message);
     }
 
     @Override

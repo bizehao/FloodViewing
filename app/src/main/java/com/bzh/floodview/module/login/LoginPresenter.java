@@ -1,11 +1,14 @@
 package com.bzh.floodview.module.login;
 
+import android.widget.Toast;
+
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.model.ApiLogin;
 import javax.inject.Inject;
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 /**
  * @author 毕泽浩
@@ -16,37 +19,37 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private static final String TAG = "LoginPresenter";
 
-    @Inject
     MainAttrs mainAttrs;
 
-    @Inject
     RetrofitHelper retrofitHelper;
 
     private LoginContract.View mView;
 
-    @Inject
-    public LoginPresenter() {
+    public LoginPresenter(RetrofitHelper retrofitHelper,MainAttrs mainAttrs) {
+        this.retrofitHelper = retrofitHelper;
+        this.mainAttrs = mainAttrs;
     }
 
     @Override
     public void login() {
-        mView.goHome();
-        /*String username = mView.getUsername();
+        String username = mView.getUsername();
         String password = mView.getPassword();
         Observable<ApiLogin> observable = retrofitHelper.getServer().login(username, password);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {
                 ApiLogin apiLogin = (ApiLogin) t;
-                if(apiLogin.getCode().equals("200")){
+                Timber.e(apiLogin.toString());
+                if(apiLogin.getState()){
                     mainAttrs.setLoginSign(true);
                     App.setUser(apiLogin.getData().getUsername(),apiLogin.getData().getX_Auth_Token());
+                    mView.showMessage(apiLogin.getRequestMessage());
                     mView.goHome();
                 }else {
-                    mView.showErrorMsg("登录失败");
+                    mView.showMessage(apiLogin.getRequestMessage());
                 }
             }
-        });*/
+        });
     }
 
     @Override

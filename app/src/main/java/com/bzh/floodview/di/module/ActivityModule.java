@@ -11,7 +11,6 @@ import com.bzh.floodview.module.login.LoginActivity;
 import com.bzh.floodview.module.setting.SettingActivity;
 import com.bzh.floodview.module.home.homeChat.talk.talkFriends.FriendsActivity;
 import com.bzh.floodview.module.home.homeChat.talk.talkMessage.MessageActivity;
-import com.bzh.floodview.sideslip.AboutusActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
