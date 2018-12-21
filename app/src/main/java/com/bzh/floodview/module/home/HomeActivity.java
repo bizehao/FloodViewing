@@ -27,6 +27,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +36,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -121,7 +123,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        Log.e(TAG, "beforeInit: -------------");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); //固定页面压制 bug:底部状态栏跟随键盘
     }
 
@@ -129,7 +130,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        Log.e(TAG, "initView: ------------");
         setSupportActionBar(mToolbar);
         View navigationHeadView = mNavigationView.getHeaderView(0);
         mCircleImageView = navigationHeadView.findViewById(R.id.user_icon);
@@ -165,7 +165,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                         startActivity(new Intent(HomeActivity.this, AboutusActivity.class));
                         break;
                     case R.id.nav_sign_out:
-                        showToast("退出");
+                        onBackPressed();
                         break;
                 }
                 mDrawerLayout.closeDrawers();
@@ -533,12 +533,30 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     }
 
     //back键
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        AppManager.getAppManager().AppExit(this);
+//    }
+
+    //back键
+    private long exitTime=0;
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        AppManager.getAppManager().AppExit(this);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode,event);
     }
+    private void exit(){
+        if((System.currentTimeMillis()-exitTime)>2000) {
+            Toast.makeText(getApplicationContext(),
+                    "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        }else{
+            AppManager.getAppManager().AppExit(this);
+            }
+        }
 
-
-
-}
+    }

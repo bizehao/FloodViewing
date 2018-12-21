@@ -8,6 +8,9 @@ import android.widget.Button;
 import com.bzh.floodview.R;
 import com.bzh.floodview.base.activity.BaseActivity;
 
+/**
+ * 意见反馈
+ */
 public class FeedbackActivity extends BaseActivity {
 
     @Override

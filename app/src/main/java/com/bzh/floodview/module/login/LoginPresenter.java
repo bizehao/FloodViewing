@@ -1,5 +1,6 @@
 package com.bzh.floodview.module.login;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import com.bzh.floodview.App;
@@ -34,6 +35,10 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void login() {
         String username = mView.getUsername();
         String password = mView.getPassword();
+        if(password.length()<6){
+            mView.showMessage("密码不能少于六位");
+            return;
+        }
         Observable<ApiLogin> observable = retrofitHelper.getServer().login(username, password);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override

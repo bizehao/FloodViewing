@@ -44,7 +44,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-        unBinder = ButterKnife.bind(this); //设置 ButterKnife
+        unBinder = ButterKnife.bind(this); //设置 ButterKnifez
         ToastUtil.init(this);
     }
 
@@ -100,16 +100,14 @@ public abstract class BaseActivity extends DaggerAppCompatActivity implements Ba
 
     @Override
     public void showError() {
-
     }
 
     @Override
     public void showLoading() {
-
     }
 
     @Override
     public void shutDownLoading() {
-
     }
+
 }

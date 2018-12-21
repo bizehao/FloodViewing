@@ -62,8 +62,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public String getPassword() {
-        return passwordText.getText().toString();
+    public String getPassword() { return passwordText.getText().toString();
     }
 
     @Override
