@@ -49,9 +49,8 @@ import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.module.home.homeIndex.IndexFragment;
 import com.bzh.floodview.module.home.homeMap.MapFragment;
 import com.bzh.floodview.module.home.homeChat.TalkFragment;
-import com.bzh.floodview.module.login.LoginActivity;
-import com.bzh.floodview.module.setting.SettingActivity;
 import com.bzh.floodview.module.home.homeChat.talk.talkFriends.FriendsActivity;
+import com.bzh.floodview.sideslip.AboutusActivity;
 import com.bzh.floodview.utils.AppManager;
 import com.bzh.floodview.utils.CommonUtil;
 import com.bzh.floodview.utils.FileUtil;
@@ -121,7 +120,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     protected void beforeInit() {
         super.beforeInit();
-        Log.e(TAG, "beforeInit: -------------" );
+        Log.e(TAG, "beforeInit: -------------");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); //固定页面压制 bug:底部状态栏跟随键盘
     }
 
@@ -129,7 +128,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        Log.e(TAG, "initView: ------------" );
+        Log.e(TAG, "initView: ------------");
         setSupportActionBar(mToolbar);
         View navigationHeadView = mNavigationView.getHeaderView(0);
         mCircleImageView = navigationHeadView.findViewById(R.id.user_icon);
@@ -162,7 +161,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                         showToast("意见反馈");
                         break;
                     case R.id.nav_adout_me:
-                        showToast("关于我们");
+                        //showToast("关于我们");
+                        startActivity(new Intent(HomeActivity.this, AboutusActivity.class));
                         break;
                     case R.id.nav_sign_out:
                         showToast("退出");
@@ -300,7 +300,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         super.onDestroy();
         mPresenter.dropView();
     }
-
 
 
     @Override
@@ -539,5 +538,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         super.onBackPressed();
         AppManager.getAppManager().AppExit(this);
     }
+
+
 
 }
