@@ -3,4 +3,5 @@
     <string name="page_error">你没登录，请登录</string>
     <string name="page_error_retry">点击登陆</string>
     <string name="page_empty">暂无新数据</string>
+    <string name="hint_input">  请您进行输入......</string>
 </resources>

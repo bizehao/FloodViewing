@@ -29,12 +29,4 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:text="1.0.0"/>
-    <!--<TextView-->
-    <!--android:padding="10dp"-->
-    <!--android:id="@+id/textaboutus"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="300dp"-->
-    <!--android:textColor="#080808"-->
-    <!--android:textSize="20sp"/>-->
 </LinearLayout>

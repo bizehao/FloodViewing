@@ -51,6 +51,7 @@ import com.bzh.floodview.module.home.homeMap.MapFragment;
 import com.bzh.floodview.module.home.homeChat.TalkFragment;
 import com.bzh.floodview.module.home.homeChat.talk.talkFriends.FriendsActivity;
 import com.bzh.floodview.sideslip.AboutusActivity;
+import com.bzh.floodview.sideslip.FeedbackActivity;
 import com.bzh.floodview.utils.AppManager;
 import com.bzh.floodview.utils.CommonUtil;
 import com.bzh.floodview.utils.FileUtil;
@@ -158,10 +159,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 Intent instant;
                 switch (menuItem.getItemId()) {
                     case R.id.nav_feedback_feedback:
-                        showToast("意见反馈");
+                        startActivity(new Intent(HomeActivity.this, FeedbackActivity.class));
                         break;
                     case R.id.nav_adout_me:
-                        //showToast("关于我们");
                         startActivity(new Intent(HomeActivity.this, AboutusActivity.class));
                         break;
                     case R.id.nav_sign_out:

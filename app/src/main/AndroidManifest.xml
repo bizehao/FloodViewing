@@ -29,9 +29,8 @@
 
     <!-- 网络权限 -->
     <!-- android:theme="@style/AppTheme" -->
-
-    <!--android:icon="@mipmap/ic_launcher"-->
-    <!--android:roundIcon="@mipmap/ic_launcher_round"-->
+    <!-- android:icon="@mipmap/ic_launcher" -->
+    <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -83,7 +82,8 @@
             android:name="com.baidu.location.f"
             android:process=":remote" />
 
-        <activity android:name=".sideslip.AboutusActivity"></activity>
+        <activity android:name=".sideslip.AboutusActivity" />
+        <activity android:name=".sideslip.FeedbackActivity"></activity>
     </application>
 
 </manifest>

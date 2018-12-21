@@ -7,6 +7,9 @@ import android.widget.TextView;
 import com.bzh.floodview.R;
 import com.bzh.floodview.base.activity.BaseActivity;
 
+/**
+ * 关于我们
+ */
 public class AboutusActivity extends BaseActivity {
 
     @Override
