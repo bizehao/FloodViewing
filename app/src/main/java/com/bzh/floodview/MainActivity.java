@@ -12,34 +12,56 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.bzh.apilibrary.badge.BGABadgeTextView;
 import com.bzh.apilibrary.badge.BGABadgeable;
 import com.bzh.apilibrary.badge.BGADragDismissDelegate;
+import com.bzh.floodview.api.RetrofitHelper;
+import com.bzh.floodview.base.activity.BaseActivity;
+import com.bzh.floodview.model.BaseApi;
+import com.bzh.floodview.model.test.Test;
 import com.bzh.floodview.module.home.HomeActivity;
 import com.bzh.floodview.module.login.LoginActivity;
 import com.bzh.floodview.ui.widget.PopupList;
 import com.bzh.floodview.utils.TimeUtils;
 import com.bzh.floodview.utils.ToastUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import mehdi.sakout.fancybuttons.FancyButton;
+import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import io.reactivex.Observable;
+import mehdi.sakout.fancybuttons.FancyButton;
+import okhttp3.ResponseBody;
+import timber.log.Timber;
+
+public class MainActivity extends BaseActivity {
+
+    @Inject
+    RetrofitHelper helper;
+
+    @BindView(R.id.btn_spotify)
+    FancyButton fancyButton;
 
     private static final String TAG = "MainActivity";
 
-    private FancyButton fancyButton;
-
-    private BGABadgeTextView bgaBadgeTextView;
-    private List<String> popupMenuItemList = new ArrayList<>();
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        finish();
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_main;
     }
 
-    public void show() {
-
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        finish();
+        /*fancyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Observable<BaseApi<Test>> observable = helper.getServer().getSay();
+                helper.requestHandler(observable, (BaseApi<Test> testBaseApi) -> {
+                    Test test = testBaseApi.getData();
+                    Timber.e(test.toString());
+                });
+            }
+        });*/
     }
 }

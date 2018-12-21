@@ -4,11 +4,13 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.bzh.floodview.api.RetrofitHelper;
+import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.mapData.ApiRainTable;
 import com.bzh.floodview.model.mapData.ApiRiverTable;
 import com.bzh.floodview.model.mapData.ApiRsvrTable;
 import java.util.List;
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 
 /**
@@ -24,86 +26,84 @@ public class MapSubViewModle {
         this.retrofitHelper = retrofitHelper;
     }
 
-    private List<ApiRainTable.DataBean> rainInfoAB; //雨情
-    private List<ApiRiverTable.DataBean> riverInfoAB; //河道
-    private List<ApiRsvrTable.DataBean> rsvrInfoAB;//水库
+    private List<ApiRainTable> rainInfoAB; //雨情
+    private List<ApiRiverTable> riverInfoAB; //河道
+    private List<ApiRsvrTable> rsvrInfoAB;//水库
 
-    private MutableLiveData<List<ApiRainTable.DataBean>> rainInfo = new MutableLiveData<>(); //雨情
-    private MutableLiveData<List<ApiRiverTable.DataBean>> riverInfo = new MutableLiveData<>(); //河道
-    private MutableLiveData<List<ApiRsvrTable.DataBean>> rsvrInfo = new MutableLiveData<>();//水库
+    private MutableLiveData<List<ApiRainTable>> rainInfo = new MutableLiveData<>(); //雨情
+    private MutableLiveData<List<ApiRiverTable>> riverInfo = new MutableLiveData<>(); //河道
+    private MutableLiveData<List<ApiRsvrTable>> rsvrInfo = new MutableLiveData<>();//水库
 
     private MutableLiveData<String> stcd = new MutableLiveData<>();//列表点击
 
     private MutableLiveData<Integer> loading = new MutableLiveData<>();//正在加载
 
-    public LiveData<List<ApiRainTable.DataBean>> getRainInfo() {
+    public LiveData<List<ApiRainTable>> getRainInfo() {
         return rainInfo;
     }
 
-    public void setRainInfo(List<ApiRainTable.DataBean> rainInfos) {
+    public void setRainInfo(List<ApiRainTable> rainInfos) {
         rainInfo.setValue(rainInfos);
     }
 
-    public LiveData<List<ApiRiverTable.DataBean>> getRiverInfo() {
+    public LiveData<List<ApiRiverTable>> getRiverInfo() {
         return riverInfo;
     }
 
-    public void setRiverInfo(List<ApiRiverTable.DataBean> riverInfos) {
+    public void setRiverInfo(List<ApiRiverTable> riverInfos) {
         riverInfo.setValue(riverInfos);
     }
 
-    public LiveData<List<ApiRsvrTable.DataBean>> getRsvrInfo() {
+    public LiveData<List<ApiRsvrTable>> getRsvrInfo() {
         return rsvrInfo;
     }
 
-    public void setRsvrInfo(List<ApiRsvrTable.DataBean> rsvrInfos) {
+    public void setRsvrInfo(List<ApiRsvrTable> rsvrInfos) {
         rsvrInfo.setValue(rsvrInfos);
     }
 
     //获取表格信息
     public void getTableInfo(String stTime, String enTime) {
-        Observable<ApiRsvrTable> observableRsvr = retrofitHelper.getServer().getRsvrTable(stTime, enTime);
-        retrofitHelper.successHandler(observableRsvr, new RetrofitHelper.callBack() {
+        Observable<BaseApi<List<ApiRsvrTable>>> observableRsvr = retrofitHelper.getServer().getRsvrTable(stTime, enTime);
+        retrofitHelper.requestHandler(observableRsvr, new RetrofitHelper.callHandler<BaseApi<List<ApiRsvrTable>>>() {
+
             @Override
-            public <T> void run(T t) {
-                ApiRsvrTable rsvrTable = (ApiRsvrTable) t;
-                rsvrInfoAB = rsvrTable.getData();
-                setRsvrInfo(rsvrTable.getData());
+            public void run(BaseApi<List<ApiRsvrTable>> listBaseApi) {
+                rsvrInfoAB = listBaseApi.getData();
+                setRsvrInfo(rsvrInfoAB);
                 setLoading(getLoading().getValue()+1);
             }
         });
-        Observable<ApiRiverTable> observableRiver = retrofitHelper.getServer().getRiverTable(stTime, enTime);
-        retrofitHelper.successHandler(observableRiver, new RetrofitHelper.callBack() {
+        Observable<BaseApi<List<ApiRiverTable>>> observableRiver = retrofitHelper.getServer().getRiverTable(stTime, enTime);
+        retrofitHelper.requestHandler(observableRiver, new RetrofitHelper.callHandler<BaseApi<List<ApiRiverTable>>>() {
             @Override
-            public <T> void run(T t) {
-                ApiRiverTable riverTable = (ApiRiverTable) t;
-                riverInfoAB = riverTable.getData();
-                setRiverInfo(riverTable.getData());
+            public void run(BaseApi<List<ApiRiverTable>> apiRiverTableBaseApi) {
+                riverInfoAB = apiRiverTableBaseApi.getData();
+                setRiverInfo(riverInfoAB);
                 setLoading(getLoading().getValue()+1);
             }
         });
-        Observable<ApiRainTable> observableRain = retrofitHelper.getServer().getRainTable(stTime, enTime);
-        retrofitHelper.successHandler(observableRain, new RetrofitHelper.callBack() {
+        Observable<BaseApi<List<ApiRainTable>>> observableRain = retrofitHelper.getServer().getRainTable(stTime, enTime);
+        retrofitHelper.requestHandler(observableRain, new RetrofitHelper.callHandler<BaseApi<List<ApiRainTable>>>() {
             @Override
-            public <T> void run(T t) {
-                ApiRainTable rainTable = (ApiRainTable) t;
-                rainInfoAB = rainTable.getData();
-                setRainInfo(rainTable.getData());
+            public void run(BaseApi<List<ApiRainTable>> listBaseApi) {
+                rainInfoAB = listBaseApi.getData();
+                setRainInfo(rainInfoAB);
                 setLoading(getLoading().getValue()+1);
             }
         });
     }
 
 
-    public List<ApiRainTable.DataBean> getRainInfoAB() {
+    public List<ApiRainTable> getRainInfoAB() {
         return rainInfoAB;
     }
 
-    public List<ApiRiverTable.DataBean> getRiverInfoAB() {
+    public List<ApiRiverTable> getRiverInfoAB() {
         return riverInfoAB;
     }
 
-    public List<ApiRsvrTable.DataBean> getRsvrInfoAB() {
+    public List<ApiRsvrTable> getRsvrInfoAB() {
         return rsvrInfoAB;
     }
 

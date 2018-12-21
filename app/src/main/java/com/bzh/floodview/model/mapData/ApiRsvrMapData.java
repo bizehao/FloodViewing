@@ -17,161 +17,131 @@ public class ApiRsvrMapData {
      * message : null
      * data : {"reservoir":{"stcd":"3090720a","tm":1533100320000,"rz":238.76,"inq":null,"w":0,"otq":null},"reservoirtimeList":[{"tm":1532844000000,"rz":238.32,"w":0}]}
      */
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm",Locale.CHINA);
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
 
-    private int state;
-    private Object message;
-    private DataBean data;
+    /**
+     * reservoir : {"stcd":"3090720a","tm":1533100320000,"rz":238.76,"inq":null,"w":0,"otq":null}
+     * reservoirtimeList : [{"tm":1532844000000,"rz":238.32,"w":0}]
+     */
 
-    public int getState() {
-        return state;
+    private ReservoirBean reservoir;
+    private List<ReservoirtimeListBean> reservoirtimeList;
+
+    public ReservoirBean getReservoir() {
+        return reservoir;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setReservoir(ReservoirBean reservoir) {
+        this.reservoir = reservoir;
     }
 
-    public Object getMessage() {
-        return message;
+    public List<ReservoirtimeListBean> getReservoirtimeList() {
+        return reservoirtimeList;
     }
 
-    public void setMessage(Object message) {
-        this.message = message;
+    public void setReservoirtimeList(List<ReservoirtimeListBean> reservoirtimeList) {
+        this.reservoirtimeList = reservoirtimeList;
     }
 
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public static class DataBean {
+    public static class ReservoirBean {
         /**
-         * reservoir : {"stcd":"3090720a","tm":1533100320000,"rz":238.76,"inq":null,"w":0,"otq":null}
-         * reservoirtimeList : [{"tm":1532844000000,"rz":238.32,"w":0}]
+         * stcd : 3090720a
+         * tm : 1533100320000
+         * rz : 238.76
+         * inq : null
+         * w : 0
+         * otq : null
          */
 
-        private ReservoirBean reservoir;
-        private List<ReservoirtimeListBean> reservoirtimeList;
+        private String stcd;
+        private long tm;
+        private double rz;
+        private Object inq;
+        private double w;
+        private Object otq;
 
-        public ReservoirBean getReservoir() {
-            return reservoir;
+        public String getStcd() {
+            return stcd;
         }
 
-        public void setReservoir(ReservoirBean reservoir) {
-            this.reservoir = reservoir;
+        public void setStcd(String stcd) {
+            this.stcd = stcd;
         }
 
-        public List<ReservoirtimeListBean> getReservoirtimeList() {
-            return reservoirtimeList;
+        public String getTm() {
+            return dateFormat.format(new Date(tm));
         }
 
-        public void setReservoirtimeList(List<ReservoirtimeListBean> reservoirtimeList) {
-            this.reservoirtimeList = reservoirtimeList;
+        public void setTm(long tm) {
+            this.tm = tm;
         }
 
-        public static class ReservoirBean {
-            /**
-             * stcd : 3090720a
-             * tm : 1533100320000
-             * rz : 238.76
-             * inq : null
-             * w : 0
-             * otq : null
-             */
-
-            private String stcd;
-            private long tm;
-            private double rz;
-            private Object inq;
-            private int w;
-            private Object otq;
-
-            public String getStcd() {
-                return stcd;
-            }
-
-            public void setStcd(String stcd) {
-                this.stcd = stcd;
-            }
-
-            public String getTm() {
-                return dateFormat.format(new Date(tm));
-            }
-
-            public void setTm(long tm) {
-                this.tm = tm;
-            }
-
-            public double getRz() {
-                return rz;
-            }
-
-            public void setRz(double rz) {
-                this.rz = rz;
-            }
-
-            public Object getInq() {
-                return inq;
-            }
-
-            public void setInq(Object inq) {
-                this.inq = inq;
-            }
-
-            public int getW() {
-                return w;
-            }
-
-            public void setW(int w) {
-                this.w = w;
-            }
-
-            public Object getOtq() {
-                return otq;
-            }
-
-            public void setOtq(Object otq) {
-                this.otq = otq;
-            }
+        public double getRz() {
+            return rz;
         }
 
-        public static class ReservoirtimeListBean {
-            /**
-             * tm : 1532844000000
-             * rz : 238.32
-             * w : 0
-             */
+        public void setRz(double rz) {
+            this.rz = rz;
+        }
 
-            private long tm; //时间
-            private String rz; //库上水位
-            private String w; //蓄水量
+        public Object getInq() {
+            return inq;
+        }
 
-            public String getTm() {
-                return  dateFormat.format(new Date(tm));
-            }
+        public void setInq(Object inq) {
+            this.inq = inq;
+        }
 
-            public void setTm(long tm) {
-                this.tm = tm;
-            }
+        public double getW() {
+            return w;
+        }
 
-            public String getRz() {
-                return rz;
-            }
+        public void setW(double w) {
+            this.w = w;
+        }
 
-            public void setRz(String rz) {
-                this.rz = rz;
-            }
+        public Object getOtq() {
+            return otq;
+        }
 
-            public String getW() {
-                return w;
-            }
+        public void setOtq(Object otq) {
+            this.otq = otq;
+        }
+    }
 
-            public void setW(String w) {
-                this.w = w;
-            }
+    public static class ReservoirtimeListBean {
+        /**
+         * tm : 1532844000000
+         * rz : 238.32
+         * w : 0
+         */
+
+        private long tm; //时间
+        private String rz; //库上水位
+        private String w; //蓄水量
+
+        public String getTm() {
+            return dateFormat.format(new Date(tm));
+        }
+
+        public void setTm(long tm) {
+            this.tm = tm;
+        }
+
+        public String getRz() {
+            return rz;
+        }
+
+        public void setRz(String rz) {
+            this.rz = rz;
+        }
+
+        public String getW() {
+            return w;
+        }
+
+        public void setW(String w) {
+            this.w = w;
         }
     }
 }

@@ -38,7 +38,7 @@ public class SubRainMapFragment extends BaseFragment {
     @Inject
     MapSubViewModle mMapSubViewModle;
 
-    private List<ApiRainTable.DataBean> listDataBeanAB = new ArrayList<>();
+    private List<ApiRainTable> listDataBeanAB = new ArrayList<>();
 
     @Override
     protected int getContentViewLayoutID() {
@@ -48,7 +48,7 @@ public class SubRainMapFragment extends BaseFragment {
     @Override
     protected void initView(Bundle savedInstanceState) {
 
-        SubMapAdapter<ApiRainTable.DataBean> adapter = new SubMapAdapter<>(getActivity(), 4);
+        SubMapAdapter<ApiRainTable> adapter = new SubMapAdapter<>(getActivity(), 4);
         adapter.setAdapterRun((i, viewHolder) -> {
             viewHolder.mTextView1.setText(String.valueOf(i + 1));
             viewHolder.mTextView2.setText(adapter.getList().get(i).getStnm());
@@ -92,7 +92,7 @@ public class SubRainMapFragment extends BaseFragment {
                 String name = s.trim();
                 if (!s.equals("")) {
                     Pattern pattern = Pattern.compile(name, Pattern.CASE_INSENSITIVE);
-                    for (ApiRainTable.DataBean dataBean : mMapSubViewModle.getRainInfoAB()) {
+                    for (ApiRainTable dataBean : mMapSubViewModle.getRainInfoAB()) {
                         Matcher matcher = pattern.matcher(dataBean.getStnm());
                         if (matcher.find()) {
                             listDataBeanAB.add(dataBean);

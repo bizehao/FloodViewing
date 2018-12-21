@@ -21,7 +21,7 @@ import java.util.List;
 public class MapAdapter extends RecyclerView.Adapter<MapAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<ApiRainMapData.DataBean> list;
+    private List<ApiRainMapData> list;
 
     public MapAdapter(Context context) {
         this.mContext = context;
@@ -36,7 +36,7 @@ public class MapAdapter extends RecyclerView.Adapter<MapAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        ApiRainMapData.DataBean dataBean = list.get(i);
+        ApiRainMapData dataBean = list.get(i);
         viewHolder.timeTextView.setText(dataBean.getTm());
         viewHolder.drpTextView.setText(dataBean.getDrp());
     }
@@ -49,7 +49,7 @@ public class MapAdapter extends RecyclerView.Adapter<MapAdapter.ViewHolder> {
         return list.size();
     }
 
-    public void setList(List<ApiRainMapData.DataBean> list) {
+    public void setList(List<ApiRainMapData> list) {
         this.list = list;
         this.notifyDataSetChanged();
     }

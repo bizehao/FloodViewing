@@ -1,6 +1,5 @@
 package com.bzh.floodview.di.module;
 
-import com.bzh.floodview.module.home.homeMap.subDialog.MapDialog;
 import com.bzh.floodview.module.home.homeMap.subDialog.MapRainDialog;
 import com.bzh.floodview.module.home.homeMap.subDialog.MapRiverDialog;
 import com.bzh.floodview.module.home.homeMap.subDialog.MapRsvrDialog;
@@ -15,9 +14,6 @@ import dagger.android.ContributesAndroidInjector;
  */
 @Module
 public abstract class FragmentDialogModule {
-    //地图弹框
-    @ContributesAndroidInjector
-    abstract MapDialog providesMapDialog();
     //地图河道弹框
     @ContributesAndroidInjector
     abstract MapRiverDialog providesMapRiverDialog();

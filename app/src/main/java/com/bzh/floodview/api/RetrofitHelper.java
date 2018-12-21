@@ -82,12 +82,32 @@ public class RetrofitHelper {
                 }, throwable -> {
                     callBack.handError();
                     System.out.println("网络请求发生错误");
-                    System.out.println(throwable.getLocalizedMessage());
+                    System.out.println(throwable.getMessage());
+                });
+    }
+
+    @SuppressWarnings("CheckResult")
+    public <T> void requestHandler(Observable<T> observable, callHandler<T> callBack) {
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((T t) -> {
+                    callBack.run(t);
+                }, throwable -> {
+                    callBack.handError();
+                    System.out.println("网络请求发生错误");
+                    System.out.println(throwable.getMessage());
                 });
     }
 
     public interface callBack {
         <T> void run(T t);
+
+        default void handError() {
+        }
+    }
+
+    public interface callHandler<T> {
+        void run(T t);
 
         default void handError() {
         }

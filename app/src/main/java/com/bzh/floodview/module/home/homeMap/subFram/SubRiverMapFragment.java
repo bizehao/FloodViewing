@@ -38,7 +38,7 @@ public class SubRiverMapFragment extends BaseFragment {
     @BindView(R.id.fs_riversearch)
     SearchView mSearchView;
 
-    private List<ApiRiverTable.DataBean> listDataBeanAB = new ArrayList<>();
+    private List<ApiRiverTable> listDataBeanAB = new ArrayList<>();
 
     @Override
     protected int getContentViewLayoutID() {
@@ -47,7 +47,7 @@ public class SubRiverMapFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        SubMapAdapter<ApiRiverTable.DataBean> adapter = new SubMapAdapter<>(getActivity(),5);
+        SubMapAdapter<ApiRiverTable> adapter = new SubMapAdapter<>(getActivity(),5);
         mRecyclerView.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(manager);
@@ -105,7 +105,7 @@ public class SubRiverMapFragment extends BaseFragment {
                 String name = s.trim();
                 if(!s.equals("")){
                     Pattern pattern = Pattern.compile(name, Pattern.CASE_INSENSITIVE);
-                    for (ApiRiverTable.DataBean dataBean : mMapSubViewModle.getRiverInfoAB()) {
+                    for (ApiRiverTable dataBean : mMapSubViewModle.getRiverInfoAB()) {
                         Matcher matcher = pattern.matcher(dataBean.getStnm());
                         if (matcher.find()) {
                             listDataBeanAB.add(dataBean);

@@ -1,12 +1,14 @@
 package com.bzh.floodview.module.login;
 
-import android.content.Context;
 import android.widget.Toast;
 
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.model.ApiLogin;
+import com.bzh.floodview.model.BaseApi;
+import com.bzh.floodview.model.login.ApiLoginData;
+
 import javax.inject.Inject;
 import io.reactivex.Observable;
 import timber.log.Timber;
@@ -35,23 +37,19 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void login() {
         String username = mView.getUsername();
         String password = mView.getPassword();
-        if(password.length()<6){
-            mView.showMessage("密码不能少于六位");
-            return;
-        }
-        Observable<ApiLogin> observable = retrofitHelper.getServer().login(username, password);
-        retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
+        Observable<BaseApi<ApiLoginData>> observable = retrofitHelper.getServer().login(username, password);
+        retrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<ApiLoginData>>() {
             @Override
-            public <T> void run(T t) {
-                ApiLogin apiLogin = (ApiLogin) t;
+            public void run(BaseApi<ApiLoginData> apiLoginDataBaseApi) {
+                ApiLoginData apiLogin = apiLoginDataBaseApi.getData();
                 Timber.e(apiLogin.toString());
                 if(apiLogin.getState()){
-                    mainAttrs.setLoginSign(true);
-                    App.setUser(apiLogin.getData().getUsername(),apiLogin.getData().getX_Auth_Token());
-                    mView.showMessage(apiLogin.getRequestMessage());
+                    //mainAttrs.setLoginSign(true);
+                    //App.setUser(apiLogin.getData().getUsername(),apiLogin.getData().getX_Auth_Token());
+                    mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                     mView.goHome();
                 }else {
-                    mView.showMessage(apiLogin.getRequestMessage());
+                    mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                 }
             }
         });

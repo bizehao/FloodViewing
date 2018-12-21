@@ -12,166 +12,125 @@ import java.util.Locale;
  */
 public class ApiRiverMapData {
 
-    /**
-     * state : 0
-     * message : null
-     * data : {"river":{"stcd":"30902270","z":29.6,"q":0,"chaochu":0,"wrz":0,"ymdhm":1533092400000},"rivertimeList":[{"ymdhm":1532836800000,"q":0,"zr":29.56}]}
-     */
+    private RiverBean river;
+    private List<RivertimeListBean> rivertimeList;
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
 
-    private int state;
-    private Object message;
-    private DataBean data;
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm",Locale.CHINA);
-
-    public int getState() {
-        return state;
+    public RiverBean getRiver() {
+        return river;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setRiver(RiverBean river) {
+        this.river = river;
     }
 
-    public Object getMessage() {
-        return message;
+    public List<RivertimeListBean> getRivertimeList() {
+        return rivertimeList;
     }
 
-    public void setMessage(Object message) {
-        this.message = message;
+    public void setRivertimeList(List<RivertimeListBean> rivertimeList) {
+        this.rivertimeList = rivertimeList;
     }
 
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public static class DataBean {
+    public static class RiverBean {
         /**
-         * river : {"stcd":"30902270","z":29.6,"q":0,"chaochu":0,"wrz":0,"ymdhm":1533092400000}
-         * rivertimeList : [{"ymdhm":1532836800000,"q":0,"zr":29.56}]
+         * stcd : 30902270
+         * z : 29.6
+         * q : 0
+         * chaochu : 0
+         * wrz : 0
+         * ymdhm : 1533092400000
          */
 
-        private RiverBean river;
-        private List<RivertimeListBean> rivertimeList;
+        private String stcd;
+        private double z;
+        private int q;
+        private int chaochu;
+        private int wrz;
+        private long ymdhm;
 
-        public RiverBean getRiver() {
-            return river;
+        public String getStcd() {
+            return stcd;
         }
 
-        public void setRiver(RiverBean river) {
-            this.river = river;
+        public void setStcd(String stcd) {
+            this.stcd = stcd;
         }
 
-        public List<RivertimeListBean> getRivertimeList() {
-            return rivertimeList;
+        public double getZ() {
+            return z;
         }
 
-        public void setRivertimeList(List<RivertimeListBean> rivertimeList) {
-            this.rivertimeList = rivertimeList;
+        public void setZ(double z) {
+            this.z = z;
         }
 
-        public static class RiverBean {
-            /**
-             * stcd : 30902270
-             * z : 29.6
-             * q : 0
-             * chaochu : 0
-             * wrz : 0
-             * ymdhm : 1533092400000
-             */
-
-            private String stcd;
-            private double z;
-            private int q;
-            private int chaochu;
-            private int wrz;
-            private long ymdhm;
-
-            public String getStcd() {
-                return stcd;
-            }
-
-            public void setStcd(String stcd) {
-                this.stcd = stcd;
-            }
-
-            public double getZ() {
-                return z;
-            }
-
-            public void setZ(double z) {
-                this.z = z;
-            }
-
-            public int getQ() {
-                return q;
-            }
-
-            public void setQ(int q) {
-                this.q = q;
-            }
-
-            public int getChaochu() {
-                return chaochu;
-            }
-
-            public void setChaochu(int chaochu) {
-                this.chaochu = chaochu;
-            }
-
-            public int getWrz() {
-                return wrz;
-            }
-
-            public void setWrz(int wrz) {
-                this.wrz = wrz;
-            }
-
-            public String getYmdhm() {
-                return dateFormat.format(new Date(ymdhm));
-            }
-
-            public void setYmdhm(long ymdhm) {
-                this.ymdhm = ymdhm;
-            }
+        public int getQ() {
+            return q;
         }
 
-        public static class RivertimeListBean {
-            /**
-             * ymdhm : 1532836800000
-             * q : 0
-             * zr : 29.56
-             */
+        public void setQ(int q) {
+            this.q = q;
+        }
 
-            private long ymdhm; //时间
-            private String q;//流量
-            private String zr;//水位值
+        public int getChaochu() {
+            return chaochu;
+        }
 
-            public String getYmdhm() {
-                return dateFormat.format(new Date(ymdhm));
-            }
+        public void setChaochu(int chaochu) {
+            this.chaochu = chaochu;
+        }
 
-            public void setYmdhm(long ymdhm) {
-                this.ymdhm = ymdhm;
-            }
+        public int getWrz() {
+            return wrz;
+        }
 
-            public String getQ() {
-                return q;
-            }
+        public void setWrz(int wrz) {
+            this.wrz = wrz;
+        }
 
-            public void setQ(String q) {
-                this.q = q;
-            }
+        public String getYmdhm() {
+            return dateFormat.format(new Date(ymdhm));
+        }
 
-            public String getZr() {
-                return zr;
-            }
+        public void setYmdhm(long ymdhm) {
+            this.ymdhm = ymdhm;
+        }
+    }
 
-            public void setZr(String zr) {
-                this.zr = zr;
-            }
+    public static class RivertimeListBean {
+        /**
+         * ymdhm : 1532836800000
+         * q : 0
+         * zr : 29.56
+         */
+
+        private long ymdhm; //时间
+        private String q;//流量
+        private String zr;//水位值
+
+        public String getYmdhm() {
+            return dateFormat.format(new Date(ymdhm));
+        }
+
+        public void setYmdhm(long ymdhm) {
+            this.ymdhm = ymdhm;
+        }
+
+        public String getQ() {
+            return q;
+        }
+
+        public void setQ(String q) {
+            this.q = q;
+        }
+
+        public String getZr() {
+            return zr;
+        }
+
+        public void setZr(String zr) {
+            this.zr = zr;
         }
     }
 }

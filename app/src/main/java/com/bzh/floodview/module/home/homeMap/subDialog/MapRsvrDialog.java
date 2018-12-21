@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.fragment.BaseDialogFragment;
+import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.mapData.ApiRsvrMapData;
 import com.bzh.floodview.utils.chart.LineChartManager;
 import com.github.mikephil.charting.charts.LineChart;
@@ -74,35 +75,35 @@ public class MapRsvrDialog extends BaseDialogFragment {
         String stlc = bundle.getString("stlc");
         String startTM = bundle.getString("startTM");
         String endTM = bundle.getString("endTM");
-        Observable<ApiRsvrMapData> observable = mRetrofitHelper.getServer().getStateRsvr(stcd, startTM, endTM);
-        mRetrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
+        Observable<BaseApi<ApiRsvrMapData>> observable = mRetrofitHelper.getServer().getStateRsvr(stcd, startTM, endTM);
+        mRetrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<ApiRsvrMapData>>() {
             @Override
-            public <T> void run(T t) {
-                ApiRsvrMapData data = (ApiRsvrMapData) t;
+            public void run(BaseApi<ApiRsvrMapData> apiRsvrMapDataBaseApi) {
+                ApiRsvrMapData data = apiRsvrMapDataBaseApi.getData();
                 Timber.e(data.toString());
                 tx_stnm.setText(title);
                 tx_address.setText(stlc);
                 Timber.e(data.toString());
-                if(data.getData() != null){
-                    tx_dataTime.setText(data.getData().getReservoir().getTm());
-                    tx_rz.setText(String.valueOf(data.getData().getReservoir().getRz()));
-                    tx_roq.setText(String.valueOf(data.getData().getReservoir().getOtq()));
-                    tx_riq.setText(String.valueOf(data.getData().getReservoir().getInq()));
-                    tx_imp.setText(String.valueOf(data.getData().getReservoir().getW()));
+                if(data != null){
+                    tx_dataTime.setText(data.getReservoir().getTm());
+                    tx_rz.setText(String.valueOf(data.getReservoir().getRz()));
+                    tx_roq.setText(String.valueOf(data.getReservoir().getOtq()));
+                    tx_riq.setText(String.valueOf(data.getReservoir().getInq()));
+                    tx_imp.setText(String.valueOf(data.getReservoir().getW()));
                 }
                 //设置x轴的数据
                 ArrayList<String> xValues = new ArrayList<>();
-                for (int i = 0; i < data.getData().getReservoirtimeList().size(); i++) {
-                    xValues.add(data.getData().getReservoirtimeList().get(i).getTm()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
+                for (int i = 0; i < data.getReservoirtimeList().size(); i++) {
+                    xValues.add(data.getReservoirtimeList().get(i).getTm()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
                 }
                 //设置y轴的数据
                 List<Float> yValues = new ArrayList<>();
                 List<Float> zValues = new ArrayList<>();
                 float valQ;
                 float valZ;
-                for (int i = 0; i < data.getData().getReservoirtimeList().size(); i++) {
-                    valQ = Float.valueOf(data.getData().getReservoirtimeList().get(i).getRz());
-                    valZ = Float.valueOf(data.getData().getReservoirtimeList().get(i).getW());
+                for (int i = 0; i < data.getReservoirtimeList().size(); i++) {
+                    valQ = Float.valueOf(data.getReservoirtimeList().get(i).getRz());
+                    valZ = Float.valueOf(data.getReservoirtimeList().get(i).getW());
                     yValues.add(valQ);
                     zValues.add(valZ);
                 }

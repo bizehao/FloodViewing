@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.fragment.BaseDialogFragment;
+import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.mapData.ApiRainMapData;
 import com.bzh.floodview.ui.widget.LoadingView;
 import com.bzh.floodview.utils.chart.BarChartManager;
@@ -22,6 +23,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarDataSet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -98,25 +100,25 @@ public class MapRainDialog extends BaseDialogFragment {
         startTime.setText(startTM);
         endTime.setText(endTM);
 
-        Observable<ApiRainMapData> observable = mRetrofitHelper.getServer().getStateRain(stcd, startTM, endTM);
-        mRetrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
+        Observable<BaseApi<List<ApiRainMapData>>> observable = mRetrofitHelper.getServer().getStateRain(stcd, startTM, endTM);
+        mRetrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<List<ApiRainMapData>>>() {
             @Override
-            public <T> void run(T t) {
-                ApiRainMapData data = (ApiRainMapData) t;
-                adapter.setList(data.getData());
+            public void run(BaseApi<List<ApiRainMapData>> listBaseApi) {
+                List<ApiRainMapData> data = listBaseApi.getData();
+                adapter.setList(data);
                 //设置x轴的数据
                 ArrayList<String> xValues = new ArrayList<>();
-                for (int i = 0; i < data.getData().size(); i++) {
-                    xValues.add(data.getData().get(i).getTm());//Float.valueOf(rainTwoLevels.get(i).getTtt())
+                for (int i = 0; i < data.size(); i++) {
+                    xValues.add(data.get(i).getTm());//Float.valueOf(rainTwoLevels.get(i).getTtt())
                 }
                 //设置y轴的数据
                 ArrayList<Float> yValues = new ArrayList<>();
                 float val = 0;
-                for (int i = 0; i < data.getData().size(); i++) {
-                    if (data.getData().get(i).getDrp().equals("--")) {
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i).getDrp().equals("--")) {
                         val = 0;
                     } else {
-                        val = Float.valueOf(data.getData().get(i).getDrp());
+                        val = Float.valueOf(data.get(i).getDrp());
                     }
                     yValues.add(val);
                 }

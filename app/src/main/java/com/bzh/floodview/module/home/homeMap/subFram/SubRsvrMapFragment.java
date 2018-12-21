@@ -38,7 +38,7 @@ public class SubRsvrMapFragment extends BaseFragment {
     @Inject
     MapSubViewModle mMapSubViewModle;
 
-    private List<ApiRsvrTable.DataBean> listDataBeanAB = new ArrayList<>();
+    private List<ApiRsvrTable> listDataBeanAB = new ArrayList<>();
 
     @Override
     protected int getContentViewLayoutID() {
@@ -47,7 +47,7 @@ public class SubRsvrMapFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        SubMapAdapter<ApiRsvrTable.DataBean> adapter = new SubMapAdapter<>(getActivity(),5);
+        SubMapAdapter<ApiRsvrTable> adapter = new SubMapAdapter<>(getActivity(),5);
         mRecyclerView.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(manager);
@@ -106,7 +106,7 @@ public class SubRsvrMapFragment extends BaseFragment {
                 String name = s.trim();
                 if(!s.equals("")){
                     Pattern pattern = Pattern.compile(name, Pattern.CASE_INSENSITIVE);
-                    for (ApiRsvrTable.DataBean dataBean : mMapSubViewModle.getRsvrInfoAB()) {
+                    for (ApiRsvrTable dataBean : mMapSubViewModle.getRsvrInfoAB()) {
                         Matcher matcher = pattern.matcher(dataBean.getStnm());
                         if (matcher.find()) {
                             listDataBeanAB.add(dataBean);

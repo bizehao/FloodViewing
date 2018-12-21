@@ -5,6 +5,8 @@ import com.bzh.floodview.model.ApiFriends;
 import com.bzh.floodview.model.ApiLogin;
 import com.bzh.floodview.model.ApiRainInfo;
 import com.bzh.floodview.model.ApiRainStInfo;
+import com.bzh.floodview.model.BaseApi;
+import com.bzh.floodview.model.login.ApiLoginData;
 import com.bzh.floodview.model.mapData.ApiRainMapData;
 import com.bzh.floodview.model.mapData.ApiRainTable;
 import com.bzh.floodview.model.ApiRegister;
@@ -18,7 +20,9 @@ import com.bzh.floodview.model.mapData.ApiStcd;
 import com.bzh.floodview.model.ApiUserInfo;
 import com.bzh.floodview.model.ApiUserInfos;
 import com.bzh.floodview.model.ApiaddFriends;
+import com.bzh.floodview.model.test.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -39,8 +43,8 @@ public interface RetrofitService {
     //登陆
     @FormUrlEncoded
     @POST("user/login")
-    Observable<ApiLogin> login(@Field("username") String username,
-                               @Field("password") String password);
+    Observable<BaseApi<ApiLoginData>> login(@Field("username") String username,
+                                            @Field("password") String password);
 
     //注销
     @GET("user/login-out")
@@ -78,11 +82,11 @@ public interface RetrofitService {
     //上传图片
     @Multipart
     @POST("user/uploadPng")
-    Observable<ResponseBody> uploadPng(@Part("username") RequestBody username,@Part MultipartBody.Part headPortrait);
+    Observable<ResponseBody> uploadPng(@Part("username") RequestBody username, @Part MultipartBody.Part headPortrait);
 
     //删除好友
     @GET("user/deleteFriend")
-    Observable<ApiCommon> delFriend(@Query("username") String username,@Query("friendName") String friendName);
+    Observable<ApiCommon> delFriend(@Query("username") String username, @Query("friendName") String friendName);
 
 
     //降雨信息
@@ -103,7 +107,7 @@ public interface RetrofitService {
 
     //汛情摘要降雨量
     @GET("floodAbstract/floodAbstract_rain_all")
-    Observable<ApiRainInfo> getFloodRainInfo(@Query("stm") String stm, @Query("etm") String etm, @Query("nums")String nums);
+    Observable<ApiRainInfo> getFloodRainInfo(@Query("stm") String stm, @Query("etm") String etm, @Query("nums") String nums);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //地图相关
@@ -114,24 +118,30 @@ public interface RetrofitService {
 
     //获取降雨量的站点信息
     @GET("mapController/rainfallInformation")
-    Observable<ApiRainMapData> getStateRain(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend")String etm);
+    Observable<BaseApi<List<ApiRainMapData>>> getStateRain(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend") String etm);
 
     //获取河道水情的站点信息
     @GET("mapController/riverStationInformation")
-    Observable<ApiRiverMapData> getStateRiver(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend")String etm);
+    Observable<BaseApi<ApiRiverMapData>> getStateRiver(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend") String etm);
 
     //获取水库水位的站点信息
     @GET("mapController/reservoirWaterLevelStationInformation")
-    Observable<ApiRsvrMapData> getStateRsvr(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend")String etm);
+    Observable<BaseApi<ApiRsvrMapData>> getStateRsvr(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend") String etm);
 
     //降雨量表格
     @GET("mapController/rainfallTable")
-    Observable<ApiRainTable> getRainTable(@Query("tmstart") String stm, @Query("tmend")String etm);
+    Observable<BaseApi<List<ApiRainTable>>> getRainTable(@Query("tmstart") String stm, @Query("tmend") String etm);
+
     //河道表格
     @GET("mapController/theRiverForms")
-    Observable<ApiRiverTable> getRiverTable(@Query("tmstart") String stm, @Query("tmend")String etm);
+    Observable<BaseApi<List<ApiRiverTable>>> getRiverTable(@Query("tmstart") String stm, @Query("tmend") String etm);
+
     //水库表格
     @GET("mapController/reservoirForm")
-    Observable<ApiRsvrTable> getRsvrTable(@Query("tmstart") String stm, @Query("tmend")String etm);
+    Observable<BaseApi<List<ApiRsvrTable>>> getRsvrTable(@Query("tmstart") String stm, @Query("tmend") String etm);
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////
+    @GET("auth/say")
+    Observable<BaseApi<Test>> getSay();
+
 }

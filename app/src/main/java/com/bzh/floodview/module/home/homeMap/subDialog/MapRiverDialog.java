@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.fragment.BaseDialogFragment;
+import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.mapData.ApiRiverMapData;
 import com.bzh.floodview.utils.chart.LineChartManager;
 import com.github.mikephil.charting.charts.LineChart;
@@ -74,34 +75,34 @@ public class MapRiverDialog extends BaseDialogFragment {
         String stlc = bundle.getString("stlc");
         String startTM = bundle.getString("startTM");
         String endTM = bundle.getString("endTM");
-        Observable<ApiRiverMapData> observable = mRetrofitHelper.getServer().getStateRiver(stcd, startTM, endTM);
-        mRetrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
+        Observable<BaseApi<ApiRiverMapData>> observable = mRetrofitHelper.getServer().getStateRiver(stcd, startTM, endTM);
+        mRetrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<ApiRiverMapData>>() {
             @Override
-            public <T> void run(T t) {
-                ApiRiverMapData data = (ApiRiverMapData) t;
+            public void run(BaseApi<ApiRiverMapData> apiRiverMapDataBaseApi) {
+                ApiRiverMapData data = apiRiverMapDataBaseApi.getData();
                 Timber.e(data.toString());
                 tx_stnm.setText(title);
                 tx_address.setText(stlc);
-                if(data.getData() != null){
-                    tx_dataTime.setText(data.getData().getRiver().getYmdhm());
-                    tx_z.setText(String.valueOf(data.getData().getRiver().getZ()));
-                    tx_q.setText(String.valueOf(data.getData().getRiver().getQ()));
-                    tx_wrz.setText(String.valueOf(data.getData().getRiver().getWrz()));
-                    tx_chaochu.setText(String.valueOf(data.getData().getRiver().getChaochu()));
+                if(data != null){
+                    tx_dataTime.setText(data.getRiver().getYmdhm());
+                    tx_z.setText(String.valueOf(data.getRiver().getZ()));
+                    tx_q.setText(String.valueOf(data.getRiver().getQ()));
+                    tx_wrz.setText(String.valueOf(data.getRiver().getWrz()));
+                    tx_chaochu.setText(String.valueOf(data.getRiver().getChaochu()));
                 }
                 //设置x轴的数据
                 ArrayList<String> xValues = new ArrayList<>();
-                for (int i = 0; i < data.getData().getRivertimeList().size(); i++) {
-                    xValues.add(data.getData().getRivertimeList().get(i).getYmdhm()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
+                for (int i = 0; i < data.getRivertimeList().size(); i++) {
+                    xValues.add(data.getRivertimeList().get(i).getYmdhm()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
                 }
                 //设置y轴的数据
                 List<Float> yValues = new ArrayList<>();
                 List<Float> zValues = new ArrayList<>();
                 float valQ;
                 float valZ;
-                for (int i = 0; i < data.getData().getRivertimeList().size(); i++) {
-                    valQ = Float.valueOf(data.getData().getRivertimeList().get(i).getQ());
-                    valZ = Float.valueOf(data.getData().getRivertimeList().get(i).getZr());
+                for (int i = 0; i < data.getRivertimeList().size(); i++) {
+                    valQ = Float.valueOf(data.getRivertimeList().get(i).getQ());
+                    valZ = Float.valueOf(data.getRivertimeList().get(i).getZr());
                     yValues.add(valQ);
                     zValues.add(valZ);
                 }
@@ -132,4 +133,5 @@ public class MapRiverDialog extends BaseDialogFragment {
     public void imgOnClick() {
         this.dismiss();
     }
+
 }
