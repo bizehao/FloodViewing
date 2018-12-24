@@ -44,8 +44,8 @@ public class LoginPresenter implements LoginContract.Presenter {
                 ApiLoginData apiLogin = apiLoginDataBaseApi.getData();
                 Timber.e(apiLogin.toString());
                 if(apiLogin.getState()){
-                    //mainAttrs.setLoginSign(true);
-                    //App.setUser(apiLogin.getData().getUsername(),apiLogin.getData().getX_Auth_Token());
+                    mainAttrs.setLoginSign(true);
+                    App.setUser(apiLogin.getUsername(),apiLogin.getX_Auth_Token());
                     mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                     mView.goHome();
                 }else {

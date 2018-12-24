@@ -22,8 +22,12 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarDataSet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -109,8 +113,11 @@ public class MapRainDialog extends BaseDialogFragment {
                 //设置x轴的数据
                 ArrayList<String> xValues = new ArrayList<>();
                 for (int i = 0; i < data.size(); i++) {
-                    xValues.add(data.get(i).getTm());//Float.valueOf(rainTwoLevels.get(i).getTtt())
+                    xValues.add(data.get(i).getSubscripttime());
+
                 }
+                //Float.valueOf(rainTwoLevels.get(i).getTtt())
+
                 //设置y轴的数据
                 ArrayList<Float> yValues = new ArrayList<>();
                 float val = 0;

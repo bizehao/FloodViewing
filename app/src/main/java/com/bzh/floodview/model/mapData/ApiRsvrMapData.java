@@ -120,6 +120,16 @@ public class ApiRsvrMapData {
         private String rz; //库上水位
         private String w; //蓄水量
 
+        public String getSubscripttime() {
+            return subscripttime;
+        }
+
+        public void setSubscripttime(String subscripttime) {
+            this.subscripttime = subscripttime;
+        }
+
+        private String subscripttime;//统计图时间
+
         public String getTm() {
             return dateFormat.format(new Date(tm));
         }

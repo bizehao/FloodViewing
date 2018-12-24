@@ -108,6 +108,15 @@ public class ApiRiverMapData {
         private long ymdhm; //时间
         private String q;//流量
         private String zr;//水位值
+        private String subscripttime;//统计图时间
+
+        public String getSubscripttime() {
+            return subscripttime;
+        }
+
+        public void setSubscripttime(String subscripttime) {
+            this.subscripttime = subscripttime;
+        }
 
         public String getYmdhm() {
             return dateFormat.format(new Date(ymdhm));

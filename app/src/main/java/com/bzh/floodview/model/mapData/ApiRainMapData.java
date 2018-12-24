@@ -24,6 +24,7 @@ public class ApiRainMapData {
 
     private long tm;
     private String drp;
+    private String subscripttime;
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
 
     public String getTm() {
@@ -44,6 +45,14 @@ public class ApiRainMapData {
 
     public void setDrp(String drp) {
         this.drp = drp;
+    }
+
+    public String getSubscripttime() {
+        return subscripttime;
+    }
+
+    public void setSubscripttime(String subscripttime) {
+        this.subscripttime = subscripttime;
     }
 
     @Override

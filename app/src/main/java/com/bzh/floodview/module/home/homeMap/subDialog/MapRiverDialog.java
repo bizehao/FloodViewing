@@ -93,7 +93,7 @@ public class MapRiverDialog extends BaseDialogFragment {
                 //设置x轴的数据
                 ArrayList<String> xValues = new ArrayList<>();
                 for (int i = 0; i < data.getRivertimeList().size(); i++) {
-                    xValues.add(data.getRivertimeList().get(i).getYmdhm()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
+                    xValues.add(data.getRivertimeList().get(i).getSubscripttime()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
                 }
                 //设置y轴的数据
                 List<Float> yValues = new ArrayList<>();
