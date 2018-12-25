@@ -29,7 +29,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,7 @@ import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.activity.BaseActivity;
-import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
+import com.bzh.floodview.module.WebSocketChatClient;
 import com.bzh.floodview.module.home.homeIndex.IndexFragment;
 import com.bzh.floodview.module.home.homeMap.MapFragment;
 import com.bzh.floodview.module.home.homeChat.TalkFragment;
@@ -72,7 +71,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import timber.log.Timber;
 
 import static com.bzh.floodview.utils.FileUtil.getRealFilePathFromUri;
 
@@ -372,6 +370,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     public void failSettring() {
         Glide.with(this).load(ContextCompat.getDrawable(getApplication(), R.mipmap.no_login_user)).into(mCircleImageView);
+        webSocketChatClient.close();
     }
 
     /**
@@ -583,7 +582,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         } else {
             AppManager.getAppManager().AppExit(this);
             mainAttrs.setLoginSign(false);
-            webSocketChatClient.close();
         }
     }
 

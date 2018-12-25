@@ -58,6 +58,12 @@ public class LoginPresenter implements LoginContract.Presenter {
                     mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                 }
             }
+
+            @Override
+            public void handlerError() {
+                mView.closeProgress();
+                mView.showMessage("网络异常，请退出重试");
+            }
         });
     }
 

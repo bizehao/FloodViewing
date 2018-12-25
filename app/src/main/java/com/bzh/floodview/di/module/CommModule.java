@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.api.RetrofitHelper;
-import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
+import com.bzh.floodview.module.WebSocketChatClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -48,7 +48,7 @@ public abstract class CommModule {
     @Provides
     public static WebSocketChatClient providerWebSocketChatClient(Gson gson, MainAttrs mainAttrs) { //webSocket
         try {
-            return new WebSocketChatClient(new URI("ws://172.26.192.1:8080"), gson, mainAttrs);
+            return new WebSocketChatClient(new URI("ws://192.168.1.210:8080"), gson, mainAttrs);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

@@ -117,9 +117,8 @@ public class RetrofitHelper {
                         callBack.run(t);
                     }
                 }, throwable -> {
-                    Timber.e("================");
+                    callBack.handlerError();
                     Timber.e(Thread.currentThread().getName());
-                    callBack.handError();
                 });
     }
 
@@ -133,7 +132,7 @@ public class RetrofitHelper {
     public interface callHandler<T> {
         void run(T t);
 
-        default void handError() {
+        default void handlerError() {
         }
     }
 }
