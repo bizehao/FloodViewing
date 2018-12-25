@@ -76,7 +76,7 @@ public class MapRiverDialog extends BaseDialogFragment {
         String startTM = bundle.getString("startTM");
         String endTM = bundle.getString("endTM");
         Observable<BaseApi<ApiRiverMapData>> observable = mRetrofitHelper.getServer().getStateRiver(stcd, startTM, endTM);
-        mRetrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<ApiRiverMapData>>() {
+        mRetrofitHelper.requestHandler(observable,getActivity(), new RetrofitHelper.callHandler<BaseApi<ApiRiverMapData>>() {
             @Override
             public void run(BaseApi<ApiRiverMapData> apiRiverMapDataBaseApi) {
                 ApiRiverMapData data = apiRiverMapDataBaseApi.getData();

@@ -48,6 +48,7 @@ import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.activity.BaseActivity;
+import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
 import com.bzh.floodview.module.home.homeIndex.IndexFragment;
 import com.bzh.floodview.module.home.homeMap.MapFragment;
 import com.bzh.floodview.module.home.homeChat.TalkFragment;
@@ -57,6 +58,8 @@ import com.bzh.floodview.sideslip.FeedbackActivity;
 import com.bzh.floodview.utils.AppManager;
 import com.bzh.floodview.utils.CommonUtil;
 import com.bzh.floodview.utils.FileUtil;
+
+import org.java_websocket.WebSocket;
 
 import java.io.File;
 import java.util.Objects;
@@ -69,6 +72,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import timber.log.Timber;
 
 import static com.bzh.floodview.utils.FileUtil.getRealFilePathFromUri;
 
@@ -112,6 +116,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     MainAttrs mainAttrs;
     @Inject
     RetrofitHelper retrofitHelper;
+
+    @Inject
+    WebSocketChatClient webSocketChatClient;
 
     private Fragment[] fragments = new Fragment[3];
 
@@ -222,15 +229,24 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                     if (mFloatingActionButton.isShown()) {
                         mFloatingActionButton.hide();
                     }
+                    if (mToolbar.getVisibility() == View.GONE) {
+                        mToolbar.setVisibility(View.VISIBLE);
+                    }
                 }
                 if (position == 1) {
                     if (mFloatingActionButton.isShown()) {
                         mFloatingActionButton.hide();
                     }
+                    if (mToolbar.getVisibility() == View.VISIBLE) {
+                        mToolbar.setVisibility(View.GONE);
+                    }
                 }
                 if (position == 2) {
                     if (!mFloatingActionButton.isShown()) {
                         mFloatingActionButton.show();
+                    }
+                    if (mToolbar.getVisibility() == View.GONE) {
+                        mToolbar.setVisibility(View.VISIBLE);
                     }
                 }
                 if (position < fragments.length) {
@@ -342,7 +358,12 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     public void successSetting() {
         //加载用户信息
-        mPresenter.loadData(App.getUsername());
+        if (webSocketChatClient.getReadyState() == WebSocket.READYSTATE.NOT_YET_CONNECTED) {
+            webSocketChatClient.connect(); //连接
+        } else {
+            webSocketChatClient.reconnect(); //恢复连接
+        }
+        //mPresenter.loadData(App.getUsername()); //加载用户信息
     }
 
     @Override
@@ -540,23 +561,27 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 //    }
 
     //back键
-    private long exitTime=0;
+    private long exitTime = 0;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             exit();
             return false;
         }
-        return super.onKeyDown(keyCode,event);
+        return super.onKeyDown(keyCode, event);
     }
-    private void exit(){
-        if((System.currentTimeMillis()-exitTime)>2000) {
+
+    private void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
             Toast.makeText(getApplicationContext(),
                     "再按一次退出程序", Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();
-        }else{
+        } else {
             AppManager.getAppManager().AppExit(this);
-            }
+            mainAttrs.setLoginSign(false);
+            webSocketChatClient.close();
         }
-
     }
+
+}

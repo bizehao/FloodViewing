@@ -1,5 +1,6 @@
 package com.bzh.floodview.module.login;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import com.bzh.floodview.App;
@@ -10,6 +11,7 @@ import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.login.ApiLoginData;
 
 import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import timber.log.Timber;
 
@@ -28,7 +30,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View mView;
 
-    public LoginPresenter(RetrofitHelper retrofitHelper,MainAttrs mainAttrs) {
+    public LoginPresenter(RetrofitHelper retrofitHelper, MainAttrs mainAttrs) {
         this.retrofitHelper = retrofitHelper;
         this.mainAttrs = mainAttrs;
     }
@@ -38,17 +40,17 @@ public class LoginPresenter implements LoginContract.Presenter {
         String username = mView.getUsername();
         String password = mView.getPassword();
         Observable<BaseApi<ApiLoginData>> observable = retrofitHelper.getServer().login(username, password);
-        retrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<ApiLoginData>>() {
+        retrofitHelper.requestHandler(observable, (Context) mView, new RetrofitHelper.callHandler<BaseApi<ApiLoginData>>() {
             @Override
             public void run(BaseApi<ApiLoginData> apiLoginDataBaseApi) {
                 ApiLoginData apiLogin = apiLoginDataBaseApi.getData();
                 Timber.e(apiLogin.toString());
-                if(apiLogin.getState()){
+                if (apiLogin.getState()) {
                     mainAttrs.setLoginSign(true);
-                    App.setUser(apiLogin.getUsername(),apiLogin.getX_Auth_Token());
+                    App.setUser(apiLogin.getUsername(), apiLogin.getX_Auth_Token());
                     mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                     mView.goHome();
-                }else {
+                } else {
                     mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                 }
             }

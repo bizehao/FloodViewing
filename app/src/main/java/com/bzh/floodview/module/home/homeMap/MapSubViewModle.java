@@ -2,6 +2,7 @@ package com.bzh.floodview.module.home.homeMap;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.Context;
 
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.model.BaseApi;
@@ -63,9 +64,9 @@ public class MapSubViewModle {
     }
 
     //获取表格信息
-    public void getTableInfo(String stTime, String enTime) {
+    public void getTableInfo(String stTime, String enTime, Context context) {
         Observable<BaseApi<List<ApiRsvrTable>>> observableRsvr = retrofitHelper.getServer().getRsvrTable(stTime, enTime);
-        retrofitHelper.requestHandler(observableRsvr, new RetrofitHelper.callHandler<BaseApi<List<ApiRsvrTable>>>() {
+        retrofitHelper.requestHandler(observableRsvr,context, new RetrofitHelper.callHandler<BaseApi<List<ApiRsvrTable>>>() {
 
             @Override
             public void run(BaseApi<List<ApiRsvrTable>> listBaseApi) {
@@ -75,7 +76,7 @@ public class MapSubViewModle {
             }
         });
         Observable<BaseApi<List<ApiRiverTable>>> observableRiver = retrofitHelper.getServer().getRiverTable(stTime, enTime);
-        retrofitHelper.requestHandler(observableRiver, new RetrofitHelper.callHandler<BaseApi<List<ApiRiverTable>>>() {
+        retrofitHelper.requestHandler(observableRiver,context, new RetrofitHelper.callHandler<BaseApi<List<ApiRiverTable>>>() {
             @Override
             public void run(BaseApi<List<ApiRiverTable>> apiRiverTableBaseApi) {
                 riverInfoAB = apiRiverTableBaseApi.getData();
@@ -84,7 +85,7 @@ public class MapSubViewModle {
             }
         });
         Observable<BaseApi<List<ApiRainTable>>> observableRain = retrofitHelper.getServer().getRainTable(stTime, enTime);
-        retrofitHelper.requestHandler(observableRain, new RetrofitHelper.callHandler<BaseApi<List<ApiRainTable>>>() {
+        retrofitHelper.requestHandler(observableRain,context, new RetrofitHelper.callHandler<BaseApi<List<ApiRainTable>>>() {
             @Override
             public void run(BaseApi<List<ApiRainTable>> listBaseApi) {
                 rainInfoAB = listBaseApi.getData();

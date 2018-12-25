@@ -76,7 +76,7 @@ public class MapRsvrDialog extends BaseDialogFragment {
         String startTM = bundle.getString("startTM");
         String endTM = bundle.getString("endTM");
         Observable<BaseApi<ApiRsvrMapData>> observable = mRetrofitHelper.getServer().getStateRsvr(stcd, startTM, endTM);
-        mRetrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<ApiRsvrMapData>>() {
+        mRetrofitHelper.requestHandler(observable,getActivity(), new RetrofitHelper.callHandler<BaseApi<ApiRsvrMapData>>() {
             @Override
             public void run(BaseApi<ApiRsvrMapData> apiRsvrMapDataBaseApi) {
                 ApiRsvrMapData data = apiRsvrMapDataBaseApi.getData();

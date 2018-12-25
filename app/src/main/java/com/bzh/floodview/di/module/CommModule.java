@@ -48,7 +48,7 @@ public abstract class CommModule {
     @Provides
     public static WebSocketChatClient providerWebSocketChatClient(Gson gson, MainAttrs mainAttrs) { //webSocket
         try {
-            return new WebSocketChatClient(new URI("ws://"+App.ip+":8080"), gson, mainAttrs);
+            return new WebSocketChatClient(new URI("ws://172.26.192.1:8080"), gson, mainAttrs);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

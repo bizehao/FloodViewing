@@ -1,18 +1,27 @@
 package com.bzh.floodview.module.home.homeChat.talk;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.data.AppDatabase;
 import com.bzh.floodview.data.model.MessageInfo;
 import com.bzh.floodview.model.Talk;
+import com.bzh.floodview.module.login.LoginActivity;
+import com.bzh.floodview.utils.AppManager;
 import com.google.gson.Gson;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
+import java.util.Timer;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import timber.log.Timber;
 
@@ -33,7 +42,7 @@ public class WebSocketChatClient extends WebSocketClient {
 
     private MessageHandler messagehandler; //消息处理
 
-    public WebSocketChatClient(URI serverUri,Gson gson,MainAttrs mainAttrs) {
+    public WebSocketChatClient(URI serverUri, Gson gson, MainAttrs mainAttrs) {
         super(serverUri);
         this.gson = gson;
         this.mainAttrs = mainAttrs;
@@ -59,7 +68,7 @@ public class WebSocketChatClient extends WebSocketClient {
         switch (talk.getCode()) {
             case "200":
                 //消息存储到数据库
-                MessageInfo messageInfo = new MessageInfo(talk,false);
+                MessageInfo messageInfo = new MessageInfo(talk, false);
                 AppDatabase database = AppDatabase.getAppDatabase();
                 database.messageInfoDao().insert(messageInfo);
 
@@ -82,6 +91,20 @@ public class WebSocketChatClient extends WebSocketClient {
                 friendsInfo.setHeadportrait(talk.getMessage());
                 FriendsInfoHandler.update(friendsInfo);*/
                 break;
+            case "455":
+                Timber.e(talk.getMessage());
+                MaterialDialog dialog = new MaterialDialog.Builder(AppManager.getAppManager().currentActivity()).title("警告")
+                        .content("账号异常")
+                        .positiveText("确认").onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                AppManager.getAppManager().finishAllActivity();
+                                LoginActivity.open(AppManager.getAppManager().currentActivity());
+                            }
+                        })
+                        .build();
+                dialog.show();
+                break;
         }
 
     }
@@ -89,9 +112,16 @@ public class WebSocketChatClient extends WebSocketClient {
     @Override
     public void onClose(int code, String reason, boolean remote) {
         Log.d(TAG, "WebSocket关闭成功");
+        //尝试重新连接
         if (mainAttrs.getLoginSign().getValue() != null && mainAttrs.getLoginSign().getValue()) {
             System.out.println("执行重试连接");
-            new Thread(this::reconnect).start();
+            ExecutorService executorService = Executors.newCachedThreadPool();
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    reconnect();
+                }
+            });
         }
     }
 

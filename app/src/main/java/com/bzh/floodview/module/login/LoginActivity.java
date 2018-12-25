@@ -13,6 +13,7 @@ import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.module.home.HomeActivity;
+import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
 
 import javax.inject.Inject;
 
@@ -32,6 +33,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Inject
     MainAttrs mainAttrs;
+
+    @Inject
+    WebSocketChatClient webSocket;
 
     @Inject
     RetrofitHelper retrofitHelper;

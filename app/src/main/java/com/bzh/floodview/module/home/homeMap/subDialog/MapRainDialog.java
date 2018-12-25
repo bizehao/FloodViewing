@@ -105,7 +105,7 @@ public class MapRainDialog extends BaseDialogFragment {
         endTime.setText(endTM);
 
         Observable<BaseApi<List<ApiRainMapData>>> observable = mRetrofitHelper.getServer().getStateRain(stcd, startTM, endTM);
-        mRetrofitHelper.requestHandler(observable, new RetrofitHelper.callHandler<BaseApi<List<ApiRainMapData>>>() {
+        mRetrofitHelper.requestHandler(observable,getActivity(), new RetrofitHelper.callHandler<BaseApi<List<ApiRainMapData>>>() {
             @Override
             public void run(BaseApi<List<ApiRainMapData>> listBaseApi) {
                 List<ApiRainMapData> data = listBaseApi.getData();

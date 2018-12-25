@@ -1,7 +1,15 @@
 package com.bzh.floodview.api;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
+import com.bzh.floodview.model.BaseApi;
+import com.bzh.floodview.module.login.LoginActivity;
+import com.bzh.floodview.utils.AppManager;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
@@ -87,15 +95,31 @@ public class RetrofitHelper {
     }
 
     @SuppressWarnings("CheckResult")
-    public <T> void requestHandler(Observable<T> observable, callHandler<T> callBack) {
+    public <T> void requestHandler(Observable<T> observable, Context context, callHandler<T> callBack) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((T t) -> {
-                    callBack.run(t);
+                    Timber.e("显示结果");
+                    BaseApi<Object> baseApi = (BaseApi<Object>) t;
+                    Timber.e(baseApi.toString());
+                    if (baseApi.getCode() == 455) { //账号异常
+                        MaterialDialog dialog = new MaterialDialog.Builder(context).title("警告")
+                                .content((String) baseApi.getMessage())
+                                .positiveText("确认").onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        AppManager.getAppManager().finishAllActivity();
+                                        LoginActivity.open(context);
+                                    }
+                                }).build();
+                        dialog.show();
+                    } else {
+                        callBack.run(t);
+                    }
                 }, throwable -> {
+                    Timber.e("================");
+                    Timber.e(Thread.currentThread().getName());
                     callBack.handError();
-                    System.out.println("网络请求发生错误");
-                    System.out.println(throwable.getMessage());
                 });
     }
 

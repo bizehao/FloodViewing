@@ -1,16 +1,23 @@
 package com.bzh.floodview;
 
+import android.support.annotation.NonNull;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.bzh.floodview.data.AppDatabase;
 import com.bzh.floodview.di.component.DaggerAppComponent;
+import com.bzh.floodview.module.login.LoginActivity;
+import com.bzh.floodview.utils.AppManager;
+
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 import timber.log.Timber;
 
 public class App extends DaggerApplication {
 
-    public static final String ip = "192.168.1.63:8090/";//172.26.220.193  192.168.31.75  192.168.1.196
+    public static final String ip = "192.168.1.210:8090/";//172.26.220.193  192.168.31.75  192.168.1.196
 
     //用户
     private static User user;
@@ -35,7 +42,6 @@ public class App extends DaggerApplication {
         //自4.3.0起，百度地图SDK所有接口均支持百度坐标和国测局坐标，用此方法设置您使用的坐标类型.
         //包括BD09LL和GCJ02两种坐标，默认是BD09LL坐标。
         SDKInitializer.setCoordType(CoordType.BD09LL);
-
     }
 
     //设置当前会话的朋友

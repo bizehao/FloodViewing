@@ -8,15 +8,149 @@
     android:layout_height="match_parent"
     android:gravity="bottom"
     sothree:umanoDragView="@+id/fm_up"
-    sothree:umanoScrollableView="@+id/fm_viewpager"
     sothree:umanoOverlay="false"
     sothree:umanoPanelHeight="115dp"
     sothree:umanoParallaxOffset="0dp"
+    sothree:umanoScrollableView="@+id/fm_viewpager"
     sothree:umanoShadowHeight="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/fm_stations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/now_location" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="目前站点"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/rain_sign" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="雨量站点"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/river_sign" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="河道站点"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/rsvr_sign" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="水库站点"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/other_sign" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="未知站点"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <com.bzh.floodview.ui.widget.LoadingView
             android:id="@+id/fm_load"
@@ -27,6 +161,7 @@
             android:id="@+id/mmap"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/fm_stations"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="0dp" />
 
@@ -34,120 +169,13 @@
             android:id="@+id/fm_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/fm_stations"
             android:layout_alignParentEnd="true"
             android:layout_margin="5dp"
-            app:fab_radius="20dp"
+            android:layout_marginTop="20dp"
+            app:fab_backgroundColor="@color/blue"
             app:fab_iconSrc="@drawable/ic_cached_black_24dp"
-            app:fab_backgroundColor="@color/blue"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="120dp"
-            android:background="@color/white"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:id="@+id/fm_tblayout"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:scaleType="fitCenter"
-                        android:layout_marginStart="4dp"
-                        android:src="@drawable/now_location"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/black"
-                        android:layout_marginEnd="4dp"
-                        android:text="目前站点"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/rain_sign"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/black"
-                        android:layout_marginEnd="4dp"
-                        android:text="雨量站点"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/river_sign"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/black"
-                        android:layout_marginEnd="4dp"
-                        android:text="河道站点"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:scaleType="fitCenter"
-                        android:layout_marginStart="4dp"
-                        android:src="@drawable/rsvr_sign"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/black"
-                        android:layout_marginEnd="4dp"
-                        android:text="水库站点"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:scaleType="fitCenter"
-                        android:layout_marginStart="4dp"
-                        android:src="@drawable/other_sign"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/black"
-                        android:layout_marginEnd="4dp"
-                        android:text="未知站点"/>
-                </LinearLayout>
-            </LinearLayout>
-            <ImageButton
-                android:id="@+id/fm_imgbut"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_chevron_left_black_24dp"
-                android:background="#d1d0d0"/>
-        </LinearLayout>
-
+            app:fab_radius="20dp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -178,7 +206,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_expand_less_black_24dp"/>
+                android:src="@drawable/ic_expand_less_black_24dp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -217,11 +245,11 @@
                 android:id="@+id/fm_btn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/button1"
                 android:clickable="true"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="1dp"
                 android:gravity="center"
                 android:text="查询"
                 android:textColor="@color/white"
@@ -247,18 +275,18 @@
             android:id="@+id/fm_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
             app:tabGravity="center"
             app:tabIndicatorColor="@color/red"
             app:tabIndicatorHeight="2dp"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/red"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
             app:tabTextColor="@color/black" />
 
         <com.bzh.floodview.ui.widget.LoadingView
             android:id="@+id/fm_page_load"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/fm_viewpager"

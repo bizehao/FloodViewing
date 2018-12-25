@@ -65,13 +65,6 @@ public class HomePresenter implements HomeContract.Presenter {
                 }
                 mView.setHeadName(apiUserInfo.getData().getName());
                 mView.setHeadMotto(apiUserInfo.getData().getMotto());
-                //webSocketChatClient.connectBlocking()
-                //webSocketChatClient.reconnect();
-                if(webSocketChatClient.getReadyState() == WebSocket.READYSTATE.NOT_YET_CONNECTED){
-                    webSocketChatClient.connect(); //连接
-                }else {
-                    webSocketChatClient.reconnect(); //恢复连接
-                }
             }
         });
         Observable<ApiFriends> friends = retrofitHelper.getServer().getFriends(username);

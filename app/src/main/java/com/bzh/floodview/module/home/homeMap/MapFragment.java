@@ -110,12 +110,6 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
     @BindView(R.id.fm_img)
     ImageView mImageView;
 
-    @BindView(R.id.fm_imgbut)
-    ImageButton mImageButton;
-
-    @BindView(R.id.fm_tblayout)
-    LinearLayout tubiaoLayout;
-
     private Calendar now;
     //日期
     private DatePickerDialog dpd;
@@ -203,7 +197,7 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
             mMapSubViewModle.setLoading(0);
             String stTime = stEditText.getText().toString();
             String enTime = enEditText.getText().toString();
-            mMapSubViewModle.getTableInfo(stTime, enTime);
+            mMapSubViewModle.getTableInfo(stTime, enTime, getActivity());
         });
 
         //地图点击事件
@@ -232,8 +226,36 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                     .zoom(10)
                     .build();
             MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(10));
             //改变地图状态
             mBaiduMap.setMapStatus(mMapStatusUpdate);
+
+            for (Map.Entry<String, Marker> markerMap : overlayMap.entrySet()) {
+                Marker marker = markerMap.getValue();
+                String sttp = marker.getExtraInfo().getString("sttp");
+                switch (sttp) {
+                    case "PP":
+                        if(marker.getIcon() != bitmapRain){
+                            marker.setIcon(bitmapRain);
+                        }
+                        break;
+                    case "ZZ":
+                        if(marker.getIcon() != bitmapRiver){
+                            marker.setIcon(bitmapRiver);
+                        }
+                        break;
+                    case "RR":
+                        if(marker.getIcon() != bitmapRsvr){
+                            marker.setIcon(bitmapRsvr);
+                        }
+                        break;
+                    default:
+                        if(marker.getIcon() != bitmapOther){
+                            marker.setIcon(bitmapOther);
+                        }
+                        break;
+                }
+            }
         });
 
         //其他child触发点击事件
@@ -263,16 +285,6 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                 } else if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) { //扩大
                     Glide.with(getActivity()).load(R.drawable.ic_expand_more_black_24dp).into(mImageView);
                 }
-            }
-        });
-
-        mImageButton.setOnClickListener(v -> {
-            if (tubiaoLayout.getVisibility() == View.VISIBLE) {
-                tubiaoLayout.setVisibility(View.GONE);
-                Glide.with(getActivity()).load(R.drawable.ic_chevron_right_black_24dp).into(mImageButton);
-            } else {
-                tubiaoLayout.setVisibility(View.VISIBLE);
-                Glide.with(getActivity()).load(R.drawable.ic_chevron_left_black_24dp).into(mImageButton);
             }
         });
 
@@ -447,7 +459,9 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
             );
         }
         dpd.setAccentColor(Color.parseColor("#0195ff"));
-        dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
+        if (!dpd.isAdded()) {
+            dpd.show(getActivity().getFragmentManager(), "Datepickerdialog");
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -468,7 +482,7 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
         String startTm = dateFormat.format(calendar.getTime());
         stEditText.setText(startTm);
         mMapSubViewModle.setLoading(0);
-        mMapSubViewModle.getTableInfo(startTm, endTm);
+        mMapSubViewModle.getTableInfo(startTm, endTm, getActivity());
     }
 
     @Override
