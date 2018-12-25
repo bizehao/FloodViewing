@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
@@ -42,6 +43,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     LoginContract.Presenter mPresenter;
 
+    MaterialDialog dialog;
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_login;
@@ -72,6 +75,23 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     public void goHome() {
         HomeActivity.open(this);
+    }
+
+    @Override
+    public void openProgress() {
+        dialog = new MaterialDialog.Builder(this)
+                .title("提示")
+                .content("正在登陆，请稍等...")
+                .progress(true, 0)
+                .cancelable(false)
+                .show();
+    }
+
+    @Override
+    public void closeProgress() {
+        if(dialog != null){
+            dialog.dismiss();
+        }
     }
 
     @Override

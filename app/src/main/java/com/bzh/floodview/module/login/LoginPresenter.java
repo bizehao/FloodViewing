@@ -10,6 +10,8 @@ import com.bzh.floodview.model.ApiLogin;
 import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.login.ApiLoginData;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -37,12 +39,14 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login() {
+        mView.openProgress();
         String username = mView.getUsername();
         String password = mView.getPassword();
         Observable<BaseApi<ApiLoginData>> observable = retrofitHelper.getServer().login(username, password);
         retrofitHelper.requestHandler(observable, (Context) mView, new RetrofitHelper.callHandler<BaseApi<ApiLoginData>>() {
             @Override
             public void run(BaseApi<ApiLoginData> apiLoginDataBaseApi) {
+                mView.closeProgress();
                 ApiLoginData apiLogin = apiLoginDataBaseApi.getData();
                 Timber.e(apiLogin.toString());
                 if (apiLogin.getState()) {

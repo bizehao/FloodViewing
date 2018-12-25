@@ -21,6 +21,12 @@ public interface LoginContract {
         //跳转到主页
         void goHome();
 
+        //启动登录提示
+        void openProgress();
+
+        //关闭登录提示
+        void closeProgress();
+
     }
 
     interface Presenter extends BasePresenter<LoginContract.View>{
