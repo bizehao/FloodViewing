@@ -172,7 +172,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                         startActivity(new Intent(HomeActivity.this, AboutusActivity.class));
                         break;
                     case R.id.nav_sign_out:
-                        onBackPressed();
+                        AppManager.getAppManager().finishAllActivity();
+                        System.exit(0);
                         break;
                 }
                 mDrawerLayout.closeDrawers();
@@ -358,12 +359,14 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Override
     public void successSetting() {
         //加载用户信息
-        if (webSocketChatClient.getReadyState() == WebSocket.READYSTATE.NOT_YET_CONNECTED) {
-            webSocketChatClient.connect(); //连接
-        } else {
-            webSocketChatClient.reconnect(); //恢复连接
+        if(webSocketChatClient != null){
+            if (webSocketChatClient.getReadyState() == WebSocket.READYSTATE.NOT_YET_CONNECTED) {
+                webSocketChatClient.connect(); //连接
+            } else {
+                webSocketChatClient.reconnect(); //恢复连接
+            }
+            //mPresenter.loadData(App.getUsername()); //加载用户信息
         }
-        //mPresenter.loadData(App.getUsername()); //加载用户信息
     }
 
     @Override

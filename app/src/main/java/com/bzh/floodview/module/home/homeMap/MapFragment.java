@@ -29,6 +29,7 @@ import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.PolygonOptions;
 import com.baidu.mapapi.map.Stroke;
+import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.map.offline.MKOfflineMap;
 import com.baidu.mapapi.map.offline.MKOfflineMapListener;
 import com.baidu.mapapi.model.LatLng;
@@ -124,6 +125,7 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
     RetrofitHelper retrofitHelper;
 
     private BaiduMap mBaiduMap;
+    private UiSettings mUiSettings;
     private DistrictSearch mDistrictSearch;
     private List<ApiStcd.DataBean> beans;
     //地图站点
@@ -166,6 +168,9 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         mBaiduMap.setBuildingsEnabled(false);
+        mUiSettings = mBaiduMap.getUiSettings();
+        mUiSettings.setOverlookingGesturesEnabled(false); //俯视3D
+        mUiSettings.setRotateGesturesEnabled(false); //地图旋转
         initData();
 
         List<Fragment> fragmentList = new ArrayList<>();
