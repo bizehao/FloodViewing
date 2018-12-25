@@ -15,9 +15,7 @@ import com.bzh.floodview.model.ApiCommon;
 import com.bzh.floodview.model.ApiFriends;
 import com.bzh.floodview.model.ApiUserInfo;
 import com.bzh.floodview.module.login.LoginActivity;
-import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
-
-import org.java_websocket.WebSocket;
+import com.bzh.floodview.module.WebSocketChatClient;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -105,7 +103,6 @@ public class HomePresenter implements HomeContract.Presenter {
                 if ((boolean) apiCommon.getData()) {
                     mView.failSettring();
                     mainAttrs.setLoginSign(false);
-                    webSocketChatClient.close();
                     LoginActivity.open((Context) mView);
                 }
             }

@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.api.RetrofitHelper;
-import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
+import com.bzh.floodview.module.WebSocketChatClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

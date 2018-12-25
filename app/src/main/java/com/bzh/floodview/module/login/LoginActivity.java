@@ -6,7 +6,6 @@ import android.support.design.widget.TextInputEditText;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bzh.floodview.MainAttrs;
@@ -14,12 +13,11 @@ import com.bzh.floodview.R;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.module.home.HomeActivity;
-import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
+import com.bzh.floodview.module.WebSocketChatClient;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 

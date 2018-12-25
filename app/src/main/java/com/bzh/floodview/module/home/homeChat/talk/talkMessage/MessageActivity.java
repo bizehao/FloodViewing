@@ -26,7 +26,7 @@ import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.data.AppDatabase;
 import com.bzh.floodview.data.model.MessageInfo;
 import com.bzh.floodview.model.Talk;
-import com.bzh.floodview.module.home.homeChat.talk.WebSocketChatClient;
+import com.bzh.floodview.module.WebSocketChatClient;
 import com.bzh.floodview.module.home.homeChat.talk.model.Message;
 import com.bzh.floodview.module.home.homeChat.talk.model.User;
 import com.google.gson.Gson;

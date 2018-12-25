@@ -123,7 +123,7 @@ public class MapRsvrDialog extends BaseDialogFragment {
             }
 
             @Override
-            public void handError() {
+            public void handlerError() {
                 tx_stnm.setText(title);
                 tx_address.setText(stlc);
             }

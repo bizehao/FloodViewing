@@ -1,5 +1,7 @@
-package com.bzh.floodview.module.home.homeChat.talk;
+package com.bzh.floodview.module;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -92,18 +94,24 @@ public class WebSocketChatClient extends WebSocketClient {
                 FriendsInfoHandler.update(friendsInfo);*/
                 break;
             case "455":
-                Timber.e(talk.getMessage());
-                MaterialDialog dialog = new MaterialDialog.Builder(AppManager.getAppManager().currentActivity()).title("警告")
-                        .content("账号异常")
-                        .positiveText("确认").onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                AppManager.getAppManager().finishAllActivity();
-                                LoginActivity.open(AppManager.getAppManager().currentActivity());
-                            }
-                        })
-                        .build();
-                dialog.show();
+                Looper.prepare();
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        MaterialDialog dialog = new MaterialDialog.Builder(AppManager.getAppManager().currentActivity()).title("警告")
+                                .content("账号异常,请重新登录")
+                                .positiveText("确认").onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        LoginActivity.open(AppManager.getAppManager().currentActivity());
+                                        AppManager.getAppManager().finishAllActivity();
+                                    }
+                                })
+                                .build();
+                        dialog.show();
+                    }
+                });
+                Looper.loop();
                 break;
         }
 
