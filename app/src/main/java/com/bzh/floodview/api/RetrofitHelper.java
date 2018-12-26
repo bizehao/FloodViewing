@@ -118,7 +118,7 @@ public class RetrofitHelper {
                     }
                 }, throwable -> {
                     callBack.handlerError();
-                    Timber.e(Thread.currentThread().getName());
+                    System.out.println(throwable.getMessage());
                 });
     }
 

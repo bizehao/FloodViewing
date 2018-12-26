@@ -37,6 +37,7 @@
         android:padding="2dp">
 
         <EditText
+            android:id="@+id/edittextfb"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="#FFF"
