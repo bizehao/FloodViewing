@@ -2,10 +2,10 @@ package com.bzh.floodview.api;
 
 import com.bzh.floodview.model.ApiCommon;
 import com.bzh.floodview.model.ApiFriends;
-import com.bzh.floodview.model.ApiLogin;
 import com.bzh.floodview.model.ApiRainInfo;
 import com.bzh.floodview.model.ApiRainStInfo;
 import com.bzh.floodview.model.BaseApi;
+import com.bzh.floodview.model.back.Feedback;
 import com.bzh.floodview.model.login.ApiLoginData;
 import com.bzh.floodview.model.mapData.ApiRainMapData;
 import com.bzh.floodview.model.mapData.ApiRainTable;
@@ -143,5 +143,8 @@ public interface RetrofitService {
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     @GET("auth/say")
     Observable<BaseApi<Test>> getSay();
+
+    @POST("addFeedBack")
+    Observable<BaseApi<Boolean>> getaddFeedBack(@Query("contents") String contents, @Query("uName") String uname );
 
 }
