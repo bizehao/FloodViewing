@@ -83,7 +83,7 @@
             android:process=":remote" />
 
         <activity android:name=".sideslip.AboutusActivity" />
-        <activity android:name=".sideslip.FeedbackActivity"></activity>
+        <activity android:name=".sideslip.FeedbackActivity" />
     </application>
 
 </manifest>

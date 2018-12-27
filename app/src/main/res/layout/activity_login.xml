@@ -62,6 +62,7 @@
                 android:layout_height="match_parent"
                 android:hint="用户名"
                 android:imeOptions="actionNext"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:inputType="text"
                 android:maxLines="1" />
         </android.support.design.widget.TextInputLayout>
@@ -79,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:hint="密码"
                 android:imeOptions="actionDone"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:inputType="textPassword"
                 android:maxLines="1" />
 

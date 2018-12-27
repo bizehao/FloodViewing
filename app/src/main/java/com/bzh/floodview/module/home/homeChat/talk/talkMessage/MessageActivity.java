@@ -58,8 +58,7 @@ public class MessageActivity extends BaseActivity {
     @Inject
     Gson gson;
 
-    @Inject
-    WebSocketChatClient webSocketChatClient;
+    WebSocketChatClient webSocketChatClient = WebSocketChatClient.getWebSocketInstance();
 
     @Inject
     MainAttrs mainAttrs;

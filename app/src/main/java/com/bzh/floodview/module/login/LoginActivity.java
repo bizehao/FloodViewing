@@ -18,6 +18,7 @@ import com.bzh.floodview.module.WebSocketChatClient;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import timber.log.Timber;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
@@ -52,6 +53,23 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     protected void initView(Bundle savedInstanceState) {
         mPresenter = new LoginPresenter(retrofitHelper, mainAttrs);
         loginBut.setOnClickListener((View v) -> {
+
+            if (getUsername() == null || getUsername().length() < 6) {
+                new MaterialDialog.Builder(this)
+                        .title("提示")
+                        .content("用户名至少6位")
+                        .positiveText("确定")
+                        .show();
+                return;
+            }
+            if (getPassword() == null || getPassword().length() < 6) {
+                new MaterialDialog.Builder(this)
+                        .title("提示")
+                        .content("密码至少6位")
+                        .positiveText("确定")
+                        .show();
+                return;
+            }
             mPresenter.login();
         });
     }
@@ -67,7 +85,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public String getPassword() { return passwordText.getText().toString();
+    public String getPassword() {
+        return passwordText.getText().toString();
     }
 
     @Override
@@ -87,7 +106,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void closeProgress() {
-        if(dialog != null){
+        if (dialog != null) {
             dialog.dismiss();
         }
     }

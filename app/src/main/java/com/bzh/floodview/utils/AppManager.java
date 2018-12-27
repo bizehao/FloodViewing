@@ -108,5 +108,15 @@ public class AppManager {
         }
     }
 
+    /**
+     * 结束所有除最上层Activity的其余Activity
+     */
+    public void finishAllActivityExceptTop() {
+        for (int i = 0, size = activityStack.size(); i < size; i++) {
+            if (null != activityStack.get(i) && i != activityStack.size()-1) {
+                activityStack.get(i).finish();
+            }
+        }
+    }
 
 }

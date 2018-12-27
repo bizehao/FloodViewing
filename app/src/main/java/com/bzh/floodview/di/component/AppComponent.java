@@ -6,9 +6,7 @@ import com.bzh.floodview.di.module.CommModule;
 import com.bzh.floodview.di.module.FragmentDialogModule;
 import com.bzh.floodview.di.module.FragmentModule;
 import com.bzh.floodview.di.module.MapModule;
-
 import javax.inject.Singleton;
-
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;

@@ -99,18 +99,14 @@ public class RetrofitHelper {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((T t) -> {
-                    Timber.e("显示结果");
                     BaseApi<Object> baseApi = (BaseApi<Object>) t;
-                    Timber.e(baseApi.toString());
+                    Timber.e("======================");
                     if (baseApi.getCode() == 455) { //账号异常
                         MaterialDialog dialog = new MaterialDialog.Builder(context).title("警告")
                                 .content((String) baseApi.getMessage())
-                                .positiveText("确认").onPositive(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        AppManager.getAppManager().finishAllActivity();
-                                        LoginActivity.open(context);
-                                    }
+                                .positiveText("确认").onPositive((dialog1, which) -> {
+                                    AppManager.getAppManager().finishAllActivity();
+                                    LoginActivity.open(context);
                                 }).build();
                         dialog.show();
                     } else {

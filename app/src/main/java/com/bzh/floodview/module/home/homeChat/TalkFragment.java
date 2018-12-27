@@ -59,8 +59,8 @@ public class TalkFragment extends BaseFragment {
     DialogsList dialogsList;
     @BindView(R.id.is_online)
     FrameLayout mFrameLayout;
-    @Inject
-    WebSocketChatClient webSocketChatClient;
+
+    private WebSocketChatClient webSocketChatClient = WebSocketChatClient.getWebSocketInstance();
     @Inject
     Gson gson;
     @Inject

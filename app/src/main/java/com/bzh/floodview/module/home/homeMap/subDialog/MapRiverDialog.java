@@ -1,6 +1,7 @@
 package com.bzh.floodview.module.home.homeMap.subDialog;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.bzh.floodview.model.mapData.ApiRiverMapData;
 import com.bzh.floodview.utils.chart.LineChartManager;
 import com.github.mikephil.charting.charts.LineChart;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,45 +82,54 @@ public class MapRiverDialog extends BaseDialogFragment {
             @Override
             public void run(BaseApi<ApiRiverMapData> apiRiverMapDataBaseApi) {
                 ApiRiverMapData data = apiRiverMapDataBaseApi.getData();
-                Timber.e(data.toString());
                 tx_stnm.setText(title);
                 tx_address.setText(stlc);
-                if(data != null){
+                if(data.getRiver() != null){
                     tx_dataTime.setText(data.getRiver().getYmdhm());
                     tx_z.setText(String.valueOf(data.getRiver().getZ()));
                     tx_q.setText(String.valueOf(data.getRiver().getQ()));
                     tx_wrz.setText(String.valueOf(data.getRiver().getWrz()));
                     tx_chaochu.setText(String.valueOf(data.getRiver().getChaochu()));
                 }
-                //设置x轴的数据
-                ArrayList<String> xValues = new ArrayList<>();
-                for (int i = 0; i < data.getRivertimeList().size(); i++) {
-                    xValues.add(data.getRivertimeList().get(i).getSubscripttime()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
+                if(data.getRivertimeList() != null && data.getRivertimeList().size() > 0){
+                    //设置x轴的数据
+                    ArrayList<String> xValues = new ArrayList<>();
+                    for (int i = 0; i < data.getRivertimeList().size(); i++) {
+                        xValues.add(data.getRivertimeList().get(i).getSubscripttime()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
+                    }
+                    //设置y轴的数据
+                    List<Float> yValues = new ArrayList<>();
+                    List<Float> zValues = new ArrayList<>();
+                    float valQ;
+                    float valZ;
+                    for (int i = 0; i < data.getRivertimeList().size(); i++) {
+                        valQ = Float.valueOf(data.getRivertimeList().get(i).getQ());
+                        valZ = Float.valueOf(data.getRivertimeList().get(i).getZr());
+                        yValues.add(valQ);
+                        zValues.add(valZ);
+                    }
+                    List<List<Float>> yLists = new ArrayList<>(); //Y轴
+                    yLists.add(yValues);
+                    yLists.add(zValues);
+                    List<String> tabList = new ArrayList<>(); //曲线名称
+                    tabList.add("流量");
+                    tabList.add("水位");
+                    List<Integer> colorList = new ArrayList<>(); //曲线名称
+                    colorList.add(Color.RED);
+                    colorList.add(Color.BLUE);
+                    LineChartManager barChartManager = new LineChartManager(mLineChart);
+                    barChartManager.showMultiNormalLineChart(xValues,yLists,tabList,colorList);
+                    //设置MarkerView
+                    barChartManager.setMarkerView(getActivity());
+                }else {
+                    mLineChart.clear();
+                    mLineChart.notifyDataSetChanged();
+                    mLineChart.setNoDataText("没有数据");
+                    mLineChart.setNoDataTextColor(Color.BLACK);;
+                    // 记得最后要刷新一下
+                    mLineChart.invalidate();
                 }
-                //设置y轴的数据
-                List<Float> yValues = new ArrayList<>();
-                List<Float> zValues = new ArrayList<>();
-                float valQ;
-                float valZ;
-                for (int i = 0; i < data.getRivertimeList().size(); i++) {
-                    valQ = Float.valueOf(data.getRivertimeList().get(i).getQ());
-                    valZ = Float.valueOf(data.getRivertimeList().get(i).getZr());
-                    yValues.add(valQ);
-                    zValues.add(valZ);
-                }
-                List<List<Float>> yLists = new ArrayList<>(); //Y轴
-                yLists.add(yValues);
-                yLists.add(zValues);
-                List<String> tabList = new ArrayList<>(); //曲线名称
-                tabList.add("流量");
-                tabList.add("水位");
-                List<Integer> colorList = new ArrayList<>(); //曲线名称
-                colorList.add(Color.RED);
-                colorList.add(Color.BLUE);
-                LineChartManager barChartManager = new LineChartManager(mLineChart);
-                barChartManager.showMultiNormalLineChart(xValues,yLists,tabList,colorList);
-                //设置MarkerView
-                barChartManager.setMarkerView(getActivity());
+
             }
 
             @Override

@@ -90,11 +90,26 @@ public class ApiRiverMapData {
         }
 
         public String getYmdhm() {
-            return dateFormat.format(new Date(ymdhm));
+            if (ymdhm != 0) {
+                return dateFormat.format(new Date(ymdhm));
+            }
+            return "";
         }
 
         public void setYmdhm(long ymdhm) {
             this.ymdhm = ymdhm;
+        }
+
+        @Override
+        public String toString() {
+            return "RiverBean{" +
+                    "stcd='" + stcd + '\'' +
+                    ", z=" + z +
+                    ", q=" + q +
+                    ", chaochu=" + chaochu +
+                    ", wrz=" + wrz +
+                    ", ymdhm=" + ymdhm +
+                    '}';
         }
     }
 
@@ -140,6 +155,16 @@ public class ApiRiverMapData {
 
         public void setZr(String zr) {
             this.zr = zr;
+        }
+
+        @Override
+        public String toString() {
+            return "RivertimeListBean{" +
+                    "ymdhm=" + ymdhm +
+                    ", q='" + q + '\'' +
+                    ", zr='" + zr + '\'' +
+                    ", subscripttime='" + subscripttime + '\'' +
+                    '}';
         }
     }
 }

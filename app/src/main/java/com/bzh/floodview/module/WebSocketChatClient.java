@@ -34,6 +34,8 @@ import timber.log.Timber;
  */
 public class WebSocketChatClient extends WebSocketClient {
 
+    private static WebSocketChatClient mWebSocketChatClient;
+
     private static final String TAG = "IndexFragment";
 
     private MainAttrs mainAttrs;
@@ -50,9 +52,20 @@ public class WebSocketChatClient extends WebSocketClient {
         this.mainAttrs = mainAttrs;
     }
 
+    public static WebSocketChatClient InstanceWebSocket(URI serverUri, Gson gson, MainAttrs mainAttrs){
+        mWebSocketChatClient = new WebSocketChatClient(serverUri,gson,mainAttrs);
+        return mWebSocketChatClient;
+    }
+
+    public static WebSocketChatClient getWebSocketInstance(){
+        return mWebSocketChatClient;
+    }
+
+
+
     @Override
     public void onOpen(ServerHandshake handshakedata) {
-        System.out.println("webSocket连接成功");
+        Timber.e("webSocket连接成功");
         Talk talk = new Talk();
         talk.setCode("100");
         talk.setSender(App.getUsername());
@@ -64,9 +77,8 @@ public class WebSocketChatClient extends WebSocketClient {
 
     @Override
     public void onMessage(String message) {
-        System.out.println(message);
+        Timber.e(message);
         Talk talk = gson.fromJson(message, Talk.class);
-        System.out.println(talk);
         switch (talk.getCode()) {
             case "200":
                 //消息存储到数据库
@@ -98,15 +110,19 @@ public class WebSocketChatClient extends WebSocketClient {
                 new Handler().post(new Runnable() {
                     @Override
                     public void run() {
+                        Timber.e(Thread.currentThread().getName());
+                        mainAttrs.setLoginSign(false);
                         MaterialDialog dialog = new MaterialDialog.Builder(AppManager.getAppManager().currentActivity()).title("警告")
-                                .content("账号异常,请重新登录")
+                                .content("账号异常，程序退出，请您重新登录")
                                 .positiveText("确认").onPositive(new MaterialDialog.SingleButtonCallback() {
                                     @Override
                                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
                                         LoginActivity.open(AppManager.getAppManager().currentActivity());
-                                        AppManager.getAppManager().finishAllActivity();
+                                        AppManager.getAppManager().finishAllActivityExceptTop();
                                     }
                                 })
+                                .cancelable(false)
                                 .build();
                         dialog.show();
                     }
@@ -119,17 +135,18 @@ public class WebSocketChatClient extends WebSocketClient {
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        Log.d(TAG, "WebSocket关闭成功");
         //尝试重新连接
         if (mainAttrs.getLoginSign().getValue() != null && mainAttrs.getLoginSign().getValue()) {
-            System.out.println("执行重试连接");
+            Timber.e("执行重试连接");
             ExecutorService executorService = Executors.newCachedThreadPool();
             executorService.execute(new Runnable() {
                 @Override
                 public void run() {
-                    reconnect();
+                    mWebSocketChatClient.reconnect();
                 }
             });
+        }else {
+            Timber.e("WebSocket关闭成功");
         }
     }
 

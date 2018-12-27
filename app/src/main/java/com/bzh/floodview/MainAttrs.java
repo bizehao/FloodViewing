@@ -67,7 +67,7 @@ public class MainAttrs {
     }
 
     public void setLoginSign(boolean loginSign) {
-        this.loginSign.setValue(loginSign);
+        this.loginSign.postValue(loginSign);
     }
 
     public void setNetworkSign(boolean networkSign) {

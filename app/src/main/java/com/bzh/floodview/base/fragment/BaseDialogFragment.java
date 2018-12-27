@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.DaggerAppCompatDialogFragment;
+import timber.log.Timber;
 
 /**
  * @author 毕泽浩

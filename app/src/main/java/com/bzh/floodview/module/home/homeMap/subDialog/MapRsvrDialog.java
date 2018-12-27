@@ -2,6 +2,7 @@ package com.bzh.floodview.module.home.homeMap.subDialog;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.bzh.floodview.R;
@@ -84,42 +85,52 @@ public class MapRsvrDialog extends BaseDialogFragment {
                 tx_stnm.setText(title);
                 tx_address.setText(stlc);
                 Timber.e(data.toString());
-                if(data != null){
+                if(data.getReservoir() != null){
                     tx_dataTime.setText(data.getReservoir().getTm());
                     tx_rz.setText(String.valueOf(data.getReservoir().getRz()));
                     tx_roq.setText(String.valueOf(data.getReservoir().getOtq()));
                     tx_riq.setText(String.valueOf(data.getReservoir().getInq()));
                     tx_imp.setText(String.valueOf(data.getReservoir().getW()));
                 }
-                //设置x轴的数据
-                ArrayList<String> xValues = new ArrayList<>();
-                for (int i = 0; i < data.getReservoirtimeList().size(); i++) {
-                    xValues.add(data.getReservoirtimeList().get(i).getSubscripttime()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
+                if(data.getReservoirtimeList() != null && data.getReservoirtimeList().size() > 0){
+                    //设置x轴的数据
+                    ArrayList<String> xValues = new ArrayList<>();
+                    for (int i = 0; i < data.getReservoirtimeList().size(); i++) {
+                        xValues.add(data.getReservoirtimeList().get(i).getSubscripttime()); //Float.valueOf(rainTwoLevels.get(i).getTtt())
+                    }
+                    //设置y轴的数据
+                    List<Float> yValues = new ArrayList<>();
+                    List<Float> zValues = new ArrayList<>();
+                    float valQ;
+                    float valZ;
+                    for (int i = 0; i < data.getReservoirtimeList().size(); i++) {
+                        valQ = Float.valueOf(data.getReservoirtimeList().get(i).getRz());
+                        valZ = Float.valueOf(data.getReservoirtimeList().get(i).getW());
+                        yValues.add(valQ);
+                        zValues.add(valZ);
+                    }
+                    List<List<Float>> yLists = new ArrayList<>(); //Y轴
+                    yLists.add(yValues);
+                    yLists.add(zValues);
+                    List<String> tabList = new ArrayList<>(); //曲线名称
+                    tabList.add("库上水位");
+                    tabList.add("蓄水量");
+                    List<Integer> colorList = new ArrayList<>(); //曲线名称
+                    colorList.add(Color.RED);
+                    colorList.add(Color.BLUE);
+                    LineChartManager barChartManager = new LineChartManager(mLineChart);
+                    barChartManager.showMultiNormalLineChart(xValues,yLists,tabList,colorList);
+                    //设置MarkerView
+                    barChartManager.setMarkerView(getActivity());
+                }else {
+                    mLineChart.clear();
+                    mLineChart.notifyDataSetChanged();
+                    mLineChart.setNoDataText("没有数据");
+                    mLineChart.setNoDataTextColor(Color.BLACK);;
+                    // 记得最后要刷新一下
+                    mLineChart.invalidate();
                 }
-                //设置y轴的数据
-                List<Float> yValues = new ArrayList<>();
-                List<Float> zValues = new ArrayList<>();
-                float valQ;
-                float valZ;
-                for (int i = 0; i < data.getReservoirtimeList().size(); i++) {
-                    valQ = Float.valueOf(data.getReservoirtimeList().get(i).getRz());
-                    valZ = Float.valueOf(data.getReservoirtimeList().get(i).getW());
-                    yValues.add(valQ);
-                    zValues.add(valZ);
-                }
-                List<List<Float>> yLists = new ArrayList<>(); //Y轴
-                yLists.add(yValues);
-                yLists.add(zValues);
-                List<String> tabList = new ArrayList<>(); //曲线名称
-                tabList.add("库上水位");
-                tabList.add("蓄水量");
-                List<Integer> colorList = new ArrayList<>(); //曲线名称
-                colorList.add(Color.RED);
-                colorList.add(Color.BLUE);
-                LineChartManager barChartManager = new LineChartManager(mLineChart);
-                barChartManager.showMultiNormalLineChart(xValues,yLists,tabList,colorList);
-                //设置MarkerView
-                barChartManager.setMarkerView(getActivity());
+
             }
 
             @Override

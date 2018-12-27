@@ -17,6 +17,7 @@ import com.bzh.floodview.ui.widget.LoadingView;
 import com.bzh.floodview.utils.chart.BarChartManager;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -129,6 +130,9 @@ public class MapRainDialog extends BaseDialogFragment {
                     }
                     yValues.add(val);
                 }
+                Description description = new Description();
+                description.setText("");
+                mBarChart.setDescription(description);
                 BarChartManager barChartManager = new BarChartManager(mBarChart);
                 barChartManager.showBarChart(xValues, yValues, "降雨信息", Color.RED);
                 mLoadingView.setVisibility(View.INVISIBLE);

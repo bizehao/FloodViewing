@@ -9,6 +9,7 @@ import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.model.ApiLogin;
 import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.login.ApiLoginData;
+import com.bzh.floodview.utils.AppManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -48,12 +49,12 @@ public class LoginPresenter implements LoginContract.Presenter {
             public void run(BaseApi<ApiLoginData> apiLoginDataBaseApi) {
                 mView.closeProgress();
                 ApiLoginData apiLogin = apiLoginDataBaseApi.getData();
-                Timber.e(apiLogin.toString());
                 if (apiLogin.getState()) {
-                    mainAttrs.setLoginSign(true);
                     App.setUser(apiLogin.getUsername(), apiLogin.getX_Auth_Token());
                     mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                     mView.goHome();
+                    mainAttrs.setLoginSign(true);
+                    AppManager.getAppManager().finishActivity();
                 } else {
                     mView.showMessage((String) apiLoginDataBaseApi.getMessage());
                 }

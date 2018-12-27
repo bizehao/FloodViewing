@@ -56,7 +56,7 @@ public class BarChartManager {
         //设置动画效果
         mBarChart.animateY(1000, Easing.EasingOption.Linear);
         mBarChart.animateX(1000, Easing.EasingOption.Linear);
-
+        mBarChart.setNoDataText("暂无数据");
         //折线图例 标签 设置
         Legend legend = mBarChart.getLegend();
         legend.setForm(Legend.LegendForm.LINE);

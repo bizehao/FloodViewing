@@ -56,6 +56,4 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract FeedbackActivity providesFeedbackActivity();
-
-
 }

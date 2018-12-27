@@ -41,35 +41,25 @@ public class LineChartManager {
 
     public LineChartManager(LineChart lineChart) {
         this.lineChart = lineChart;
-        leftYAxis = lineChart.getAxisLeft();
-        rightYAxis = lineChart.getAxisRight();
-        xAxis = lineChart.getXAxis();
-        initChart(lineChart);
+        initChart();
     }
 
     /**
      * 初始化图表
      */
-    private void initChart(LineChart lineChart) {
+    private void initChart() {
         /***图表设置***/
-        //是否展示网格线
-        lineChart.setDrawGridBackground(false);
-        lineChart.setBackgroundColor(Color.WHITE);
-        //是否显示边界
-        lineChart.setDrawBorders(false);
-        //是否可以拖动
-//        lineChart.setDragEnabled(false);
-        lineChart.setDoubleTapToZoomEnabled(false);
-        lineChart.setNoDataText("暂无数据"); //没有数据时显示
-        //是否有触摸事件
-//        lineChart.setTouchEnabled(true);
+        lineChart.setDrawGridBackground(false); //是否展示网格线
+        lineChart.setBackgroundColor(Color.WHITE); //背景色
+        lineChart.setDrawBorders(false); //是否显示边界
+        lineChart.setDragEnabled(true); //是否可以拖动
+        lineChart.setDoubleTapToZoomEnabled(false); //是否将双击设置为缩放启用
+        lineChart.animateY(500); //设置Y轴动画效果
+        lineChart.animateX(500); //设置X轴动画效果
 
-        //设置XY轴动画效果
-//        lineChart.animateY(500);
-//        lineChart.animateX(500);
         Description description = new Description();
-//        description.setText("需要展示的内容");
-        description.setEnabled(false);
+        description.setText("需要描述的内容");
+        description.setEnabled(false); //是否启用图表描述
         lineChart.setDescription(description);
 
 
@@ -78,12 +68,15 @@ public class LineChartManager {
         leftYAxis = lineChart.getAxisLeft();
         rightYAxis = lineChart.getAxisRight();
 
-        xAxis.setDrawGridLines(false);
+        /* 添加表格线 */
+        xAxis.setDrawGridLines(true);
         rightYAxis.setDrawGridLines(true);
         leftYAxis.setDrawGridLines(true);
         //设置Y轴网格线为虚线
+        xAxis.enableGridDashedLine(10f, 10f, 0f);
+        rightYAxis.enableGridDashedLine(10f, 10f, 0f);
         leftYAxis.enableGridDashedLine(10f, 10f, 0f);
-        rightYAxis.setEnabled(false);
+        //rightYAxis.setEnabled(false);
 
         //X轴设置显示位置在底部
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);

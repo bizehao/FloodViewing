@@ -57,10 +57,13 @@ import com.bzh.floodview.sideslip.FeedbackActivity;
 import com.bzh.floodview.utils.AppManager;
 import com.bzh.floodview.utils.CommonUtil;
 import com.bzh.floodview.utils.FileUtil;
+import com.google.gson.Gson;
 
 import org.java_websocket.WebSocket;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -71,6 +74,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import timber.log.Timber;
 
 import static com.bzh.floodview.utils.FileUtil.getRealFilePathFromUri;
 
@@ -91,11 +95,11 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @BindView(R.id.home_bottom_bar)
     BottomNavigationBar mBottomNavigationBar;
 
-    CircleImageView mCircleImageView;
+    private CircleImageView mCircleImageView;
 
-    TextView mTextViewName;
+    private TextView mTextViewName;
 
-    TextView mTextViewMotto;
+    private TextView mTextViewMotto;
 
     //调用照相机返回图片文件
     private File tempFile;
@@ -115,8 +119,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Inject
     RetrofitHelper retrofitHelper;
 
+    private WebSocketChatClient webSocketChatClient;
+
     @Inject
-    WebSocketChatClient webSocketChatClient;
+    Gson gson;
 
     private Fragment[] fragments = new Fragment[3];
 
@@ -190,6 +196,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                         .setBadgeItem(numberBadgeItem))
                 .setFirstSelectedPosition(0).initialise();
 
+        //是否显示徽章
         mainAttrs.getLoginSign().observe(this, aBoolean -> {
             if (aBoolean) {
                 numberBadgeItem.show();
@@ -199,7 +206,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         });
 
         mainAttrs.getNoReadCount().observe(this, integer -> {
-            if ((mainAttrs.getLoginSign().getValue() != null && !mainAttrs.getLoginSign().getValue()) || (integer != null && integer == 0)) {
+            if (integer != null && integer == 0) {
                 numberBadgeItem.hide();
             } else {
                 numberBadgeItem.show();
@@ -213,12 +220,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() { //悬浮按钮点击跳转到好友列表
             @Override
             public void onClick(View v) {
-                if (mainAttrs.getLoginSign().getValue()) {
-                    FriendsActivity.open(HomeActivity.this);
-                } else {
-                    showToast("请您先登录");
-                }
-
+                FriendsActivity.open(HomeActivity.this);
             }
         });
         mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
@@ -283,6 +285,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             }
         });
 
+        //根据登录状态 连接或断开webSocket
         mainAttrs.getLoginSign().observe(this, aBoolean -> {
             if (aBoolean != null && aBoolean) {
                 successSetting();
@@ -356,20 +359,17 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     @Override
     public void successSetting() {
-        //加载用户信息
-        if(webSocketChatClient != null){
-            if (webSocketChatClient.getReadyState() == WebSocket.READYSTATE.NOT_YET_CONNECTED) {
-                webSocketChatClient.connect(); //连接
-            } else {
-                webSocketChatClient.reconnect(); //恢复连接
-            }
-            //mPresenter.loadData(App.getUsername()); //加载用户信息
+        Glide.with(this).load(ContextCompat.getDrawable(getApplication(), R.mipmap.no_login_user)).into(mCircleImageView);
+        try {
+            webSocketChatClient = WebSocketChatClient.InstanceWebSocket(new URI("ws://192.168.1.210:8080"), gson, mainAttrs);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
+        webSocketChatClient.connect(); //登录成功，连接webSocket
     }
 
     @Override
     public void failSettring() {
-        Glide.with(this).load(ContextCompat.getDrawable(getApplication(), R.mipmap.no_login_user)).into(mCircleImageView);
         webSocketChatClient.close();
     }
 

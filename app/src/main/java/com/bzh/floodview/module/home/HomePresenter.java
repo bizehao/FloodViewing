@@ -38,8 +38,7 @@ public class HomePresenter implements HomeContract.Presenter {
     @Inject
     MainAttrs mainAttrs;
 
-    @Inject
-    WebSocketChatClient webSocketChatClient;
+    private WebSocketChatClient webSocketChatClient = WebSocketChatClient.getWebSocketInstance();
 
     @Inject
     public HomePresenter() {
