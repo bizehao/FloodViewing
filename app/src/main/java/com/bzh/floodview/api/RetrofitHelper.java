@@ -100,7 +100,6 @@ public class RetrofitHelper {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((T t) -> {
                     BaseApi<Object> baseApi = (BaseApi<Object>) t;
-                    Timber.e("======================");
                     if (baseApi.getCode() == 455) { //账号异常
                         MaterialDialog dialog = new MaterialDialog.Builder(context).title("警告")
                                 .content((String) baseApi.getMessage())

@@ -69,7 +69,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 public class MapFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener, OnGetDistricSearchResultListener, MKOfflineMapListener {
@@ -209,7 +208,6 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Timber.e(marker.getTitle());
                 String stcd = marker.getExtraInfo().getString("stcd");
                 triggerClickEvent(stcd);
                 return false;
@@ -298,7 +296,6 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 if (mapStatus.zoom >= 12.0) {
                     if (!bigOrSmall) {
-                        Timber.e("图标放大");
                         bigOrSmall = !bigOrSmall;
                         for (Map.Entry<String, Marker> markerMap : overlayMap.entrySet()) {
                             Marker marker = markerMap.getValue();
@@ -325,7 +322,6 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                     }
                 } else {
                     if (bigOrSmall) {
-                        Timber.e("图标缩小");
                         bigOrSmall = !bigOrSmall;
                         for (Map.Entry<String, Marker> markerMap : overlayMap.entrySet()) {
                             Marker marker = markerMap.getValue();
@@ -618,7 +614,5 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
 
     @Override
     public void onGetOfflineMapState(int i, int i1) {
-        Timber.e("第一  " + i);
-        Timber.e("第二  " + i1);
     }
 }

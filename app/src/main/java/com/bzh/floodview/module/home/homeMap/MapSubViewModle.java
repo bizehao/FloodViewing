@@ -11,7 +11,6 @@ import com.bzh.floodview.model.mapData.ApiRiverTable;
 import com.bzh.floodview.model.mapData.ApiRsvrTable;
 import java.util.List;
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 
 /**

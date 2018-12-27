@@ -241,7 +241,6 @@ public class ContentPresenter implements ContentContract.Present {
         final String address1 = property.Route + "floodAbstract/floodAbstract_rain";
         final String address2 = property.Route + "floodAbstract/floodAbstract_river";
         final String address3 = property.Route + "floodAbstract/floodAbstract_reservoir";
-        System.out.println("=====================================");
         getHttpResponse(start_time, end_time, handler, address1, 51);
         getHttpResponse(start_time, end_time, handler, address2, 52);
         getHttpResponse(start_time, end_time, handler, address3, 53);

@@ -51,9 +51,6 @@ public class FriendsRecycleViewAdapter extends RecyclerView.Adapter<FriendsRecyc
         if (friendsInfos != null && friendsInfos.size() > 0) {
             for (int i = 0; i < friendsInfos.size(); i++) {
                 FriendsInfo friendsInfo = friendsInfos.get(i);
-                System.out.println("========================");
-                System.out.print(friendsInfo.getRemarkname());
-                System.out.println("------------------------");
                 friends.add(new Friend(friendsInfo.getUsername(),
                         friendsInfo.getRemarkname(),
                         friendsInfo.getHeadportrait(),
