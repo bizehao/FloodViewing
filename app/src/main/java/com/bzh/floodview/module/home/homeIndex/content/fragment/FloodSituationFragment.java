@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import com.bzh.floodview.R;
 import com.bzh.floodview.utils.DataHolder;
 
+/**
+ * 汛情信息
+ */
 public class FloodSituationFragment extends Fragment {
 
     private TabLayout tabLayout;
@@ -44,6 +47,7 @@ public class FloodSituationFragment extends Fragment {
     private void initViews() {
         tabLayout = rootView.findViewById(R.id.tablayout);
         viewPager = rootView.findViewById(R.id.tab_viewpager);
+        viewPager.setOffscreenPageLimit(3);
         mTabTitles[0] = "雨情";
         mTabTitles[1] = "河道";
         mTabTitles[2] = "水库";

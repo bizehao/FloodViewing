@@ -22,13 +22,17 @@ import com.bzh.floodview.utils.MapIntent;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import timber.log.Timber;
+
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
     private Context mContext;
 
     private List<Submenu> mSubmenu;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    private int height;
+
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         CardView cardView;
         ImageView imageView;
@@ -39,11 +43,15 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             cardView = (CardView) itemView;
             imageView = itemView.findViewById(R.id.show_item_icon);
             textView = itemView.findViewById(R.id.show_item_name);
+            if(height != 0){
+                cardView.getLayoutParams().height = height;
+            }
         };
     }
 
-    public ShowAdapter(List<Submenu> mSubmenu) {
+    public ShowAdapter(List<Submenu> mSubmenu,int height) {
         this.mSubmenu = mSubmenu;
+        this.height = height;
     }
 
     @NonNull
@@ -57,7 +65,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = holder.getAdapterPosition();
+                Timber.e("打印测试"+view.getHeight());
+                /*int position = holder.getAdapterPosition();
                 Submenu submenu = mSubmenu.get(position);
                 String name = submenu.getItemName();
                 int sign = submenu.getSign();
@@ -81,7 +90,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
                         break;
                     case 4:
                         break;
-                }
+                }*/
             }
         });
         return holder;
