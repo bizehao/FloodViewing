@@ -65,8 +65,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Timber.e("打印测试"+view.getHeight());
-                /*int position = holder.getAdapterPosition();
+                int position = holder.getAdapterPosition();
                 Submenu submenu = mSubmenu.get(position);
                 String name = submenu.getItemName();
                 int sign = submenu.getSign();
@@ -90,7 +89,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
                         break;
                     case 4:
                         break;
-                }*/
+                }
             }
         });
         return holder;

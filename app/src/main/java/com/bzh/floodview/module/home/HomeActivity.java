@@ -124,7 +124,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     @Inject
     Gson gson;
 
-    private Fragment[] fragments = new Fragment[3];
+    private Fragment[] fragments = new Fragment[2];
 
     @Override
     protected int getContentViewLayoutID() {
@@ -161,7 +161,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
         fragments[0] = sportFragment;
         fragments[1] = mapFragment;
-        fragments[2] = talkFragment;
+        //fragments[2] = talkFragment;
         //侧滑菜单 menu
         //mNavigationView.setCheckedItem(R.id.nav_login);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -192,8 +192,8 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED).setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE)
                 .addItem(new BottomNavigationItem(R.drawable.home_unchecked, "主页").setActiveColorResource(R.color.blue))
                 .addItem(new BottomNavigationItem(R.drawable.patrol_unchecked, "监测预警").setActiveColorResource(R.color.blue))
-                .addItem(new BottomNavigationItem(R.drawable.maillist_unchecked, "通讯录").setActiveColorResource(R.color.blue)
-                        .setBadgeItem(numberBadgeItem))
+                /*.addItem(new BottomNavigationItem(R.drawable.maillist_unchecked, "通讯录").setActiveColorResource(R.color.blue)
+                        .setBadgeItem(numberBadgeItem))*/
                 .setFirstSelectedPosition(0).initialise();
 
         //是否显示徽章
@@ -242,14 +242,14 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                         mToolbar.setVisibility(View.GONE);
                     }
                 }
-                if (position == 2) {
+                /*if (position == 2) {
                     if (!mFloatingActionButton.isShown()) {
                         mFloatingActionButton.show();
                     }
                     if (mToolbar.getVisibility() == View.GONE) {
                         mToolbar.setVisibility(View.VISIBLE);
                     }
-                }
+                }*/
                 if (position < fragments.length) {
                     //mFloatingActionButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplication(), colors[position])));
                     FragmentManager fragmentManager = getSupportFragmentManager();

@@ -48,9 +48,6 @@ public class IndexFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        WindowManager windowManager = getActivity().getWindowManager();
-        Point point = new Point();
-        windowManager.getDefaultDisplay().getSize(point);
         initDatas();
         initShow();
     }
