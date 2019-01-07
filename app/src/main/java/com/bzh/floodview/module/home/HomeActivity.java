@@ -361,7 +361,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     public void successSetting() {
         Glide.with(this).load(ContextCompat.getDrawable(getApplication(), R.mipmap.no_login_user)).into(mCircleImageView);
         try {
-            webSocketChatClient = WebSocketChatClient.InstanceWebSocket(new URI("ws://192.168.1.210:8080"), gson, mainAttrs);
+            webSocketChatClient = WebSocketChatClient.InstanceWebSocket(new URI("ws://"+App.socketIp), gson, mainAttrs);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
