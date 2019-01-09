@@ -10,12 +10,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -25,12 +22,13 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bin.david.form.core.SmartTable;
@@ -53,12 +51,8 @@ import com.bzh.floodview.model.ApiRainInfo;
 import com.bzh.floodview.model.ApiRainStInfo;
 import com.bzh.floodview.model.ApiRiverInfo;
 import com.bzh.floodview.model.ApiRsvrInfo;
-import com.bzh.floodview.model.floodsituation.IntensityOfRain;
-import com.bzh.floodview.model.floodsituation.LoadTable;
-import com.bzh.floodview.model.floodsituation.RainInfo;
-import com.bzh.floodview.model.floodsituation.River;
-import com.bzh.floodview.model.floodsituation.Rsvr;
-import com.bzh.floodview.model.floodsituation.SendIntensity;
+import com.bzh.floodview.module.home.homeIndex.content.Adapter.LBAdapter;
+import com.bzh.floodview.module.home.homeIndex.content.Adapter.entit.Administrativearea;
 import com.bzh.floodview.module.home.homeIndex.content.fragment.FloodSituationFragment;
 import com.bzh.floodview.module.home.homeIndex.content.fragment.IntensityOfRainFragment;
 import com.bzh.floodview.ui.widget.FreeNumberPicker;
@@ -72,6 +66,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -128,6 +123,11 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     private Toolbar contentToolbar;//标题栏
     private TextView contentTitle, content_jilu;//标题 记录
 
+
+    private Spinner spinner;
+
+    List<Administrativearea>  areaList;
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_content;
@@ -135,6 +135,10 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        // 获取界面布局文件中的Spinner组件
+
+
+
         contentToolbar = findViewById(R.id.content_toolbar);
         contentTitle = findViewById(R.id.content_title);
         setSupportActionBar(contentToolbar);
@@ -403,10 +407,14 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                         ejectDate();
                         break;
                     case R.id.select:  //点击查询按钮
+                        System.out.println("点击查询按钮");
                         getDatas();
                         break;
                     case R.id.cancel:
                         mPopWindow.dismiss();
+                        for (int i=0;i<areaList.size();i++){
+                            areaList.get(i).setAreaState(false);
+                        }
                         break;
                 }
             }
@@ -418,6 +426,29 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         contentView.findViewById(R.id.select).setOnClickListener(listener);
         contentView.findViewById(R.id.cancel).setOnClickListener(listener);
 
+        spinner=contentView.findViewById(R.id.sp_select_email);
+        areaList=new ArrayList<>();
+        areaList.add(new Administrativearea("张三",false));
+        areaList.add(new Administrativearea("李四",false));
+        areaList.add(new Administrativearea("王五",false));
+        areaList.add(new Administrativearea("赵柳",false));
+        // 创建ArrayAdapter对象
+        LBAdapter adapter=new LBAdapter(areaList);
+        // 为Spinner设置Adapter
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0,true);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Administrativearea data = areaList.get(position);
+                System.out.println(data);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                System.out.println(parent);
+            }
+        });
     }
 
     public void initParams() {
@@ -425,6 +456,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     }
 
     public void getDatas() {
+        System.out.println("----------------------------------------------------------------------------------------");
         String showContent = "";
         String dateBegin = date_begin.getText().toString();
         String dateEnd = date_end.getText().toString();
@@ -433,7 +465,6 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
             //initDisplayOpinion();
             //displayTable();
             //mPopWindow.dismiss();
-
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
             try {
@@ -443,6 +474,13 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                     start_time = Tools.handleTime(date1);
                     end_time = Tools.handleTime(date2);
                     timeText.setText(String.format("%s至%s", start_time, end_time));
+                    String zhanhao="";
+                    for (int i=0;i<areaList.size();i++){
+                        if (areaList.get(i).isAreaState()){
+                            zhanhao+=areaList.get(i).getAreaName()+",";
+                        }
+                    }
+                    System.out.println(zhanhao);
                     displayTable(start_time, end_time);
                     mPopWindow.dismiss();
                 } else {

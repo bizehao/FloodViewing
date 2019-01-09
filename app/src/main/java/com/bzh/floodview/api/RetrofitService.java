@@ -21,6 +21,7 @@ import com.bzh.floodview.model.ApiUserInfo;
 import com.bzh.floodview.model.ApiUserInfos;
 import com.bzh.floodview.model.ApiaddFriends;
 import com.bzh.floodview.model.test.Test;
+import com.bzh.floodview.module.home.homeIndex.content.Adapter.entit.Administrativearea;
 
 import java.util.List;
 import java.util.Map;
@@ -144,7 +145,11 @@ public interface RetrofitService {
     @GET("auth/say")
     Observable<BaseApi<Test>> getSay();
 
+    //添加意见反馈
     @POST("addFeedBack")
     Observable<BaseApi<Boolean>> getaddFeedBack(@Query("contents") String contents, @Query("uName") String uname );
+
+    @GET("")
+    Observable<BaseApi<Administrativearea>> getAdministrativearea();
 
 }

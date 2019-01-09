@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/surance_blue">
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:id="@+id/lineartime"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -43,8 +43,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginTop="5dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -70,42 +70,108 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:gravity="left"
+                android:text="政         区:"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+
+            <!--<android.support.v7.widget.AppCompatSpinner-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="20dp">-->
+
+            <!--</android.support.v7.widget.AppCompatSpinner>-->
+            <!--dialog, popup-->
+            <!--android:entries="@array/week"-->
+            <Spinner
+                android:id="@+id/sp_select_email"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:spinnerMode="dropdown"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                />
+           <!-- android:theme="@style/common_spinner"&ndash;&gt;-->
+        </LinearLayout>
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="68dp"
-        android:layout_marginTop="103dp"
-        android:topLeftRadius="8dip"
-        android:topRightRadius="8dip"
-        android:bottomLeftRadius="8dip"
-        android:bottomRightRadius="8dip"
-        android:layout_marginBottom="10dp"
-        android:text="取消"
-        android:background="@drawable/bt_shape"
-        android:textColor="#040000"
-        android:textSize="20sp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="68dp" />
 
-    <Button
-        android:id="@+id/select"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/cancel"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/bt_shape"
-        android:text="查询"
-        android:textColor="#040000"
-        android:textSize="20sp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="68dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lineartime"
+        android:layout_marginTop="10dp">
 
+        <Button
+            android:id="@+id/select"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="60dp"
+            android:background="@drawable/bt_shape"
+            android:text="查询"
+            android:textColor="#040000"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bt_shape"
+            android:text="取消"
+            android:textColor="#040000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <!--<Button-->
+    <!--android:id="@+id/cancel"-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginTop="103dp"-->
+    <!--android:layout_marginEnd="68dp"-->
+    <!--android:layout_marginRight="68dp"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:background="@drawable/bt_shape"-->
+    <!--android:bottomLeftRadius="8dip"-->
+    <!--android:bottomRightRadius="8dip"-->
+    <!--android:text="取消"-->
+    <!--android:textColor="#040000"-->
+    <!--android:textSize="20sp"-->
+    <!--android:topLeftRadius="8dip"-->
+    <!--android:topRightRadius="8dip" />-->
+
+
+    <!--<Button-->
+    <!--android:id="@+id/select"-->
+    <!--android:layout_width="80dp"-->
+    <!--android:layout_height="40dp"-->
+    <!--android:layout_alignTop="@+id/cancel"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_marginStart="68dp"-->
+    <!--android:layout_marginLeft="68dp"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--android:background="@drawable/bt_shape"-->
+    <!--android:text="查询"-->
+    <!--android:textColor="#040000"-->
+    <!--android:textSize="20sp" />-->
 </RelativeLayout>
 

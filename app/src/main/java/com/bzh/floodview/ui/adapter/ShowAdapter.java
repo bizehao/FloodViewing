@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import timber.log.Timber;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
@@ -71,6 +74,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
                 int sign = submenu.getSign();
                 LinkedHashMap<String,Integer> subMap = submenu.getSubMap();
                 Intent intent = null;
+                Log.e(TAG, "onClick: -*-*-*-*-*-*-*-*-*-"+name );
                 switch (sign){
                     case 1:
                         intent = new Intent(mContext, ContentActivity.class);

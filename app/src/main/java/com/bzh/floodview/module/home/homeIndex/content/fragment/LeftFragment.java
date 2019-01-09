@@ -538,6 +538,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
 
     //获取数据
     public void getDatas() {
+        System.out.println("------------------------------------------------------------------");
         String showContent = "";
         String dateBegin = date_begin.getText().toString();
         String dateEnd = date_end.getText().toString();

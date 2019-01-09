@@ -96,4 +96,10 @@
         <item name="android:textSize">@dimen/font_20sp</item>
     </style>
 
+
+    <style name="common_spinner" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>
