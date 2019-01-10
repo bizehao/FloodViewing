@@ -5,6 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.bzh.floodview.data.AppDatabase;
 import com.bzh.floodview.data.model.MessageInfo;
+import com.bzh.floodview.model.ApiCounty;
+
+import java.util.List;
 
 /**
  * @author 毕泽浩
@@ -22,6 +25,8 @@ public class MainAttrs {
     private MutableLiveData<MessageInfo> ownSendMsg; //自己发送的消息
 
     private LiveData<Integer> noReadCount; //未读信息条数
+
+    private List<ApiCounty> counties;
 
     public MainAttrs() {
         noReadCount = AppDatabase.getAppDatabase().messageInfoDao().getNoReadCount(false);
@@ -76,5 +81,13 @@ public class MainAttrs {
 
     public LiveData<Integer> getNoReadCount() {
         return noReadCount;
+    }
+
+    public List<ApiCounty> getCounties() {
+        return counties;
+    }
+
+    public void setCounties(List<ApiCounty> counties) {
+        this.counties = counties;
     }
 }

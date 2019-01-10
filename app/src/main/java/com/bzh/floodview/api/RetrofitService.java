@@ -1,6 +1,7 @@
 package com.bzh.floodview.api;
 
 import com.bzh.floodview.model.ApiCommon;
+import com.bzh.floodview.model.ApiCounty;
 import com.bzh.floodview.model.ApiFriends;
 import com.bzh.floodview.model.ApiRainInfo;
 import com.bzh.floodview.model.ApiRainStInfo;
@@ -92,7 +93,7 @@ public interface RetrofitService {
 
     //降雨信息
     @GET("rainInfo/rainfalls_all")
-    Observable<ApiRainInfo> getRainfallInfo(@Query("stm") String stm, @Query("etm") String etm);
+    Observable<ApiRainInfo> getRainfallInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
 
     //雨强信息
     @GET("rainInfo/rainIntensity_all")
@@ -108,7 +109,11 @@ public interface RetrofitService {
 
     //汛情摘要降雨量
     @GET("floodAbstract/floodAbstract_rain_all")
-    Observable<ApiRainInfo> getFloodRainInfo(@Query("stm") String stm, @Query("etm") String etm, @Query("nums") String nums);
+    Observable<ApiRainInfo> getFloodRainInfo(@Query("stm") String stm, @Query("etm") String etm, @Query("nums") String nums,@Query("addvcd")String adcd);
+
+    //县域信息
+    @GET("OtherController/allAddvcds")
+    Observable<BaseApi<List<ApiCounty>>> getCounty();
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //地图相关

@@ -15,13 +15,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -44,9 +47,11 @@ import com.bin.david.form.data.format.title.TitleImageDrawFormat;
 import com.bin.david.form.data.style.FontStyle;
 import com.bin.david.form.data.table.PageTableData;
 import com.bin.david.form.listener.OnColumnItemClickListener;
+import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.R;
 import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.file.property;
+import com.bzh.floodview.model.ApiCounty;
 import com.bzh.floodview.model.ApiRainInfo;
 import com.bzh.floodview.model.ApiRainStInfo;
 import com.bzh.floodview.model.ApiRiverInfo;
@@ -73,6 +78,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 public class ContentActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener,
         View.OnClickListener, ContentContract.View {
@@ -106,6 +113,9 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     @Inject
     ContentPresenter mPresent;
 
+    @Inject
+    MainAttrs mainAttrs;
+
     private LoadingView loadingView;
     private String title;
 
@@ -136,9 +146,6 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     @Override
     protected void initView(Bundle savedInstanceState) {
         // 获取界面布局文件中的Spinner组件
-
-
-
         contentToolbar = findViewById(R.id.content_toolbar);
         contentTitle = findViewById(R.id.content_title);
         setSupportActionBar(contentToolbar);
@@ -166,7 +173,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
             timeText.setText(String.format("%s至%s", start_time, end_time));
             date_begin.setText(TimeUtils.fromDataTime(start_time));
             date_end.setText(TimeUtils.fromDataTime(end_time));
-            displayTable(start_time, end_time);
+            displayTable(start_time, end_time,null);
         } else {
             Calendar now = Calendar.getInstance();
             Date date = new Date();
@@ -185,7 +192,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
             timeText.setText(String.format("%s至%s", start_time, end_time));
             date_begin.setText(TimeUtils.fromDataTime(start_time));
             date_end.setText(TimeUtils.fromDataTime(end_time));
-            displayTable(start_time, end_time);
+            displayTable(start_time, end_time,null);
         }
     }
 
@@ -274,7 +281,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     }
 
     //表格数据
-    public void displayTable(final String start_time, final String end_time) {
+    public void displayTable(final String start_time, final String end_time, final String adcd) {
         if (notDatas.getVisibility() == View.VISIBLE) {//无数据
             notDatas.setVisibility(View.GONE);
         }
@@ -321,9 +328,9 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         switch (title) {
             case "降雨信息":
                 if (xunSign == 1) {
-                    mPresent.getRainfallInfoXun(xunHead, start_time, end_time, handler);
+                    mPresent.getRainfallInfoXun(xunHead, start_time, end_time, handler,adcd);
                 } else {
-                    mPresent.getRainfallInfo(start_time, end_time);
+                    mPresent.getRainfallInfo(start_time, end_time,adcd);
                 }
                 secondLevelSelectAddress1 = property.Route + "rainInfo/rainfalls_one";
                 secondLevelSelectAddress2 = property.Route + "rainInfo/rain_detailed";
@@ -426,29 +433,19 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         contentView.findViewById(R.id.select).setOnClickListener(listener);
         contentView.findViewById(R.id.cancel).setOnClickListener(listener);
 
-        spinner=contentView.findViewById(R.id.sp_select_email);
+        spinner=contentView.findViewById(R.id.dc_spinner);
         areaList=new ArrayList<>();
-        areaList.add(new Administrativearea("张三",false));
-        areaList.add(new Administrativearea("李四",false));
-        areaList.add(new Administrativearea("王五",false));
-        areaList.add(new Administrativearea("赵柳",false));
+        //TODO
+        mainAttrs.getCounties();
+        for (int i=0; i<mainAttrs.getCounties().size(); i++){
+            ApiCounty apiCounty = mainAttrs.getCounties().get(i);
+            areaList.add(new Administrativearea(apiCounty.getAdcd(),apiCounty.getAdnm()));
+        }
         // 创建ArrayAdapter对象
         LBAdapter adapter=new LBAdapter(areaList);
         // 为Spinner设置Adapter
         spinner.setAdapter(adapter);
-        spinner.setSelection(0,true);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Administrativearea data = areaList.get(position);
-                System.out.println(data);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                System.out.println(parent);
-            }
-        });
     }
 
     public void initParams() {
@@ -456,7 +453,6 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     }
 
     public void getDatas() {
-        System.out.println("----------------------------------------------------------------------------------------");
         String showContent = "";
         String dateBegin = date_begin.getText().toString();
         String dateEnd = date_end.getText().toString();
@@ -474,14 +470,14 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                     start_time = Tools.handleTime(date1);
                     end_time = Tools.handleTime(date2);
                     timeText.setText(String.format("%s至%s", start_time, end_time));
-                    String zhanhao="";
+                    StringBuilder zhanhao= new StringBuilder();
                     for (int i=0;i<areaList.size();i++){
                         if (areaList.get(i).isAreaState()){
-                            zhanhao+=areaList.get(i).getAreaName()+",";
+                            zhanhao.append(areaList.get(i).getAreaId()).append(",");
                         }
                     }
                     System.out.println(zhanhao);
-                    displayTable(start_time, end_time);
+                    displayTable(start_time, end_time,zhanhao.toString());
                     mPopWindow.dismiss();
                 } else {
                     showContent = "开始时间必须小于结束时间";

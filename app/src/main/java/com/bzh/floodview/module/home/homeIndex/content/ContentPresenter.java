@@ -147,8 +147,8 @@ public class ContentPresenter implements ContentContract.Present {
 
     //降雨信息
     @Override
-    public void getRainfallInfo(String start_time, String end_time) {
-        Observable<ApiRainInfo> observable = retrofitHelper.getServer().getRainfallInfo(start_time, end_time);
+    public void getRainfallInfo(String start_time, String end_time,String adcd) {
+        Observable<ApiRainInfo> observable = retrofitHelper.getServer().getRainfallInfo(start_time, end_time, adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {
@@ -165,8 +165,8 @@ public class ContentPresenter implements ContentContract.Present {
 
     //汛情降雨信息二级
     @Override
-    public void getRainfallInfoXun(String rainLJ, String start_time, String end_time, Handler handler) {
-        Observable<ApiRainInfo> observable = retrofitHelper.getServer().getFloodRainInfo(start_time, end_time,rainLJ);
+    public void getRainfallInfoXun(String rainLJ, String start_time, String end_time, Handler handler,String adcd) {
+        Observable<ApiRainInfo> observable = retrofitHelper.getServer().getFloodRainInfo(start_time, end_time,rainLJ,adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {

@@ -30,9 +30,9 @@ public interface ContentContract {
     //中间主持层
     interface Present extends BasePresenter<View> {
         //降雨信息
-        void getRainfallInfo(String start_time, String end_time);
+        void getRainfallInfo(String start_time, String end_time,String adcd);
         //汛情降雨二级
-        void getRainfallInfoXun(String rainLJ, String start_time, String end_time, Handler handler);
+        void getRainfallInfoXun(String rainLJ, String start_time, String end_time, Handler handler, String adcd);
         //雨强信息
         void getIntensityOfRainInfo(String start_time, String end_time);
 

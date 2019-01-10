@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 
+import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.R;
+import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.base.fragment.BaseFragment;
+import com.bzh.floodview.model.ApiCounty;
+import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.floodsituation.Submenu;
 import com.bzh.floodview.ui.adapter.ShowAdapter;
 import com.bzh.floodview.utils.DensityUtils;
@@ -23,6 +27,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import io.reactivex.Observable;
 import timber.log.Timber;
 
 /**
@@ -35,7 +40,12 @@ public class IndexFragment extends BaseFragment {
 
     private List<Submenu> submenus;
     private ShowAdapter showAdapter;
-    private int height;
+
+    @Inject
+    RetrofitHelper retrofitHelper;
+
+    @Inject
+    MainAttrs mainAttrs;
 
     @Inject
     public IndexFragment() {
@@ -50,6 +60,14 @@ public class IndexFragment extends BaseFragment {
     protected void initView(Bundle savedInstanceState) {
         initDatas();
         initShow();
+        Observable<BaseApi<List<ApiCounty>>> observable = retrofitHelper.getServer().getCounty();
+        retrofitHelper.requestHandler(observable, getActivity(), new RetrofitHelper.callHandler<BaseApi<List<ApiCounty>>>() {
+            @Override
+            public void run(BaseApi<List<ApiCounty>> listBaseApi) {
+                List<ApiCounty> counties = listBaseApi.getData();
+                mainAttrs.setCounties(counties);
+            }
+        });
     }
 
     public void initDatas() {

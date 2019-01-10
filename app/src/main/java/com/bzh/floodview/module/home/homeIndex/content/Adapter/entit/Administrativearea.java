@@ -8,6 +8,11 @@ public class Administrativearea {
     public Administrativearea() {
     }
 
+    public Administrativearea(String areaId, String areaName) {
+        this.areaId = areaId;
+        this.areaName = areaName;
+    }
+
     public Administrativearea(String areaName, boolean areaState) {
         this.areaName = areaName;
         this.areaState = areaState;
