@@ -435,8 +435,6 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
 
         spinner=contentView.findViewById(R.id.dc_spinner);
         areaList=new ArrayList<>();
-        //TODO
-        mainAttrs.getCounties();
         for (int i=0; i<mainAttrs.getCounties().size(); i++){
             ApiCounty apiCounty = mainAttrs.getCounties().get(i);
             areaList.add(new Administrativearea(apiCounty.getAdcd(),apiCounty.getAdnm()));

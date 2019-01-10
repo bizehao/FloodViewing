@@ -3,7 +3,7 @@ package com.bzh.floodview.module.home.homeIndex.content.Adapter.entit;
 public class Administrativearea {
     private String areaId;//县域号
     private String areaName;//区域名称
-    private boolean areaState; //状态，政区是否被选中
+    private boolean areaState = true; //状态，政区是否被选中
 
     public Administrativearea() {
     }

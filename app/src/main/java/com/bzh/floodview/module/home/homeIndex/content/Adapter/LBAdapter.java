@@ -23,13 +23,18 @@ public class LBAdapter extends BaseAdapter {
 
     private int count = 0;
 
+    private boolean allCheck = true;
+
     public LBAdapter(List<Administrativearea> list) {
         this.list = list;
+        count = list.size();
     }
+
+
 
     @Override
     public int getCount() {
-        return list.size();
+        return list.size() + 2;
     }
 
     @Override
@@ -49,19 +54,42 @@ public class LBAdapter extends BaseAdapter {
         CheckBox mCheckBox = convertViews.findViewById(R.id.area_checkbox);
         if (position == 0) {
             mCheckBox.setVisibility(View.GONE);
-            mTextView.setText("已勾选"+count+"个县域");
-        } else {
-            mTextView.setText(list.get(position).getAreaName());
-            mCheckBox.setChecked(list.get(position).isAreaState());
+            mTextView.setText("已勾选" + count + "个县域");
+        } else if(position == 1){
+            mCheckBox.setChecked(allCheck);
+            mTextView.setText("全选");
+            mCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    allCheck = mCheckBox.isChecked();
+                    if (allCheck) {
+                        for (Administrativearea obj : list) {
+                            obj.setAreaState(true);
+                        }
+                        count = list.size();
+                    } else {
+                        for (Administrativearea obj : list) {
+                            obj.setAreaState(false);
+                        }
+                        count = 0;
+                    }
+                    notifyDataSetChanged();
+                }
+            });
+        }else {
+            Administrativearea obj = list.get(position-2);
+            mTextView.setText(obj.getAreaName());
+            mCheckBox.setChecked(obj.isAreaState());
             mCheckBox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     boolean state = mCheckBox.isChecked();
-                    list.get(position).setAreaState(state);
-                    if(state){
-                        count++;
-                    }else {
+                    obj.setAreaState(state);
+                    if (state) {
+                        allCheck = ++count == list.size();
+                    } else {
                         count--;
+                        allCheck = false;
                     }
                     notifyDataSetChanged();
                 }
