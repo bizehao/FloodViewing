@@ -136,7 +136,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
 
     private Spinner spinner;
 
-    List<Administrativearea>  areaList;
+    List<Administrativearea> areaList;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -173,7 +173,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
             timeText.setText(String.format("%s至%s", start_time, end_time));
             date_begin.setText(TimeUtils.fromDataTime(start_time));
             date_end.setText(TimeUtils.fromDataTime(end_time));
-            displayTable(start_time, end_time,null);
+            displayTable(start_time, end_time, null);
         } else {
             Calendar now = Calendar.getInstance();
             Date date = new Date();
@@ -192,7 +192,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
             timeText.setText(String.format("%s至%s", start_time, end_time));
             date_begin.setText(TimeUtils.fromDataTime(start_time));
             date_end.setText(TimeUtils.fromDataTime(end_time));
-            displayTable(start_time, end_time,null);
+            displayTable(start_time, end_time, null);
         }
     }
 
@@ -328,9 +328,9 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         switch (title) {
             case "降雨信息":
                 if (xunSign == 1) {
-                    mPresent.getRainfallInfoXun(xunHead, start_time, end_time, handler,adcd);
+                    mPresent.getRainfallInfoXun(xunHead, start_time, end_time, handler, adcd);
                 } else {
-                    mPresent.getRainfallInfo(start_time, end_time,adcd);
+                    mPresent.getRainfallInfo(start_time, end_time, adcd);
                 }
                 secondLevelSelectAddress1 = property.Route + "rainInfo/rainfalls_one";
                 secondLevelSelectAddress2 = property.Route + "rainInfo/rain_detailed";
@@ -419,7 +419,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                         break;
                     case R.id.cancel:
                         mPopWindow.dismiss();
-                        for (int i=0;i<areaList.size();i++){
+                        for (int i = 0; i < areaList.size(); i++) {
                             areaList.get(i).setAreaState(false);
                         }
                         break;
@@ -433,14 +433,14 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         contentView.findViewById(R.id.select).setOnClickListener(listener);
         contentView.findViewById(R.id.cancel).setOnClickListener(listener);
 
-        spinner=contentView.findViewById(R.id.dc_spinner);
-        areaList=new ArrayList<>();
-        for (int i=0; i<mainAttrs.getCounties().size(); i++){
+        spinner = contentView.findViewById(R.id.dc_spinner);
+        areaList = new ArrayList<>();
+        for (int i = 0; i < mainAttrs.getCounties().size(); i++) {
             ApiCounty apiCounty = mainAttrs.getCounties().get(i);
-            areaList.add(new Administrativearea(apiCounty.getAdcd(),apiCounty.getAdnm()));
+            areaList.add(new Administrativearea(apiCounty.getAdcd(), apiCounty.getAdnm()));
         }
         // 创建ArrayAdapter对象
-        LBAdapter adapter=new LBAdapter(areaList);
+        LBAdapter adapter = new LBAdapter(areaList);
         // 为Spinner设置Adapter
         spinner.setAdapter(adapter);
 
@@ -468,14 +468,14 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                     start_time = Tools.handleTime(date1);
                     end_time = Tools.handleTime(date2);
                     timeText.setText(String.format("%s至%s", start_time, end_time));
-                    StringBuilder zhanhao= new StringBuilder();
-                    for (int i=0;i<areaList.size();i++){
-                        if (areaList.get(i).isAreaState()){
+                    StringBuilder zhanhao = new StringBuilder();
+                    for (int i = 0; i < areaList.size(); i++) {
+                        if (areaList.get(i).isAreaState()) {
                             zhanhao.append(areaList.get(i).getAreaId()).append(",");
                         }
                     }
                     System.out.println(zhanhao);
-                    displayTable(start_time, end_time,zhanhao.toString());
+                    displayTable(start_time, end_time, zhanhao.toString());
                     mPopWindow.dismiss();
                 } else {
                     showContent = "开始时间必须小于结束时间";
@@ -626,10 +626,9 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                     intent.putExtra("viceItemStcd", value);
                     intent.putExtra("address1", secondLevelSelectAddress1);
                     intent.putExtra("address2", secondLevelSelectAddress2);
-                    if (title.equals("降雨信息")) {
-                        intent.putExtra("start_time", start_time);
-                        intent.putExtra("end_time", end_time);
-                    }
+                    intent.putExtra("start_time", start_time);
+                    intent.putExtra("end_time", end_time);
+
                     startActivity(intent);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     e.printStackTrace();
@@ -744,7 +743,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
 
     //河道表格设置
     @Override
-    public void setRiverStTable(Map<String,String> map, List<ApiRiverInfo.DataBean> apiRiverInfo) {
+    public void setRiverStTable(Map<String, String> map, List<ApiRiverInfo.DataBean> apiRiverInfo) {
         if (apiRiverInfo != null && apiRiverInfo.size() > 0) {
             if (notDatas.getVisibility() == View.VISIBLE) {
                 notDatas.setVisibility(View.GONE);
@@ -765,7 +764,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
 
     //水库表格设置
     @Override
-    public void setRsvrStTable(Map<String,String> map, List<ApiRsvrInfo.DataBean> apiRsvrInfo) {
+    public void setRsvrStTable(Map<String, String> map, List<ApiRsvrInfo.DataBean> apiRsvrInfo) {
         if (apiRsvrInfo != null && apiRsvrInfo.size() > 0) {
             if (notDatas.getVisibility() == View.VISIBLE) {
                 notDatas.setVisibility(View.GONE);

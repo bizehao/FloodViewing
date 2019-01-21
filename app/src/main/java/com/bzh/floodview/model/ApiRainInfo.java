@@ -13,6 +13,16 @@ public class ApiRainInfo {
     private String RequestMessage;
     private List<DataBean> data;
 
+    private String subscripttime;//统计图时间
+
+    public String getSubscripttime() {
+        return subscripttime;
+    }
+
+    public void setSubscripttime(String subscripttime) {
+        this.subscripttime = subscripttime;
+    }
+
     public String getCode() {
         return code;
     }

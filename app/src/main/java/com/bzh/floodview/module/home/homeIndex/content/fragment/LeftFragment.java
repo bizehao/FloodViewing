@@ -72,9 +72,7 @@ import okhttp3.Response;
 
 import static com.bzh.floodview.file.property.Route;
 
-/**
- * 二级左
- */
+
 public class LeftFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, CompoundButton.OnCheckedChangeListener {
     private Toolbar contentToolbar;//标题栏
     //日期
@@ -181,7 +179,6 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
             buttons[0].setBackgroundColor(getResources().getColor(R.color.red));
         } else {
             view = inflater.inflate(R.layout.fragment_left, container, false);
-
             smartTable = view.findViewById(R.id.smart_table);
             mLineChart = view.findViewById(R.id.lineChart);
             mBarChart = view.findViewById(R.id.barChart);
@@ -190,7 +187,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
             left_jilu = view.findViewById(R.id.left_jilu);
             initViews();
             //默认时间
-            Calendar now = Calendar.getInstance();
+            /*Calendar now = Calendar.getInstance();
             Date date = new Date();
             now.setTime(date);
             now.set(Calendar.MINUTE,0);
@@ -206,8 +203,11 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
             start_time = sdf.format(str_date);
             fragment_left_datetv.setText(String.format("%s至%s", start_time, end_time));
             date_begin.setText(TimeUtils.fromDataTime(start_time));
-            date_end.setText(TimeUtils.fromDataTime(end_time));
-            getHttpsDatas(stcd, start_time, end_time, address);
+            date_end.setText(TimeUtils.fromDataTime(end_time));*/
+            startTime = bundle.getString("startTime");
+            endTime = bundle.getString("endTime");
+            fragment_left_datetv.setText(String.format("%s至%s", startTime, endTime));
+            getHttpsDatas(stcd, startTime, endTime, address);
         }
         return view;
     }
@@ -547,7 +547,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
             //initDisplayOpinion();
             //displayTable();
             //mPopWindow.dismiss();
-            //ShowToast.showToast(showContent);
+            //ShowToast.showToast(showContent)
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
             try {

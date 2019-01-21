@@ -22,6 +22,16 @@ public class ApiRainStInfo {
     private Object message;
     private DataBean data;
 
+    private String subscripttime;//统计图时间
+
+    public String getSubscripttime() {
+        return subscripttime;
+    }
+
+    public void setSubscripttime(String subscripttime) {
+        this.subscripttime = subscripttime;
+    }
+
     public int getState() {
         return state;
     }

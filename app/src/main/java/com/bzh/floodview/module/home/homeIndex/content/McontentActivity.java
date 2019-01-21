@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bzh.floodview.R;
 import com.bzh.floodview.base.activity.BaseActivity;
 import com.bzh.floodview.file.property;
@@ -76,13 +77,9 @@ public class McontentActivity extends BaseActivity implements McontentContract.V
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         //设置tablayout距离上下左右的距离
         //tab_title.setPadding(20,20,20,20);
-        if(address1.equals(property.Route+"rainInfo/rainfalls_one")|| address1.equals(property.Route+"rainInfo/rainIntensity_one")){
-            String startTime = intent.getStringExtra("start_time");
-            String endTime = intent.getStringExtra("end_time");
-            mFragmentArrays[0] = LeftFragment.newInstance(stcd, address1, startTime, endTime);
-        }else{
-            mFragmentArrays[0] = LeftFragment.newInstance(stcd, address1);
-        }
+        String startTime = intent.getStringExtra("start_time");
+        String endTime = intent.getStringExtra("end_time");
+        mFragmentArrays[0] = LeftFragment.newInstance(stcd, address1, startTime, endTime);
         mFragmentArrays[1] = RightFragment.newInstance(stcd, address2);
         PagerAdapter pagerAdapter = new McontentActivity.MyViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -175,7 +172,7 @@ public class McontentActivity extends BaseActivity implements McontentContract.V
         return true;
     }*/
 
-    private void initParams(){
+    private void initParams() {
         present = new McontentPresenter(this);
     }
 
