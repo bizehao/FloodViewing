@@ -97,15 +97,15 @@ public interface RetrofitService {
 
     //雨强信息
     @GET("rainInfo/rainIntensity_all")
-    Observable<ApiRainStInfo> getIntensityOfRainInfo(@Query("stm") String stm, @Query("etm") String etm);
+    Observable<ApiRainStInfo> getIntensityOfRainInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
 
     //河道信息
     @GET("waterInfo/river_all")
-    Observable<ApiRiverInfo> getRiverInfo(@Query("stm") String stm, @Query("etm") String etm);
+    Observable<ApiRiverInfo> getRiverInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
 
     //水库信息
     @GET("waterInfo/reservoir_all")
-    Observable<ApiRsvrInfo> getRsvrInfo(@Query("stm") String stm, @Query("etm") String etm);
+    Observable<ApiRsvrInfo> getRsvrInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
 
     //汛情摘要降雨量
     @GET("floodAbstract/floodAbstract_rain_all")

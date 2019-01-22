@@ -34,12 +34,12 @@ public interface ContentContract {
         //汛情降雨二级
         void getRainfallInfoXun(String rainLJ, String start_time, String end_time, Handler handler, String adcd);
         //雨强信息
-        void getIntensityOfRainInfo(String start_time, String end_time);
+        void getIntensityOfRainInfo(String start_time, String end_time, String adcd);
 
         //河道站
-        void getRiverInfo(String start_time, String end_time);
+        void getRiverInfo(String start_time, String end_time, String adcd);
         //水库站
-        void getRsvrInfo(String start_time, String end_time, Handler handler);
+        void getRsvrInfo(String start_time, String end_time, Handler handler, String adcd);
 
         //汛情摘要
         void getFloodSituation(String start_time, String end_time, Handler handler);

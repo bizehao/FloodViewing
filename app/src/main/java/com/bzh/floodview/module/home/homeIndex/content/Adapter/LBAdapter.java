@@ -7,14 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-
 import com.bzh.floodview.R;
 import com.bzh.floodview.module.home.homeIndex.content.Adapter.entit.Administrativearea;
-import com.google.gson.Gson;
-
 import java.util.List;
-
-import timber.log.Timber;
 
 
 public class LBAdapter extends BaseAdapter {

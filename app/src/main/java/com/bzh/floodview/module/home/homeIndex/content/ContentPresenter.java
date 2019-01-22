@@ -147,7 +147,7 @@ public class ContentPresenter implements ContentContract.Present {
 
     //降雨信息
     @Override
-    public void getRainfallInfo(String start_time, String end_time,String adcd) {
+    public void getRainfallInfo(String start_time, String end_time, String adcd) {
         Observable<ApiRainInfo> observable = retrofitHelper.getServer().getRainfallInfo(start_time, end_time, adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
@@ -165,8 +165,8 @@ public class ContentPresenter implements ContentContract.Present {
 
     //汛情降雨信息二级
     @Override
-    public void getRainfallInfoXun(String rainLJ, String start_time, String end_time, Handler handler,String adcd) {
-        Observable<ApiRainInfo> observable = retrofitHelper.getServer().getFloodRainInfo(start_time, end_time,rainLJ,adcd);
+    public void getRainfallInfoXun(String rainLJ, String start_time, String end_time, Handler handler, String adcd) {
+        Observable<ApiRainInfo> observable = retrofitHelper.getServer().getFloodRainInfo(start_time, end_time, rainLJ, adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {
@@ -184,8 +184,8 @@ public class ContentPresenter implements ContentContract.Present {
 
     //雨强信息
     @Override
-    public void getIntensityOfRainInfo(String start_time, String end_time) {
-        Observable<ApiRainStInfo> observable = retrofitHelper.getServer().getIntensityOfRainInfo(start_time, end_time);
+    public void getIntensityOfRainInfo(String start_time, String end_time, String adcd) {
+        Observable<ApiRainStInfo> observable = retrofitHelper.getServer().getIntensityOfRainInfo(start_time, end_time, adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {
@@ -197,8 +197,8 @@ public class ContentPresenter implements ContentContract.Present {
 
     //河道站
     @Override
-    public void getRiverInfo(String start_time, String end_time) {
-        Observable<ApiRiverInfo> observable = retrofitHelper.getServer().getRiverInfo(start_time, end_time);
+    public void getRiverInfo(String start_time, String end_time, String adcd) {
+        Observable<ApiRiverInfo> observable = retrofitHelper.getServer().getRiverInfo(start_time, end_time, adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {
@@ -210,15 +210,15 @@ public class ContentPresenter implements ContentContract.Present {
                 map.put("时间", "ttt");
                 map.put("水位(m)", "z");
                 map.put("超警戒水位", "cjjsw");
-                mView.setRiverStTable(map,riverInfo.getData());
+                mView.setRiverStTable(map, riverInfo.getData());
             }
         });
     }
 
     //水库站
     @Override
-    public void getRsvrInfo(String start_time, String end_time, Handler handler) {
-        Observable<ApiRsvrInfo> observable = retrofitHelper.getServer().getRsvrInfo(start_time, end_time);
+    public void getRsvrInfo(String start_time, String end_time, Handler handler, String adcd) {
+        Observable<ApiRsvrInfo> observable = retrofitHelper.getServer().getRsvrInfo(start_time, end_time, adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {
@@ -230,7 +230,7 @@ public class ContentPresenter implements ContentContract.Present {
                 map.put("时间", "ttt");
                 map.put("库水位(m)", "rz");
                 map.put("超汛限水位", "cxxsw");
-                mView.setRsvrStTable(map,rsvrInfo.getData());
+                mView.setRsvrStTable(map, rsvrInfo.getData());
             }
         });
     }

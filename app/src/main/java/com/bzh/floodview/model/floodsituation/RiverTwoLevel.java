@@ -16,6 +16,7 @@ public class RiverTwoLevel {
     private String nowz;
     private String wrz;
     private String grz;
+    private String subscripttime;//统计图时间
 
     public String getStcd() {
         return stcd;
@@ -111,6 +112,14 @@ public class RiverTwoLevel {
 
     public void setGrz(String grz) {
         this.grz = grz;
+    }
+
+    public String getSubscripttime() {
+        return subscripttime;
+    }
+
+    public void setSubscripttime(String subscripttime) {
+        this.subscripttime = subscripttime;
     }
 
     @Override

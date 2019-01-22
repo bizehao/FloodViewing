@@ -23,11 +23,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.bzh.floodview.module.home.homeIndex.content.ContentContract;
 import com.rey.material.widget.CheckBox;
+
 import android.widget.CompoundButton;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.data.CellInfo;
 import com.bin.david.form.data.column.Column;
@@ -56,8 +60,10 @@ import com.google.gson.reflect.TypeToken;
 import com.mingle.widget.LoadingView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,6 +71,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
@@ -168,7 +175,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
             button3 = view.findViewById(R.id.fragment_left_rain_3);
             button4 = view.findViewById(R.id.fragment_left_rain_4);
             button5 = view.findViewById(R.id.fragment_left_rain_5);
-            buttons=new Button[]{button1,button2,button3,button4,button5};
+            buttons = new Button[]{button1, button2, button3, button4, button5};
             button1.setOnClickListener(this);
             button2.setOnClickListener(this);
             button3.setOnClickListener(this);
@@ -249,10 +256,10 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                 }
             });
             FontStyle.setDefaultTextSize(DensityUtils.sp2px(getActivity(), 20)); //设置全局字体大小 setColumnTitleStyle
-            smartTable.getConfig().setColumnTitleStyle(new FontStyle(60,Color.BLACK));
+            smartTable.getConfig().setColumnTitleStyle(new FontStyle(60, Color.BLACK));
             switch (msg.what) {
                 case 1:
-                    if(left_notDatas.getVisibility() == View.VISIBLE){
+                    if (left_notDatas.getVisibility() == View.VISIBLE) {
                         left_notDatas.setVisibility(View.GONE);
                     }
                     if (address.equals(Route + "waterInfo/river_one")) { //河道
@@ -272,7 +279,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                         minz = riverTwoLevels.get(0).getMinz();
                         maxz = riverTwoLevels.get(0).getMaxz();
                         left_jilu.setText(nowz);
-                        handler.postDelayed(timeRunable,1000);
+                        handler.postDelayed(timeRunable, 1000);
                         //普通列
                         Column<String> column1 = new Column<>("时间", "ttt");
                         column1.setMinHeight(100);
@@ -283,10 +290,10 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                         smartTable.setTableData(tableData);
                         //图表
                         lineChartManager = new LineChartManager(mLineChart);
-                        lineChartManager.showLineChart(riverTwoLevels, "河道水位信息", getResources().getColor(R.color.blue), "ttt", "z");
-                        lineChartManager.addLine(riverTwoLevels, "河道流量信息", getResources().getColor(R.color.red), "q");
+                        lineChartManager.showLineChart(riverTwoLevels, "河道水位信息", getResources().getColor(R.color.blue, null), "subscripttime", "z");
+                        lineChartManager.addLine(riverTwoLevels, "河道流量信息", getResources().getColor(R.color.red, null), "q");
                         //设置曲线填充色 以及 MarkerView
-                        Drawable drawable = getResources().getDrawable(R.drawable.fade_blue);
+                        Drawable drawable = getResources().getDrawable(R.drawable.fade_blue, null);
                         lineChartManager.setChartFillDrawable(drawable);
                         lineChartManager.setMarkerView(getActivity());
                     }
@@ -301,14 +308,12 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                         if (rsvrTwoLevels.size() > 0) {
                             fsltdz = Float.parseFloat(rsvrTwoLevels.get(0).getFsltdz());
                             inotq = rsvrTwoLevels;
-                            System.out.println("++++++++++++++++++");
-                            System.out.println(fsltdz);
                         }
                         nowz = rsvrTwoLevels.get(0).getNowz();
                         minz = rsvrTwoLevels.get(0).getMinz();
                         maxz = rsvrTwoLevels.get(0).getMaxz();
                         left_jilu.setText(nowz);
-                        handler.postDelayed(timeRunable,1000);
+                        handler.postDelayed(timeRunable, 1000);
                         //普通列
                         Column<String> column1 = new Column<>("时间", "ttt");
                         column1.setMinHeight(100);
@@ -320,7 +325,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                         smartTable.setTableData(tableData);
                         //图表
                         lineChartManager = new LineChartManager(mLineChart);
-                        lineChartManager.showLineChart(rsvrTwoLevels, "水库水位信息", getResources().getColor(R.color.blue), "ttt", "rz");
+                        lineChartManager.showLineChart(rsvrTwoLevels, "水库水位信息", getResources().getColor(R.color.blue), "subscripttime", "rz");
                         //设置曲线填充色 以及 MarkerView
                         Drawable drawable = getResources().getDrawable(R.drawable.fade_blue);
                         lineChartManager.setChartFillDrawable(drawable);
@@ -330,17 +335,14 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                     break;
                 case 0:
                     left_loadingView.setVisibility(View.GONE);//隐藏加载动画
-                    System.out.println("无数据");
-                    if(left_notDatas.getVisibility() == View.GONE){
+                    if (left_notDatas.getVisibility() == View.GONE) {
                         left_notDatas.setVisibility(View.VISIBLE);
                     }
                     break;
                 case 2:
-                    if(left_notDatas.getVisibility() == View.VISIBLE){
+                    if (left_notDatas.getVisibility() == View.VISIBLE) {
                         left_notDatas.setVisibility(View.GONE);
                     }
-                    System.out.println("降水二级");
-                    System.out.println(data);
                     List<RainTwoLevel> rainTwoLevels = gson.fromJson(data, new TypeToken<List<RainTwoLevel>>() {
                     }.getType());
                     //普通列
@@ -354,16 +356,17 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                     BarChartManager barChartManager = new BarChartManager(mBarChart);
                     //设置x轴的数据
                     ArrayList<String> xValues = new ArrayList<>();
-                    for(int i=0; i<rainTwoLevels.size(); i++){
+                    for (int i = 0; i < rainTwoLevels.size(); i++) {
                         xValues.add(rainTwoLevels.get(i).getTtt());//Float.valueOf(rainTwoLevels.get(i).getTtt())
                     }
                     //设置y轴的数据
                     ArrayList<Float> yValues = new ArrayList<>();
-                    for(int i=0; i<rainTwoLevels.size(); i++){
+                    for (int i = 0; i < rainTwoLevels.size(); i++) {
                         yValues.add(Float.valueOf(rainTwoLevels.get(i).getDrp()));
                     }
-                    barChartManager.showBarChart(xValues,yValues,"降雨信息",Color.RED);
+                    barChartManager.showBarChart(xValues, yValues, "降雨信息", Color.RED);
                     left_loadingView.setVisibility(View.GONE);
+
                     break;
             }
         }
@@ -395,7 +398,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                 return 0;
             }
         });
-        smartTable.getConfig().setContentStyle(new FontStyle(20,Color.RED)); //设置全局字体大小)
+        smartTable.getConfig().setContentStyle(new FontStyle(20, Color.RED)); //设置全局字体大小)
         smartTable.setTableData(tableData);
     }
 
@@ -425,23 +428,23 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
         switch (view.getId()) {
             case R.id.fragment_left_rain_1:
                 getHttpsDatas(stcd, startTime, endTime, address, 1);
-                setColor(buttons,0);
+                setColor(buttons, 0);
                 break;
             case R.id.fragment_left_rain_2:
                 getHttpsDatas(stcd, startTime, endTime, address, 3);
-                setColor(buttons,1);
+                setColor(buttons, 1);
                 break;
             case R.id.fragment_left_rain_3:
                 getHttpsDatas(stcd, startTime, endTime, address, 6);
-                setColor(buttons,2);
+                setColor(buttons, 2);
                 break;
             case R.id.fragment_left_rain_4:
                 getHttpsDatas(stcd, startTime, endTime, address, 12);
-                setColor(buttons,3);
+                setColor(buttons, 3);
                 break;
             case R.id.fragment_left_rain_5:
                 getHttpsDatas(stcd, startTime, endTime, address, 24);
-                setColor(buttons,4);
+                setColor(buttons, 4);
                 break;
         }
     }
@@ -538,7 +541,6 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
 
     //获取数据
     public void getDatas() {
-        System.out.println("------------------------------------------------------------------");
         String showContent = "";
         String dateBegin = date_begin.getText().toString();
         String dateEnd = date_end.getText().toString();
@@ -572,10 +574,10 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
 
     //网络请求
     private void getHttpsDatas(String stcd, String beginTime, String endTime, String address) {
-        if(left_notDatas.getVisibility() == View.VISIBLE){
+        if (left_notDatas.getVisibility() == View.VISIBLE) {
             left_notDatas.setVisibility(View.GONE);
         }
-        if(left_loadingView.getVisibility() == View.GONE){
+        if (left_loadingView.getVisibility() == View.GONE) {
             left_loadingView.setVisibility(View.VISIBLE);
         }
         final RequestBody requestBody = new FormBody.Builder()
@@ -593,7 +595,6 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String responseData = response.body().string();
-                    System.out.println(responseData);
                     JSONObject jsonObject = new JSONObject(responseData);
                     int state = jsonObject.getInt("state");
                     Message message = new Message();
@@ -617,10 +618,10 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
 
     //网络请求(降雨)
     private void getHttpsDatas(String stcd, String beginTime, String endTime, String address, int timeLength) {
-        if(left_notDatas.getVisibility() == View.VISIBLE){
+        if (left_notDatas.getVisibility() == View.VISIBLE) {
             left_notDatas.setVisibility(View.GONE);
         }
-        if(left_loadingView.getVisibility() == View.GONE){
+        if (left_loadingView.getVisibility() == View.GONE) {
             left_loadingView.setVisibility(View.VISIBLE);
         }
         final RequestBody requestBody = new FormBody.Builder()
@@ -639,7 +640,6 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String responseData = response.body().string();
-                    System.out.println(responseData);
                     JSONObject jsonObject = new JSONObject(responseData);
                     int state = jsonObject.getInt("state");
                     Message message = new Message();
@@ -709,11 +709,11 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
         public void run() {
 
             currentSecond = currentSecond + 1;
-            if(currentSecond%9 == 0){
+            if (currentSecond % 9 == 0) {
                 left_jilu.setText(nowz);
-            }else if(currentSecond%6 == 0){
+            } else if (currentSecond % 6 == 0) {
                 left_jilu.setText(maxz);
-            }else if(currentSecond%3 == 0){
+            } else if (currentSecond % 3 == 0) {
                 left_jilu.setText(minz);
             }
 
@@ -727,13 +727,14 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
     private Handler mhandle = new Handler();
     private boolean isPause = false;//是否暂停
     private long currentSecond = 0;//当前毫秒数
-/*****************计时器*******************/
 
-    public void setColor(Button[] buttons,int btn){
-        for(int i=0; i<buttons.length; i++){
-            if(i == btn){
+    /*****************计时器*******************/
+
+    public void setColor(Button[] buttons, int btn) {
+        for (int i = 0; i < buttons.length; i++) {
+            if (i == btn) {
                 buttons[i].setBackgroundColor(getResources().getColor(R.color.red));
-            }else {
+            } else {
                 buttons[i].setBackgroundColor(getResources().getColor(R.color.surance_blue));
             }
         }
@@ -742,7 +743,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
     //menu 事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.toolbar_data:
                 if (null == mPopWindow || !mPopWindow.isShowing()) {
                     //创建并显示popWindow
@@ -769,7 +770,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
     //添加 menu 菜单
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(!(address.equals(Route + "rainInfo/rainfalls_one") || address.equals(Route + "rainInfo/rainIntensity_one"))){
+        if (!(address.equals(Route + "rainInfo/rainfalls_one") || address.equals(Route + "rainInfo/rainIntensity_one"))) {
             //inflater.inflate(R.menu.toolbar, menu);
         }
     }

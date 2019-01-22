@@ -14,6 +14,7 @@ public class RsvrTwoLevel {
     private String maxz;//最高
     private String nowz;//当前
     private String fsltdz;//汛限水位
+    private String subscripttime; //统计图时间
 
     public String getStcd() {
         return stcd;

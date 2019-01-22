@@ -52,6 +52,7 @@
             android:id="@+id/login_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="80dp"
             android:layout_marginRight="40dp">

@@ -336,15 +336,15 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                 secondLevelSelectAddress2 = property.Route + "rainInfo/rain_detailed";
                 break;
             case "雨强信息":
-                mPresent.getIntensityOfRainInfo(start_time, end_time);
+                mPresent.getIntensityOfRainInfo(start_time, end_time,adcd);
                 break;
             case "河道站":
-                mPresent.getRiverInfo(start_time, end_time);
+                mPresent.getRiverInfo(start_time, end_time,adcd);
                 secondLevelSelectAddress1 = property.Route + "waterInfo/river_one";
                 secondLevelSelectAddress2 = property.Route + "waterInfo/river_detailed";
                 break;
             case "水库站":
-                mPresent.getRsvrInfo(start_time, end_time, handler);
+                mPresent.getRsvrInfo(start_time, end_time, handler,adcd);
                 secondLevelSelectAddress1 = property.Route + "waterInfo/reservoir_one";
                 secondLevelSelectAddress2 = property.Route + "waterInfo/reservoir_detailed";
                 break;
@@ -465,6 +465,14 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                 Date date1 = sdf.parse(dateBegin);
                 Date date2 = sdf.parse(dateEnd);
                 if (date1.getTime() < date2.getTime()) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(date1);
+                    calendar.add(Calendar.DATE,3);
+                    if(title.equals("雨强信息") && calendar.getTime().getTime() < date2.getTime()){
+                        showContent = "雨强查询的时间限定为3天以内";
+                        showToast(showContent);
+                        return;
+                    }
                     start_time = Tools.handleTime(date1);
                     end_time = Tools.handleTime(date2);
                     timeText.setText(String.format("%s至%s", start_time, end_time));
@@ -479,6 +487,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                     mPopWindow.dismiss();
                 } else {
                     showContent = "开始时间必须小于结束时间";
+                    showToast(showContent);
 
                 }
             } catch (ParseException e) {
