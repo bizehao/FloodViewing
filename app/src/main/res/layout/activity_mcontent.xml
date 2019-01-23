@@ -23,7 +23,7 @@
                 android:id="@+id/mcontent_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="18sp"
+                android:textSize="23sp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="#fff"/>

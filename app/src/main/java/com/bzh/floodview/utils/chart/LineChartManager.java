@@ -554,9 +554,10 @@ public class LineChartManager {
     /**
      * 设置 可以显示X Y 轴自定义值的 MarkerView
      */
-    public void setMarkerView(Context context) {
-        LineChartMarkView mv = new LineChartMarkView(context, xAxis.getValueFormatter());
+    public <T> void setMarkerView(Context context, LineChartMarkView.LineValHandler lineValHandler) {
+        LineChartMarkView<T> mv = new LineChartMarkView<>(context, xAxis.getValueFormatter());
         mv.setChartView(lineChart);
+        mv.setLineValHandler(lineValHandler);
         lineChart.setMarker(mv);
         lineChart.invalidate();
     }

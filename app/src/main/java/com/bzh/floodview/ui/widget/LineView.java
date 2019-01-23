@@ -61,12 +61,12 @@ public class LineView extends View {
         float bx = 30; //开始
         float ex = getWidth() - 30; //结束
         float y = getHeight() / 2;
-        mPaint.setColor(getResources().getColor(R.color.gray, null));
+        mPaint.setColor(getResources().getColor(R.color.gray));
         canvas.drawLine(bx, y, ex, y, mPaint);
         float muqian = 8;
         float dengfen = (getWidth()-60)/19;
         ex = muqian*dengfen;
-        mPaint.setColor(getResources().getColor(R.color.red,null));
+        mPaint.setColor(getResources().getColor(R.color.red));
         canvas.drawLine(bx, y, ex, y, mPaint);
     }
 }

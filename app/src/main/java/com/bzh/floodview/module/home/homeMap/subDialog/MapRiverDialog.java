@@ -11,6 +11,7 @@ import com.bzh.floodview.base.fragment.BaseDialogFragment;
 import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.mapData.ApiRiverMapData;
 import com.bzh.floodview.utils.chart.LineChartManager;
+import com.bzh.floodview.utils.chart.LineChartMarkView;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.sql.Time;
@@ -120,7 +121,12 @@ public class MapRiverDialog extends BaseDialogFragment {
                     LineChartManager barChartManager = new LineChartManager(mLineChart);
                     barChartManager.showMultiNormalLineChart(xValues,yLists,tabList,colorList);
                     //设置MarkerView
-                    barChartManager.setMarkerView(getActivity());
+                    barChartManager.setMarkerView(getActivity(), new LineChartMarkView.LineValHandler() {
+                        @Override
+                        public String setXVal(int index) {
+                            return data.getRivertimeList().get(index).getYmdhm();
+                        }
+                    });
                 }else {
                     mLineChart.clear();
                     mLineChart.notifyDataSetChanged();

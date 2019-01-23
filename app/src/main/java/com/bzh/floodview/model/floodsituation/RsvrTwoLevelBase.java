@@ -317,7 +317,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHhrztm() {
-        return hhrztm;
+        return hhrztm.substring(0,hhrztm.length()-2);
     }
 
     public void setHhrztm(String hhrztm) {
@@ -341,7 +341,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHmxinqtm() {
-        return hmxinqtm;
+        return hmxinqtm.substring(0,hmninqtm.length()-2);
     }
 
     public void setHmxinqtm(String hmxinqtm) {
@@ -365,7 +365,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHmxotqtm() {
-        return hmxotqtm;
+        return hmxotqtm.substring(0,hmninqtm.length()-2);
     }
 
     public void setHmxotqtm(String hmxotqtm) {
@@ -381,7 +381,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHlrztm() {
-        return hlrztm;
+        return hlrztm.substring(0,hlrztm.length()-2);
     }
 
     public void setHlrztm(String hlrztm) {
@@ -397,7 +397,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHmninqtm() {
-        return hmninqtm;
+        return hmninqtm.substring(0,hmninqtm.length()-2);
     }
 
     public void setHmninqtm(String hmninqtm) {

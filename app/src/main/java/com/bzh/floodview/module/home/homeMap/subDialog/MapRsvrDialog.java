@@ -11,6 +11,7 @@ import com.bzh.floodview.base.fragment.BaseDialogFragment;
 import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.mapData.ApiRsvrMapData;
 import com.bzh.floodview.utils.chart.LineChartManager;
+import com.bzh.floodview.utils.chart.LineChartMarkView;
 import com.github.mikephil.charting.charts.LineChart;
 
 import java.util.ArrayList;
@@ -121,7 +122,12 @@ public class MapRsvrDialog extends BaseDialogFragment {
                     LineChartManager barChartManager = new LineChartManager(mLineChart);
                     barChartManager.showMultiNormalLineChart(xValues,yLists,tabList,colorList);
                     //设置MarkerView
-                    barChartManager.setMarkerView(getActivity());
+                    barChartManager.setMarkerView(getActivity(), new LineChartMarkView.LineValHandler() {
+                        @Override
+                        public String setXVal(int index) {
+                            return data.getReservoirtimeList().get(index).getTm();
+                        }
+                    });
                 }else {
                     mLineChart.clear();
                     mLineChart.notifyDataSetChanged();

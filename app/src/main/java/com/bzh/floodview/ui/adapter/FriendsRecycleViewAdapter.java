@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bzh.floodview.R;
 import com.bzh.floodview.data.model.FriendsInfo;
 import com.bzh.floodview.model.Friend;
-import com.bzh.floodview.utils.PinyinUtils;
+//import com.bzh.floodview.utils.PinyinUtils;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -54,14 +54,14 @@ public class FriendsRecycleViewAdapter extends RecyclerView.Adapter<FriendsRecyc
                 friends.add(new Friend(friendsInfo.getUsername(),
                         friendsInfo.getRemarkname(),
                         friendsInfo.getHeadportrait(),
-                        PinyinUtils.getPinYin(friendsInfo.getRemarkname())));
+                        /*PinyinUtils.getPinYin(friendsInfo.getRemarkname()))*/""));
             }
             sort(friends);
             for (int i = 0; i < friends.size(); i++) {
                 //当前城市拼音首字母
-                String currentLetter = PinyinUtils.getFirstLetter(friends.get(i).getPinyin());
+                String currentLetter = "";//PinyinUtils.getFirstLetter(friends.get(i).getPinyin());
                 //上个首字母，如果不存在设为""
-                String previousLetter = i >= 1 ? PinyinUtils.getFirstLetter(friends.get(i - 1).getPinyin()) : "";
+                String previousLetter = "";//i >= 1 ? PinyinUtils.getFirstLetter(friends.get(i - 1).getPinyin()) : "";
                 if (!TextUtils.equals(currentLetter, previousLetter)) {
                     letterIndexes.put(currentLetter, i);
                 }
@@ -107,8 +107,8 @@ public class FriendsRecycleViewAdapter extends RecyclerView.Adapter<FriendsRecyc
         } else {
             Glide.with(context).load(R.drawable.user_icon).into(viewHolder.imageView);
         }
-        String currentLetter = PinyinUtils.getFirstLetter(friend.getPinyin());
-        String previousLetter = i >= 1 ? PinyinUtils.getFirstLetter(friends.get(i - 1).getPinyin()) : "";
+        String currentLetter = "";//PinyinUtils.getFirstLetter(friend.getPinyin());
+        String previousLetter = "";//i >= 1 ? PinyinUtils.getFirstLetter(friends.get(i - 1).getPinyin()) : "";
         if (!TextUtils.equals(currentLetter, previousLetter)) {
             viewHolder.Initials.setVisibility(View.VISIBLE);
             viewHolder.Initials.setText(currentLetter);

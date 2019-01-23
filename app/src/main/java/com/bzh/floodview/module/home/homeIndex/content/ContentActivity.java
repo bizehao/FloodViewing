@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -366,7 +367,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         // 设置PopupWindow的背景
         mPopWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//
         // 设置PopupWindow是否能响应外部点击事件
-        mPopWindow.setFocusable(false);
+        mPopWindow.setFocusable(true);
         mPopWindow.setOutsideTouchable(false);
         // 设置PopupWindow是否能响应点击事件
         mPopWindow.setTouchable(true);
@@ -553,7 +554,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         //表格样式
         smartTable.getConfig().setShowTableTitle(false).setShowXSequence(false).setShowYSequence(false)
                 .setColumnTitleStyle(new FontStyle(60, Color.parseColor("#030607")))//设置标题字体
-                .setColumnTitleBackground(new BaseBackgroundFormat(getResources().getColor(R.color.bg_blue, null)));//设置标题背景色
+                .setColumnTitleBackground(new BaseBackgroundFormat(getResources().getColor(R.color.bg_blue)));//设置标题背景色
 
         final Column[] columns = new Column[map.size()];
         int size = DensityUtils.dp2px(ContentActivity.this, 20);
@@ -668,6 +669,7 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Log.e(TAG, "onOptionsItemSelected: ---點擊");
                 finish();
                 break;
             case R.id.toolbar_data:
@@ -676,6 +678,8 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         }
         return true;
     }
+
+    private static final String TAG = "ContentActivity";
 
     //加载右菜单（toolbar）
     @Override

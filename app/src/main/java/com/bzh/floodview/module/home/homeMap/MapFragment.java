@@ -500,8 +500,8 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             for (List<LatLng> polyline : polyLines) {
                 OverlayOptions ooPolygon = new PolygonOptions().points(polyline)
-                        .stroke(new Stroke(10, getResources().getColor(R.color.map_line, null)))
-                        .fillColor(getResources().getColor(R.color.map_over, null)); //覆盖层的颜色
+                        .stroke(new Stroke(10, getResources().getColor(R.color.map_line)))
+                        .fillColor(getResources().getColor(R.color.map_over)); //覆盖层的颜色
                 mBaiduMap.addOverlay(ooPolygon);
                 for (LatLng latLng : polyline) {
                     builder.include(latLng);

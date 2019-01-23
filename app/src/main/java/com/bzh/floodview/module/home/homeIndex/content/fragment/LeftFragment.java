@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.bzh.floodview.module.home.homeIndex.content.ContentContract;
+import com.bzh.floodview.utils.chart.LineChartMarkView;
 import com.rey.material.widget.CheckBox;
 
 import android.widget.CompoundButton;
@@ -290,12 +291,17 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                         smartTable.setTableData(tableData);
                         //图表
                         lineChartManager = new LineChartManager(mLineChart);
-                        lineChartManager.showLineChart(riverTwoLevels, "河道水位信息", getResources().getColor(R.color.blue, null), "subscripttime", "z");
-                        lineChartManager.addLine(riverTwoLevels, "河道流量信息", getResources().getColor(R.color.red, null), "q");
+                        lineChartManager.showLineChart(riverTwoLevels, "河道水位信息", getResources().getColor(R.color.blue), "subscripttime", "z");
+                        lineChartManager.addLine(riverTwoLevels, "河道流量信息", getResources().getColor(R.color.red), "q");
                         //设置曲线填充色 以及 MarkerView
                         Drawable drawable = getResources().getDrawable(R.drawable.fade_blue, null);
                         lineChartManager.setChartFillDrawable(drawable);
-                        lineChartManager.setMarkerView(getActivity());
+                        lineChartManager.setMarkerView(getActivity(), new LineChartMarkView.LineValHandler() {
+                            @Override
+                            public String setXVal(int index) {
+                                return riverTwoLevels.get(index).getTtt();
+                            }
+                        });
                     }
                     if (address.equals(Route + "waterInfo/reservoir_one")) { //水库
                         Tools.setViewInVisible(jingjie);
@@ -329,7 +335,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                         //设置曲线填充色 以及 MarkerView
                         Drawable drawable = getResources().getDrawable(R.drawable.fade_blue);
                         lineChartManager.setChartFillDrawable(drawable);
-                        lineChartManager.setMarkerView(getActivity());
+                        lineChartManager.setMarkerView(getActivity(), index -> rsvrTwoLevels.get(index).getTtt());
                     }
                     left_loadingView.setVisibility(View.GONE);
                     break;
