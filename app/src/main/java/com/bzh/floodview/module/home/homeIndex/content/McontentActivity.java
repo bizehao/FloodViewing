@@ -13,6 +13,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -52,11 +53,13 @@ public class McontentActivity extends BaseActivity implements McontentContract.V
         initParams();
     }
 
+    private static final String TAG = "McontentActivity";
+
     public void initViews() {
         Intent intent = getIntent();
         toolbar = findViewById(R.id.mcontent_toolbar);
         textViewTitle = findViewById(R.id.mcontent_title);
-        viceTextViewTitle = findViewById(R.id.vice_mcontent_title);
+        //viceTextViewTitle = findViewById(R.id.vice_mcontent_title);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -93,17 +96,16 @@ public class McontentActivity extends BaseActivity implements McontentContract.V
                 R.drawable.layout_divider_vertical));
 
         tabLayout.getTabAt(0).select();
-        textViewTitle.setText(MessageFormat.format("{0}过程线", itemTitle));
-        viceTextViewTitle.setText(viceItemTitle);
-
+        textViewTitle.setText(MessageFormat.format("{0}过程线", viceItemTitle));
+        //viceTextViewTitle.setText(viceItemTitle);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                System.out.println("选中的" + tab.getText());
-                textViewTitle.setText(MessageFormat.format("{0}{1}", itemTitle, tab.getText()));
-                viceTextViewTitle.setText(viceItemTitle);
+                textViewTitle.setText(MessageFormat.format("{0}{1}", viceItemTitle, tab.getText()));
+                //viceTextViewTitle.setText(viceItemTitle);
             }
+
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {

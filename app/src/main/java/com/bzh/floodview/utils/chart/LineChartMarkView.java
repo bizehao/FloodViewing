@@ -18,6 +18,8 @@ import com.github.mikephil.charting.utils.MPPointF;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * Created by xhu_ww on 2018/6/1.
  * description:
@@ -38,6 +40,10 @@ public class LineChartMarkView extends MarkerView {
         tvValue1 = (TextView) findViewById(R.id.tv_value1);
     }
 
+    int i=0;
+
+    List<String> times;
+
     @SuppressLint("SetTextI18n")
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
@@ -46,6 +52,8 @@ public class LineChartMarkView extends MarkerView {
             LineData lineData = ((LineChart) chart).getLineData();
             //获取到图表中的所有曲线
             List<ILineDataSet> dataSetList = lineData.getDataSets();
+            Timber.e("shuchu"+dataSetList.size());
+            Timber.e(e.toString());
             for (int i = 0; i < dataSetList.size(); i++) {
                 LineDataSet dataSet = (LineDataSet) dataSetList.get(i);
                 //获取到曲线的所有在Y轴的数据集合，根据当前X轴的位置 来获取对应的Y轴值
@@ -57,7 +65,7 @@ public class LineChartMarkView extends MarkerView {
                     tvValue1.setText(dataSet.getLabel() + "：" + df.format(y));//df.format(y * 100) + "%")
                 }
             }
-            tvDate.setText(xAxisValueFormatter.getFormattedValue(e.getX(), null));
+            tvDate.setText(xAxisValueFormatter.getFormattedValue(i++, null));//e.getX()
         }
         super.refreshContent(e, highlight);
     }

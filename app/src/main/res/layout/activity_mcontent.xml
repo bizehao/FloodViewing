@@ -22,16 +22,18 @@
             <TextView
                 android:id="@+id/mcontent_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="18sp"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:textColor="#fff"/>
-            <TextView
-                android:id="@+id/vice_mcontent_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#fff"/>
+            <!--<TextView-->
+                <!--android:id="@+id/vice_mcontent_title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="15sp"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:textColor="#fff"/>-->
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
