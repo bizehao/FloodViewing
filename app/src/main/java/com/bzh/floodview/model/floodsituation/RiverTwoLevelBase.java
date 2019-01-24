@@ -50,7 +50,7 @@ public class RiverTwoLevelBase implements Serializable {
     private String bspn; //提防起点桩号
 
     public String getStcd() {
-        return stcd;
+        return stcd == null?"":stcd;
     }
 
     public void setStcd(String stcd) {
@@ -58,7 +58,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getStnm() {
-        return stnm;
+        return stnm == null?"":stnm;
     }
 
     public void setStnm(String stnm) {
@@ -66,7 +66,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getAdnm() {
-        return adnm;
+        return adnm==null?"":adnm;
     }
 
     public void setAdnm(String adnm) {
@@ -74,7 +74,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getRvnm() {
-        return rvnm;
+        return rvnm == null? "":rvnm;
     }
 
     public void setRvnm(String rvnm) {
@@ -82,7 +82,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHnnm() {
-        return hnnm;
+        return hnnm == null? "":hnnm;
     }
 
     public void setHnnm(String hnnm) {
@@ -90,7 +90,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getBsnm() {
-        return bsnm;
+        return bsnm == null? "":bsnm;
     }
 
     public void setBsnm(String bsnm) {
@@ -98,7 +98,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getStlc() {
-        return stlc;
+        return stlc == null? "":stlc;
     }
 
     public void setStlc(String stlc) {
@@ -106,7 +106,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getAtcunit() {
-        return atcunit;
+        return atcunit == null? "":atcunit;
     }
 
     public void setAtcunit(String atcunit) {
@@ -114,7 +114,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getAdmauth() {
-        return admauth;
+        return admauth == null? "":admauth;
     }
 
     public void setAdmauth(String admauth) {
@@ -123,7 +123,7 @@ public class RiverTwoLevelBase implements Serializable {
 
     public String getTm() {
 
-        return tm;
+        return tm == null? "":tm;
     }
 
     public void setTm(String tm) {
@@ -131,7 +131,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getZ() {
-        return z;
+        return z == null? "":z;
     }
 
     public void setZ(String z) {
@@ -139,7 +139,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getQ() {
-        return q;
+        return q == null? "":q;
     }
 
     public void setQ(String q) {
@@ -147,7 +147,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getWptn() {
-        return wptn;
+        return wptn == null? "":wptn;
     }
 
     public void setWptn(String wptn) {
@@ -155,7 +155,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getState() {
-        return state;
+        return state == null? "":state;
     }
 
     public void setState(String state) {
@@ -163,7 +163,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getEwrz() {
-        return ewrz;
+        return ewrz == null? "":ewrz;
     }
 
     public void setEwrz(String ewrz) {
@@ -171,7 +171,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getEwrq() {
-        return ewrq;
+        return ewrq == null? "":ewrq;
     }
 
     public void setEwrq(String ewrq) {
@@ -179,7 +179,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getEgrz() {
-        return egrz;
+        return egrz == null? "":egrz;
     }
 
     public void setEgrz(String egrz) {
@@ -187,7 +187,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getEgrq() {
-        return egrq;
+        return egrq == null? "":egrq;
     }
 
     public void setEgrq(String egrq) {
@@ -195,7 +195,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getLdkel() {
-        return ldkel;
+        return ldkel == null? "":ldkel;
     }
 
     public void setLdkel(String ldkel) {
@@ -203,7 +203,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getRdkel() {
-        return rdkel;
+        return rdkel == null? "":rdkel;
     }
 
     public void setRdkel(String rdkel) {
@@ -211,7 +211,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getWrz() {
-        return wrz;
+        return wrz == null? "":wrz;
     }
 
     public void setWrz(String wrz) {
@@ -219,7 +219,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getWrq() {
-        return wrq;
+        return wrq == null? "":wrq;
     }
 
     public void setWrq(String wrq) {
@@ -227,7 +227,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getGrz() {
-        return grz;
+        return grz == null? "":grz;
     }
 
     public void setGrz(String grz) {
@@ -235,7 +235,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getGrq() {
-        return grq;
+        return grq == null? "":grq;
     }
 
     public void setGrq(String grq) {
@@ -243,7 +243,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getFlpq() {
-        return flpq;
+        return flpq == null? "":flpq;
     }
 
     public void setFlpq(String flpq) {
@@ -251,7 +251,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getObhtz() {
-        return obhtz;
+        return obhtz == null? "":obhtz;
     }
 
     public void setObhtz(String obhtz) {
@@ -259,7 +259,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getObhtztm() {
-        return obhtztm;
+        return obhtztm == null? "":obhtztm;
     }
 
     public void setObhtztm(String obhtztm) {
@@ -267,7 +267,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getIvhz() {
-        return ivhz;
+        return ivhz == null? "":ivhz;
     }
 
     public void setIvhz(String ivhz) {
@@ -275,7 +275,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getIvhztm() {
-        return ivhztm;
+        return ivhztm == null? "":ivhztm;
     }
 
     public void setIvhztm(String ivhztm) {
@@ -283,7 +283,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getObmxq() {
-        return obmxq;
+        return obmxq == null? "":obmxq;
     }
 
     public void setObmxq(String obmxq) {
@@ -291,7 +291,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getObmxqtm() {
-        return obmxqtm;
+        return obmxqtm == null? "":obmxqtm;
     }
 
     public void setObmxqtm(String obmxqtm) {
@@ -299,7 +299,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getIvmxq() {
-        return ivmxq;
+        return ivmxq == null? "":ivmxq;
     }
 
     public void setIvmxq(String ivmxq) {
@@ -307,7 +307,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getIvmxqtm() {
-        return ivmxqtm;
+        return ivmxqtm == null? "":ivmxqtm;
     }
 
     public void setIvmxqtm(String ivmxqtm) {
@@ -315,7 +315,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHmxs() {
-        return hmxs;
+        return hmxs == null? "":hmxs;
     }
 
     public void setHmxs(String hmxs) {
@@ -323,7 +323,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHmxstm() {
-        return hmxstm;
+        return hmxstm == null? "":hmxstm;
     }
 
     public void setHmxstm(String hmxstm) {
@@ -331,7 +331,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHmxavv() {
-        return hmxavv;
+        return hmxavv == null? "":hmxavv;
     }
 
     public void setHmxavv(String hmxavv) {
@@ -339,7 +339,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHmxavvtm() {
-        return hmxavvtm;
+        return hmxavvtm == null? "":hmxavvtm;
     }
 
     public void setHmxavvtm(String hmxavvtm) {
@@ -347,7 +347,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHlz() {
-        return hlz;
+        return hlz == null? "":hlz;
     }
 
     public void setHlz(String hlz) {
@@ -355,7 +355,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHlztm() {
-        return hlztm;
+        return hlztm == null? "":hlztm;
     }
 
     public void setHlztm(String hlztm) {
@@ -363,7 +363,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHmnq() {
-        return hmnq;
+        return hmnq == null? "":hmnq;
     }
 
     public void setHmnq(String hmnq) {
@@ -371,7 +371,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getHmnqtm() {
-        return hmnqtm;
+        return hmnqtm == null? "":hmnqtm;
     }
 
     public void setHmnqtm(String hmnqtm) {
@@ -379,7 +379,7 @@ public class RiverTwoLevelBase implements Serializable {
     }
 
     public String getBspn() {
-        return bspn;
+        return bspn == null? "":bspn;
     }
 
     public void setBspn(String bspn) {

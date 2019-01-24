@@ -18,7 +18,7 @@ public class RainTwoLevelBase implements Serializable {
     private String admauth; //信息管理单位
 
     public String getStcd() {
-        return stcd;
+        return stcd == null ? "" : stcd;
     }
 
     public void setStcd(String stcd) {
@@ -26,7 +26,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getStnm() {
-        return stnm;
+        return stnm == null ? "" : stnm;
     }
 
     public void setStnm(String stnm) {
@@ -34,7 +34,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getSttp() {
-        return sttp;
+        return sttp == null ? "" : sttp;
     }
 
     public void setSttp(String sttp) {
@@ -42,7 +42,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getAdnm() {
-        return adnm;
+        return adnm == null ? "" : adnm;
     }
 
     public void setAdnm(String adnm) {
@@ -50,7 +50,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getRvnm() {
-        return rvnm;
+        return rvnm == null ? "" : rvnm;
     }
 
     public void setRvnm(String rvnm) {
@@ -58,7 +58,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getHnnm() {
-        return hnnm;
+        return hnnm == null ? "" : hnnm;
     }
 
     public void setHnnm(String hnnm) {
@@ -66,7 +66,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getBsnm() {
-        return bsnm;
+        return bsnm == null ? "" : bsnm;
     }
 
     public void setBsnm(String bsnm) {
@@ -74,7 +74,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getStlc() {
-        return stlc;
+        return stlc == null ? "" : stlc;
     }
 
     public void setStlc(String stlc) {
@@ -82,7 +82,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getAtcunit() {
-        return atcunit;
+        return atcunit == null ? "" : atcunit;
     }
 
     public void setAtcunit(String atcunit) {
@@ -90,7 +90,7 @@ public class RainTwoLevelBase implements Serializable {
     }
 
     public String getAdmauth() {
-        return admauth;
+        return admauth == null ? "" : admauth;
     }
 
     public void setAdmauth(String admauth) {

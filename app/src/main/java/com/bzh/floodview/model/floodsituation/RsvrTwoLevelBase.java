@@ -61,7 +61,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getStnm() {
-        return stnm;
+        return stnm == null?"":stnm;
     }
 
     public void setStnm(String stnm) {
@@ -69,7 +69,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getAdnm() {
-        return adnm;
+        return adnm == null?"":adnm;
     }
 
     public void setAdnm(String adnm) {
@@ -77,7 +77,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getRvnm() {
-        return rvnm;
+        return rvnm == null?"":rvnm;
     }
 
     public void setRvnm(String rvnm) {
@@ -85,7 +85,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHnnm() {
-        return hnnm;
+        return hnnm == null?"":hnnm;
     }
 
     public void setHnnm(String hnnm) {
@@ -93,7 +93,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getBsnm() {
-        return bsnm;
+        return bsnm == null?"":bsnm;
     }
 
     public void setBsnm(String bsnm) {
@@ -101,7 +101,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getScale() {
-        return scale;
+        return scale == null?"":scale;
     }
 
     public void setScale(String scale) {
@@ -109,7 +109,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getStlc() {
-        return stlc;
+        return stlc == null?"":stlc;
     }
 
     public void setStlc(String stlc) {
@@ -117,7 +117,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getAtcunit() {
-        return atcunit;
+        return atcunit == null?"":atcunit;
     }
 
     public void setAtcunit(String atcunit) {
@@ -125,7 +125,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getAdmauth() {
-        return admauth;
+        return admauth == null?"":admauth;
     }
 
     public void setAdmauth(String admauth) {
@@ -133,7 +133,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getTm() {
-        return tm;
+        return tm == null?"":tm;
     }
 
     public void setTm(String tm) {
@@ -141,7 +141,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getRz() {
-        return rz;
+        return rz == null?"":rz;
     }
 
     public void setRz(String rz) {
@@ -149,7 +149,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getW() {
-        return w;
+        return w == null?"":w;
     }
 
     public void setW(String w) {
@@ -157,7 +157,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getInq() {
-        return inq;
+        return inq == null?"":inq;
     }
 
     public void setInq(String inq) {
@@ -165,7 +165,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getOtq() {
-        return otq;
+        return otq == null?"":otq;
     }
 
     public void setOtq(String otq) {
@@ -173,7 +173,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getApdinq() {
-        return apdinq;
+        return apdinq == null?"":apdinq;
     }
 
     public void setApdinq(String apdinq) {
@@ -181,7 +181,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getApdotq() {
-        return apdotq;
+        return apdotq == null?"":apdotq;
     }
 
     public void setApdotq(String apdotq) {
@@ -189,7 +189,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getFsltdz() {
-        return fsltdz;
+        return fsltdz == null?"":fsltdz;
     }
 
     public void setFsltdz(String fsltdz) {
@@ -197,7 +197,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getEfsltdz() {
-        return efsltdz;
+        return efsltdz == null?"":efsltdz;
     }
 
     public void setEfsltdz(String efsltdz) {
@@ -205,7 +205,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getFsltdw() {
-        return fsltdw;
+        return fsltdw == null?"":fsltdw;
     }
 
     public void setFsltdw(String fsltdw) {
@@ -213,7 +213,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getEfsltdw() {
-        return efsltdw;
+        return efsltdw == null?"":efsltdw;
     }
 
     public void setEfsltdw(String efsltdw) {
@@ -221,7 +221,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getEnormz() {
-        return enormz;
+        return enormz == null?"":enormz;
     }
 
     public void setEnormz(String enormz) {
@@ -229,7 +229,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getDamel() {
-        return damel;
+        return damel == null?"":damel;
     }
 
     public void setDamel(String damel) {
@@ -237,7 +237,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getCkflz() {
-        return ckflz;
+        return ckflz == null?"":ckflz;
     }
 
     public void setCkflz(String ckflz) {
@@ -245,7 +245,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getDsflz() {
-        return dsflz;
+        return dsflz == null?"":dsflz;
     }
 
     public void setDsflz(String dsflz) {
@@ -253,7 +253,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getNormz() {
-        return normz;
+        return normz == null?"":normz;
     }
 
     public void setNormz(String normz) {
@@ -261,7 +261,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getDdz() {
-        return ddz;
+        return ddz == null?"":ddz;
     }
 
     public void setDdz(String ddz) {
@@ -269,7 +269,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getActz() {
-        return actz;
+        return actz == null?"":actz;
     }
 
     public void setActz(String actz) {
@@ -277,7 +277,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getTtcp() {
-        return ttcp;
+        return ttcp == null?"":ttcp;
     }
 
     public void setTtcp(String ttcp) {
@@ -285,7 +285,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getFldcp() {
-        return fldcp;
+        return fldcp == null?"":fldcp;
     }
 
     public void setFldcp(String fldcp) {
@@ -293,7 +293,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getActcp() {
-        return actcp;
+        return actcp == null?"":actcp;
     }
 
     public void setActcp(String actcp) {
@@ -301,7 +301,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getDdcp() {
-        return ddcp;
+        return ddcp == null?"":ddcp;
     }
 
     public void setDdcp(String ddcp) {
@@ -309,7 +309,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHhrz() {
-        return hhrz;
+        return hhrz == null?"":hhrz;
     }
 
     public void setHhrz(String hhrz) {
@@ -325,7 +325,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHmxinq() {
-        return hmxinq;
+        return hmxinq == null?"":hmxinq;
     }
 
     public void setHmxinq(String hmxinq) {
@@ -333,7 +333,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getRstdr() {
-        return rstdr;
+        return rstdr == null?"":rstdr;
     }
 
     public void setRstdr(String rstdr) {
@@ -349,7 +349,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHmxw() {
-        return hmxw;
+        return hmxw == null?"":hmxw;
     }
 
     public void setHmxw(String hmxw) {
@@ -357,7 +357,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHmxotq() {
-        return hmxotq;
+        return hmxotq == null?"":hmxotq;
     }
 
     public void setHmxotq(String hmxotq) {
@@ -373,7 +373,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHlrz() {
-        return hlrz;
+        return hlrz == null?"":hlrz;
     }
 
     public void setHlrz(String hlrz) {
@@ -389,7 +389,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getHmninq() {
-        return hmninq;
+        return hmninq == null?"":hmninq;
     }
 
     public void setHmninq(String hmninq) {
@@ -405,7 +405,7 @@ public class RsvrTwoLevelBase implements Serializable {
     }
 
     public String getLwa() {
-        return lwa;
+        return lwa == null?"":lwa;
     }
 
     public void setLwa(String lwa) {
