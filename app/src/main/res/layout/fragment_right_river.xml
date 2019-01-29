@@ -46,7 +46,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.stcd}"
+                        android:text="@{riverTwoLevelBase.stcd.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -71,7 +71,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.stnm}"
+                        android:text="@{riverTwoLevelBase.stnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -96,7 +96,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.adnm}"
+                        android:text="@{riverTwoLevelBase.adnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -121,7 +121,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.rvnm}"
+                        android:text="@{riverTwoLevelBase.rvnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -146,7 +146,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hnnm}"
+                        android:text="@{riverTwoLevelBase.hnnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -171,7 +171,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.bsnm}"
+                        android:text="@{riverTwoLevelBase.bsnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -196,7 +196,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.stlc}"
+                        android:text="@{riverTwoLevelBase.stlc.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -221,7 +221,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.atcunit}"
+                        android:text="@{riverTwoLevelBase.atcunit.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -246,7 +246,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.admauth}"
+                        android:text="@{riverTwoLevelBase.admauth.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -287,7 +287,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.tm}"
+                        android:text="@{riverTwoLevelBase.tm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -312,7 +312,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.z}"
+                        android:text="@{riverTwoLevelBase.z.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -337,7 +337,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.q}"
+                        android:text="@{riverTwoLevelBase.q.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -362,7 +362,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.wptn}"
+                        android:text="@{riverTwoLevelBase.wptn.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -387,7 +387,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.state}"
+                        android:text="@{riverTwoLevelBase.state.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -412,7 +412,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.ewrz}"
+                        android:text="@{riverTwoLevelBase.ewrz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -437,7 +437,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.ewrq}"
+                        android:text="@{riverTwoLevelBase.ewrq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -462,7 +462,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.egrz}"
+                        android:text="@{riverTwoLevelBase.egrz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -487,7 +487,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.egrq}"
+                        android:text="@{riverTwoLevelBase.egrq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -528,7 +528,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.ldkel}"
+                        android:text="@{riverTwoLevelBase.ldkel.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -553,7 +553,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.rdkel}"
+                        android:text="@{riverTwoLevelBase.rdkel.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -578,7 +578,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.wrz}"
+                        android:text="@{riverTwoLevelBase.wrz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -603,7 +603,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.wrq}"
+                        android:text="@{riverTwoLevelBase.wrq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -628,7 +628,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.grz}"
+                        android:text="@{riverTwoLevelBase.grz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -653,7 +653,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.grq}"
+                        android:text="@{riverTwoLevelBase.grq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -678,7 +678,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.flpq}"
+                        android:text="@{riverTwoLevelBase.flpq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -703,7 +703,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.obhtz}"
+                        android:text="@{riverTwoLevelBase.obhtz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -728,7 +728,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.obhtztm}"
+                        android:text="@{riverTwoLevelBase.obhtztm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -753,7 +753,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.ivhz}"
+                        android:text="@{riverTwoLevelBase.ivhz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -778,7 +778,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.ivhztm}"
+                        android:text="@{riverTwoLevelBase.ivhztm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -803,7 +803,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.obmxq}"
+                        android:text="@{riverTwoLevelBase.obmxq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -828,7 +828,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.obmxqtm}"
+                        android:text="@{riverTwoLevelBase.obmxqtm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -853,7 +853,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.ivmxq}"
+                        android:text="@{riverTwoLevelBase.ivmxq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -878,7 +878,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.ivmxqtm}"
+                        android:text="@{riverTwoLevelBase.ivmxqtm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -903,7 +903,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hmxs}"
+                        android:text="@{riverTwoLevelBase.hmxs.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -928,7 +928,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hmxstm}"
+                        android:text="@{riverTwoLevelBase.hmxstm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -953,7 +953,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hmxavv}"
+                        android:text="@{riverTwoLevelBase.hmxavv.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -978,7 +978,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hmxavvtm}"
+                        android:text="@{riverTwoLevelBase.hmxavvtm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -1003,7 +1003,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hlz}"
+                        android:text="@{riverTwoLevelBase.hlz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -1028,7 +1028,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hlztm}"
+                        android:text="@{riverTwoLevelBase.hlztm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -1053,7 +1053,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hmnq}"
+                        android:text="@{riverTwoLevelBase.hmnq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -1078,7 +1078,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.hmnqtm}"
+                        android:text="@{riverTwoLevelBase.hmnqtm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -1103,7 +1103,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{riverTwoLevelBase.bspn}"
+                        android:text="@{riverTwoLevelBase.bspn.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 

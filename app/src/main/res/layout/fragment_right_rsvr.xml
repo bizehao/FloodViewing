@@ -45,7 +45,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.stcd}"
+                        android:text="@{rsvrTwoLevelBase.stcd.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -68,7 +68,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.stnm}"
+                        android:text="@{rsvrTwoLevelBase.stnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -90,7 +90,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.adnm}"
+                        android:text="@{rsvrTwoLevelBase.adnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -112,7 +112,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.rvnm}"
+                        android:text="@{rsvrTwoLevelBase.rvnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -134,7 +134,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hnnm}"
+                        android:text="@{rsvrTwoLevelBase.hnnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -156,7 +156,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.bsnm}"
+                        android:text="@{rsvrTwoLevelBase.bsnm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -178,7 +178,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.scale}"
+                        android:text="@{rsvrTwoLevelBase.scale.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -200,7 +200,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.stlc}"
+                        android:text="@{rsvrTwoLevelBase.stlc.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -222,7 +222,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.atcunit}"
+                        android:text="@{rsvrTwoLevelBase.atcunit.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -244,7 +244,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.admauth}"
+                        android:text="@{rsvrTwoLevelBase.admauth.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -280,7 +280,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.tm}"
+                        android:text="@{rsvrTwoLevelBase.tm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -302,7 +302,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.rz}"
+                        android:text="@{rsvrTwoLevelBase.rz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -324,7 +324,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.w}"
+                        android:text="@{rsvrTwoLevelBase.w.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -346,7 +346,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.inq}"
+                        android:text="@{rsvrTwoLevelBase.inq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -368,7 +368,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.otq}"
+                        android:text="@{rsvrTwoLevelBase.otq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -390,7 +390,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.apdinq}"
+                        android:text="@{rsvrTwoLevelBase.apdinq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -412,7 +412,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.apdotq}"
+                        android:text="@{rsvrTwoLevelBase.apdotq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -434,7 +434,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.fsltdz}"
+                        android:text="@{rsvrTwoLevelBase.fsltdz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -456,7 +456,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.efsltdz}"
+                        android:text="@{rsvrTwoLevelBase.efsltdz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -478,7 +478,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.fsltdw}"
+                        android:text="@{rsvrTwoLevelBase.fsltdw.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -500,7 +500,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.efsltdw}"
+                        android:text="@{rsvrTwoLevelBase.efsltdw.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -522,7 +522,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.enormz}"
+                        android:text="@{rsvrTwoLevelBase.enormz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -558,7 +558,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.damel}"
+                        android:text="@{rsvrTwoLevelBase.damel.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -580,7 +580,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.ckflz}"
+                        android:text="@{rsvrTwoLevelBase.ckflz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -602,7 +602,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.dsflz}"
+                        android:text="@{rsvrTwoLevelBase.dsflz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -624,7 +624,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.normz}"
+                        android:text="@{rsvrTwoLevelBase.normz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -646,7 +646,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.ddz}"
+                        android:text="@{rsvrTwoLevelBase.ddz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -668,7 +668,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.actz}"
+                        android:text="@{rsvrTwoLevelBase.actz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -690,7 +690,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.ttcp}"
+                        android:text="@{rsvrTwoLevelBase.ttcp.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -712,7 +712,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.fldcp}"
+                        android:text="@{rsvrTwoLevelBase.fldcp.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -734,7 +734,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.actcp}"
+                        android:text="@{rsvrTwoLevelBase.actcp.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -756,7 +756,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.ddcp}"
+                        android:text="@{rsvrTwoLevelBase.ddcp.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -778,7 +778,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hhrz}"
+                        android:text="@{rsvrTwoLevelBase.hhrz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -800,7 +800,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hhrztm}"
+                        android:text="@{rsvrTwoLevelBase.hhrztm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -822,7 +822,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hmxinq}"
+                        android:text="@{rsvrTwoLevelBase.hmxinq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -844,7 +844,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.rstdr}"
+                        android:text="@{rsvrTwoLevelBase.rstdr.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -866,7 +866,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hmxinqtm}"
+                        android:text="@{rsvrTwoLevelBase.hmxinqtm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -888,7 +888,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hmxw}"
+                        android:text="@{rsvrTwoLevelBase.hmxw.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -910,7 +910,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hmxotq}"
+                        android:text="@{rsvrTwoLevelBase.hmxotq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -932,7 +932,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hmxotqtm}"
+                        android:text="@{rsvrTwoLevelBase.hmxotqtm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -954,7 +954,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hlrz}"
+                        android:text="@{rsvrTwoLevelBase.hlrz.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -976,7 +976,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hlrztm}"
+                        android:text="@{rsvrTwoLevelBase.hlrztm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -998,7 +998,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hmninq}"
+                        android:text="@{rsvrTwoLevelBase.hmninq.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -1020,7 +1020,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.hmninqtm}"
+                        android:text="@{rsvrTwoLevelBase.hmninqtm.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
                 <TableRow
@@ -1042,7 +1042,7 @@
                         android:layout_weight="1"
                         android:background="@color/white_bg_10531M"
                         android:gravity="center"
-                        android:text="@{rsvrTwoLevelBase.lwa}"
+                        android:text="@{rsvrTwoLevelBase.lwa.trim()}"
                         android:textSize="20sp" />
                 </TableRow>
 
