@@ -64,7 +64,7 @@ public class FloodSituationFragment extends Fragment {
     }
 
     final class MyViewPagerAdapter extends FragmentPagerAdapter {
-        public MyViewPagerAdapter(FragmentManager fm) {
+        MyViewPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

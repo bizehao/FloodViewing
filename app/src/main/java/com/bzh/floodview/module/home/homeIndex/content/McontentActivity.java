@@ -96,7 +96,7 @@ public class McontentActivity extends BaseActivity implements McontentContract.V
                 R.drawable.layout_divider_vertical));
 
         tabLayout.getTabAt(0).select();//过程线
-        textViewTitle.setText(MessageFormat.format("{0}柱状图", viceItemTitle));
+        textViewTitle.setText(MessageFormat.format("{0}过程线", viceItemTitle));
         //viceTextViewTitle.setText(viceItemTitle);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 

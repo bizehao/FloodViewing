@@ -56,9 +56,9 @@ public class ApiRsvrMapData {
         private String stcd;
         private long tm;
         private double rz;
-        private Object inq;
+        private double inq;
         private double w;
-        private Object otq;
+        private double otq;
 
         public String getStcd() {
             return stcd;
@@ -88,7 +88,7 @@ public class ApiRsvrMapData {
             return inq;
         }
 
-        public void setInq(Object inq) {
+        public void setInq(double inq) {
             this.inq = inq;
         }
 
@@ -104,7 +104,7 @@ public class ApiRsvrMapData {
             return otq;
         }
 
-        public void setOtq(Object otq) {
+        public void setOtq(double otq) {
             this.otq = otq;
         }
     }

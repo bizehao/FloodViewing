@@ -11,9 +11,9 @@ import timber.log.Timber;
 
 public class App extends DaggerApplication {
 
-    public static final String ip = "192.168.1.195:8090/";//172.26.220.193  192.168.31.75  192.168.1.196
+    public static final String ip = "222.128.66.136:5225/floodserver/";//172.26.220.193  192.168.31.75  192.168.1.196
 
-    public static final String socketIp = "192.168.1.195:8080/";//172.26.220.193  192.168.31.75  192.168.1.196
+    public static final String socketIp = "222.128.66.136:5302/";//172.26.220.193  192.168.31.75  192.168.1.196
 
     //用户
     private static User user;

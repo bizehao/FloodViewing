@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.core.TableConfig;
 import com.bin.david.form.data.CellInfo;
@@ -39,6 +40,7 @@ import com.bzh.floodview.model.floodsituation.Rsvr;
 import com.bzh.floodview.module.home.homeIndex.content.ContentActivity;
 import com.bzh.floodview.ui.widget.FreeNumberPicker;
 import com.bzh.floodview.utils.DataHolder;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -51,8 +53,6 @@ import java.util.Objects;
  */
 public class TabFloodOfRainFragment extends Fragment implements View.OnClickListener {
 
-    private LinearLayout mContentView;
-
     private View rootView;
     private SmartTable smartTable;
     private PageTableData tableData;
@@ -63,10 +63,8 @@ public class TabFloodOfRainFragment extends Fragment implements View.OnClickList
     private Button left, right;
     private TextView timeTextView;
     private String[] timeString;
-
-    public TabFloodOfRainFragment() {
-
-    }
+    private LinearLayout noDataLayout;
+    private LinearLayout dataLayout;
 
     public static Fragment newInstance(int sign) {
         Bundle bundle = new Bundle();
@@ -96,7 +94,14 @@ public class TabFloodOfRainFragment extends Fragment implements View.OnClickList
                     floodLimitRain = new FloodLimitRain(entry.getKey(), entry.getValue(), "");
                     floodLimitRains.add(floodLimitRain);
                 }
-                initsmartTable("汛情降雨", map, floodLimitRains, 1);
+                if (floodLimitRains.size() > 0) {
+                    dataLayout.setVisibility(View.VISIBLE);
+                    noDataLayout.setVisibility(View.GONE);
+                    initsmartTable("汛情降雨", map, floodLimitRains, 1);
+                } else {
+                    dataLayout.setVisibility(View.GONE);
+                    noDataLayout.setVisibility(View.VISIBLE);
+                }
                 break;
             case 1:
                 map = new LinkedHashMap<>();
@@ -107,7 +112,15 @@ public class TabFloodOfRainFragment extends Fragment implements View.OnClickList
                 map.put("警戒水位(m)", "wrz");
                 map.put("超警戒(m)", "cjjsw");
                 List<River> rivers = (List<River>) DataHolder.getInstance().retrieve("map2");
-                initsmartTable("汛情河道", map, rivers, 2);
+                if (rivers.size() > 0) {
+                    dataLayout.setVisibility(View.VISIBLE);
+                    noDataLayout.setVisibility(View.GONE);
+                    initsmartTable("汛情河道", map, rivers, 2);
+                } else {
+                    dataLayout.setVisibility(View.GONE);
+                    noDataLayout.setVisibility(View.VISIBLE);
+                }
+
                 break;
             case 2:
                 map = new LinkedHashMap<>();
@@ -118,7 +131,14 @@ public class TabFloodOfRainFragment extends Fragment implements View.OnClickList
                 map.put("汛限水位(m)", "fsltdz");
                 map.put("超汛限(m)", "cxxsw");
                 List<Rsvr> rsvrs = (List<Rsvr>) DataHolder.getInstance().retrieve("map3");
-                initsmartTable("汛情水库", map, rsvrs, 3);
+                if (rsvrs.size() > 0) {
+                    dataLayout.setVisibility(View.VISIBLE);
+                    noDataLayout.setVisibility(View.GONE);
+                    initsmartTable("汛情水库", map, rsvrs, 3);
+                } else {
+                    dataLayout.setVisibility(View.GONE);
+                    noDataLayout.setVisibility(View.VISIBLE);
+                }
                 break;
         }
         return rootView;
@@ -137,6 +157,8 @@ public class TabFloodOfRainFragment extends Fragment implements View.OnClickList
         timeTextView = getActivity().findViewById(R.id.show_time);
         String time = (String) timeTextView.getText();
         timeString = time.split("至");
+        noDataLayout = rootView.findViewById(R.id.not_datas);
+        dataLayout = rootView.findViewById(R.id.fragment_intentRainView);
     }
 
     @Override
@@ -240,7 +262,8 @@ public class TabFloodOfRainFragment extends Fragment implements View.OnClickList
                     nameColumn.setComparator(new Comparator<String>() {
                         @Override
                         public int compare(String s1, String s2) {
-                            int val = Integer.parseInt(s1) - Integer.parseInt(s2);;
+                            int val = Integer.parseInt(s1) - Integer.parseInt(s2);
+                            ;
                             return val;
                         }
                     });
@@ -343,7 +366,7 @@ public class TabFloodOfRainFragment extends Fragment implements View.OnClickList
                 return TableConfig.INVALID_COLOR;
             }
         });
-        if(list.size() > 0){
+        if (list.size() > 0) {
             tableData.setPageSize(7);
         }
         int settotalPage = tableData.getTotalPage();

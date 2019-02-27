@@ -10,6 +10,26 @@
         android:layout_height="match_parent" />-->
 
     <LinearLayout
+        android:id="@+id/not_datas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:src="@drawable/notdatas"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="暂无数据"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/fragment_intentRainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
