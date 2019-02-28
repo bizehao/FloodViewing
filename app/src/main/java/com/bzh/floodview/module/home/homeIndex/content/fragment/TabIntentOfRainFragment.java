@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.core.TableConfig;
 import com.bin.david.form.data.CellInfo;
@@ -41,9 +42,14 @@ import com.bzh.floodview.ui.widget.FreeNumberPicker;
 import com.bzh.floodview.utils.DataHolder;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -63,6 +69,8 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
     private TextView timeText;
     private String[] timeString;//时间
     List<IntensityOfRain> intentList;
+    private LinearLayout noDatasLayout; //无数据
+    private LinearLayout datasLayout; //有数据
 
     public TabIntentOfRainFragment() {
 
@@ -80,6 +88,7 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_tab, container, false);
+        initView();
         Bundle bundle = getArguments();
         assert bundle != null;
         int sign = bundle.getInt("sign");
@@ -87,8 +96,8 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
             case 1:
                 intentList = new ArrayList<>();
                 List<ApiRainStInfo.DataBean._$1hoursBean> list1 = (List<ApiRainStInfo.DataBean._$1hoursBean>) DataHolder.getInstance().retrieve("1hours");
-                if(list1 != null){
-                    for (ApiRainStInfo.DataBean._$1hoursBean hoursBean : list1){
+                if (list1 != null && list1.size() > 0) {
+                    for (ApiRainStInfo.DataBean._$1hoursBean hoursBean : list1) {
                         IntensityOfRain gg = new IntensityOfRain();
                         gg.setAdnm(hoursBean.getAdnm());
                         gg.setStcd(hoursBean.getStcd());
@@ -98,13 +107,16 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
                         gg.setTtt(hoursBean.getTtt());
                         intentList.add(gg);
                     }
+                } else {
+                    noDatasLayout.setVisibility(View.VISIBLE);
+                    datasLayout.setVisibility(View.GONE);
                 }
                 break;
             case 3:
                 intentList = new ArrayList<>();
                 List<ApiRainStInfo.DataBean._$3hoursBean> list3 = (List<ApiRainStInfo.DataBean._$3hoursBean>) DataHolder.getInstance().retrieve("3hours");
-                if(list3 != null){
-                    for (ApiRainStInfo.DataBean._$3hoursBean hoursBean : list3){
+                if (list3 != null && list3.size() > 0) {
+                    for (ApiRainStInfo.DataBean._$3hoursBean hoursBean : list3) {
                         IntensityOfRain gg = new IntensityOfRain();
                         gg.setAdnm(hoursBean.getAdnm());
                         gg.setStcd(hoursBean.getStcd());
@@ -114,13 +126,16 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
                         gg.setTtt(hoursBean.getTtt());
                         intentList.add(gg);
                     }
+                } else {
+                    noDatasLayout.setVisibility(View.VISIBLE);
+                    datasLayout.setVisibility(View.GONE);
                 }
                 break;
             case 6:
                 intentList = new ArrayList<>();
                 List<ApiRainStInfo.DataBean._$6hoursBean> list6 = (List<ApiRainStInfo.DataBean._$6hoursBean>) DataHolder.getInstance().retrieve("6hours");
-                if(list6 != null){
-                    for (ApiRainStInfo.DataBean._$6hoursBean hoursBean : list6){
+                if (list6 != null && list6.size() > 0) {
+                    for (ApiRainStInfo.DataBean._$6hoursBean hoursBean : list6) {
                         IntensityOfRain gg = new IntensityOfRain();
                         gg.setAdnm(hoursBean.getAdnm());
                         gg.setStcd(hoursBean.getStcd());
@@ -130,10 +145,10 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
                         gg.setTtt(hoursBean.getTtt());
                         intentList.add(gg);
                     }
+                } else {
+                    noDatasLayout.setVisibility(View.VISIBLE);
+                    datasLayout.setVisibility(View.GONE);
                 }
-                break;
-            default:
-                intentList = new ArrayList<>();
                 break;
         }
         Map<String, String> map = new LinkedHashMap<>();
@@ -142,7 +157,6 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
         map.put("雨量(mm)", "drp");
         map.put("时间", "ttt");
         map.put("政区", "adnm");
-        initView();
         String time = (String) timeText.getText();
         timeString = time.split("至");
         initsmartTable("雨强", map, intentList);
@@ -157,6 +171,8 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
         left = rootView.findViewById(R.id.fragment_intentRain_left);
         right = rootView.findViewById(R.id.fragment_intentRain_right);
         timeText = Objects.requireNonNull(getActivity()).findViewById(R.id.show_time);
+        noDatasLayout = rootView.findViewById(R.id.not_datas);
+        datasLayout = rootView.findViewById(R.id.fragment_intentRainView);
         fragment_intentRain_jump.setOnClickListener(this);
         left.setOnClickListener(this);
         right.setOnClickListener(this);
@@ -283,10 +299,18 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
                     intent.putExtra("address1", property.Route + "rainInfo/rainIntensity_one");
                     intent.putExtra("address2", property.Route + "rainInfo/rain_detailed");
                     intent.putExtra("start_time", timeString[0]);
-                    intent.putExtra("end_time", timeString[1]);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                    Date date = format.parse(timeString[0]);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(date);
+                    calendar.add(Calendar.DATE,1);
+                    String endTm = format.format(calendar.getTime());
+                    intent.putExtra("end_time", endTm);
                     startActivity(intent);
                     //getActivity().finish();
                 } catch (NoSuchFieldException | IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
@@ -302,7 +326,7 @@ public class TabIntentOfRainFragment extends Fragment implements View.OnClickLis
                 return TableConfig.INVALID_COLOR;
             }
         });
-        if(list.size() > 0){
+        if (list.size() > 0) {
             tableData.setPageSize(7);
         }
 

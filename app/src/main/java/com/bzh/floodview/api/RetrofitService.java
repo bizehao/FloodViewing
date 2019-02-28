@@ -97,7 +97,7 @@ public interface RetrofitService {
 
     //雨强信息
     @GET("rainInfo/rainIntensity_all")
-    Observable<ApiRainStInfo> getIntensityOfRainInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
+    Observable<ApiRainStInfo> getIntensityOfRainInfo(@Query("stm") String stm,@Query("addvcd") String adcd);
 
     //河道信息
     @GET("waterInfo/river_all")

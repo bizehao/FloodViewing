@@ -69,6 +69,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 public class MapFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener, OnGetDistricSearchResultListener, MKOfflineMapListener {
@@ -183,6 +184,24 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
 
         mViewPager.setAdapter(new MyFragmentAdapter(getChildFragmentManager(), fragmentList, titleList));
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() { //选项卡滚动切换监听
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(mSlidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED){
+                    mSlidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         mSlidingUpPanelLayout.setScrollableViewHelper(new RecyclerViewHelper());//拖动面板的嵌套recyclerview处理
         setTime(); //设置默认时间
 

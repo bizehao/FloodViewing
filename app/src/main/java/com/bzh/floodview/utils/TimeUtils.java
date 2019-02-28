@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 时间工具
@@ -44,16 +45,19 @@ public class TimeUtils {
         int s= (int) (time%60);//秒
         int m= (int) (time/60);//分
         int h=(int) (time/3600);//秒
-        return String.format("%02d:%02d:%02d",h,m,s);
+        return String.format(Locale.CHINA,"%02d:%02d:%02d",h,m,s);
     }
 
-    public static String fromDataTime(String dataTime)  {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date date = null;
+    public static String fromDataTime(String dataTime,String format)  {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, Locale.CHINA);
+        Date date;
         try {
             date = simpleDateFormat.parse(dataTime);
             Calendar t = Calendar.getInstance();
             t.setTime(date);
+            if (format.equals("yyyy-MM-dd")){
+                return t.get(Calendar.YEAR)+"年"+(t.get(Calendar.MONTH)+1)+"月"+t.get(Calendar.DATE)+"日";
+            }
             return t.get(Calendar.YEAR)+"年"+(t.get(Calendar.MONTH)+1)+"月"+t.get(Calendar.DATE)+"日"
                     +t.get(Calendar.HOUR_OF_DAY)+"时"+t.get(Calendar.MINUTE)+"分";
         } catch (ParseException e) {

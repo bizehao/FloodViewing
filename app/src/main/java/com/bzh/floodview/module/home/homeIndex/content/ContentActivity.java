@@ -76,6 +76,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -172,28 +173,39 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
             start_time = intent.getStringExtra("startTime");
             end_time = intent.getStringExtra("endTime");
             timeText.setText(String.format("%s至%s", start_time, end_time));
-            date_begin.setText(TimeUtils.fromDataTime(start_time));
-            date_end.setText(TimeUtils.fromDataTime(end_time));
+            date_begin.setText(TimeUtils.fromDataTime(start_time, "yyyy-MM-dd HH:mm"));
+            date_end.setText(TimeUtils.fromDataTime(end_time, "yyyy-MM-dd HH:mm"));
             displayTable(start_time, end_time, null);
         } else {
-            Calendar now = Calendar.getInstance();
-            Date date = new Date();
-            now.setTime(date);
-            now.set(Calendar.MINUTE, 0);
-            int hour = now.get(Calendar.HOUR_OF_DAY);
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            end_time = sdf.format(date);
-            if (hour < 8) {
-                now.add(Calendar.DATE, -1);
+            if (title.equals("雨强信息")) {
+                Calendar now = Calendar.getInstance();
+                Date date = new Date();
+                now.setTime(date);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+                start_time = sdf.format(now.getTime());
+                timeText.setText(String.format(start_time));
+                date_begin.setText(TimeUtils.fromDataTime(start_time, "yyyy-MM-dd"));
+                displayTable(start_time, null, null);
+            } else {
+                Calendar now = Calendar.getInstance();
+                Date date = new Date();
+                now.setTime(date);
+                now.set(Calendar.MINUTE, 0);
+                int hour = now.get(Calendar.HOUR_OF_DAY);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                end_time = sdf.format(date);
+                if (hour < 8) {
+                    now.add(Calendar.DATE, -1);
+                }
+                now.set(Calendar.HOUR_OF_DAY, 8);
+                now.set(Calendar.MINUTE, 0);
+                Date str_date = now.getTime();
+                start_time = sdf.format(str_date);
+                timeText.setText(String.format("%s至%s", start_time, end_time));
+                date_begin.setText(TimeUtils.fromDataTime(start_time, "yyyy-MM-dd HH:mm"));
+                date_end.setText(TimeUtils.fromDataTime(end_time, "yyyy-MM-dd HH:mm"));
+                displayTable(start_time, end_time, null);
             }
-            now.set(Calendar.HOUR_OF_DAY, 8);
-            now.set(Calendar.MINUTE, 0);
-            Date str_date = now.getTime();
-            start_time = sdf.format(str_date);
-            timeText.setText(String.format("%s至%s", start_time, end_time));
-            date_begin.setText(TimeUtils.fromDataTime(start_time));
-            date_end.setText(TimeUtils.fromDataTime(end_time));
-            displayTable(start_time, end_time, null);
         }
     }
 
@@ -242,6 +254,10 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                     now.get(Calendar.SECOND),
                     true
             );
+        }
+        if (title.equals("雨强信息")) {
+            date_begin.setText(date);
+            return;
         }
         tpd.setAccentColor(Color.parseColor("#0195ff"));
         tpd.show(getFragmentManager(), "Timepickerdialog");
@@ -337,15 +353,15 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
                 secondLevelSelectAddress2 = property.Route + "rainInfo/rain_detailed";
                 break;
             case "雨强信息":
-                mPresent.getIntensityOfRainInfo(start_time, end_time,adcd);
+                mPresent.getIntensityOfRainInfo(start_time, end_time, adcd);
                 break;
             case "河道站":
-                mPresent.getRiverInfo(start_time, end_time,adcd);
+                mPresent.getRiverInfo(start_time, end_time, adcd);
                 secondLevelSelectAddress1 = property.Route + "waterInfo/river_one";
                 secondLevelSelectAddress2 = property.Route + "waterInfo/river_detailed";
                 break;
             case "水库站":
-                mPresent.getRsvrInfo(start_time, end_time, handler,adcd);
+                mPresent.getRsvrInfo(start_time, end_time, handler, adcd);
                 secondLevelSelectAddress1 = property.Route + "waterInfo/reservoir_one";
                 secondLevelSelectAddress2 = property.Route + "waterInfo/reservoir_detailed";
                 break;
@@ -445,6 +461,10 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         // 为Spinner设置Adapter
         spinner.setAdapter(adapter);
 
+        if (title.equals("雨强信息")) { //雨强信息查询只有一个时间
+            contentView.findViewById(R.id.end_time_layout).setVisibility(View.GONE);
+        }
+
     }
 
     public void initParams() {
@@ -457,33 +477,40 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
         String dateEnd = date_end.getText().toString();
         if (dateBegin.equals("") && dateEnd.equals("")) {
             showContent = "请选择时间"; //暂时
+            showToast(showContent);
             //initDisplayOpinion();
             //displayTable();
             //mPopWindow.dismiss();
         } else {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分");
+            SimpleDateFormat sdf;
+            if (title.equals("雨强信息")) {
+                sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+            } else {
+                sdf = new SimpleDateFormat("yyyy年MM月dd日HH时mm分", Locale.CHINA);
+            }
             try {
-                Date date1 = sdf.parse(dateBegin);
-                Date date2 = sdf.parse(dateEnd);
+
+                Date date1 = dateBegin.equals("") ? new Date() : sdf.parse(dateBegin);
+                Date date2 = dateEnd.equals("") ? new Date() : sdf.parse(dateEnd);
                 if (date1.getTime() < date2.getTime()) {
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(date1);
-                    calendar.add(Calendar.DATE,3);
-                    if(title.equals("雨强信息") && calendar.getTime().getTime() < date2.getTime()){
-                        showContent = "雨强查询的时间限定为3天以内";
-                        showToast(showContent);
-                        return;
-                    }
+                    calendar.add(Calendar.DATE, 3);
                     start_time = Tools.handleTime(date1);
                     end_time = Tools.handleTime(date2);
-                    timeText.setText(String.format("%s至%s", start_time, end_time));
+                    if (title.equals("雨强信息")) {
+                        timeText.setText(start_time);
+                    } else {
+                        timeText.setText(String.format("%s至%s", start_time, end_time));
+
+                    }
                     StringBuilder zhanhao = new StringBuilder();
                     for (int i = 0; i < areaList.size(); i++) {
                         if (areaList.get(i).isAreaState()) {
                             zhanhao.append(areaList.get(i).getAreaId()).append(",");
                         }
                     }
-                    System.out.println(zhanhao);
+                    Timber.e(zhanhao.toString());
                     displayTable(start_time, end_time, zhanhao.toString());
                     mPopWindow.dismiss();
                 } else {
@@ -730,9 +757,10 @@ public class ContentActivity extends BaseActivity implements DatePickerDialog.On
     //雨强表格设置
     @Override
     public void setRainStTable(ApiRainStInfo.DataBean apiRainSsInfo) {
+
         if (apiRainSsInfo.get_$1hours() != null && apiRainSsInfo.get_$1hours().size() > 0
-                && apiRainSsInfo.get_$3hours() != null && apiRainSsInfo.get_$3hours().size() > 0
-                && apiRainSsInfo.get_$6hours() != null && apiRainSsInfo.get_$6hours().size() > 0) {
+                || apiRainSsInfo.get_$3hours() != null && apiRainSsInfo.get_$3hours().size() > 0
+                || apiRainSsInfo.get_$6hours() != null && apiRainSsInfo.get_$6hours().size() > 0) {
 
             if (notDatas.getVisibility() == View.VISIBLE) {
                 notDatas.setVisibility(View.GONE);

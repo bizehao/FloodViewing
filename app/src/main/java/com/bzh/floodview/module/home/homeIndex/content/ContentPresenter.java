@@ -41,6 +41,7 @@ import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import timber.log.Timber;
 
 public class ContentPresenter implements ContentContract.Present {
 
@@ -185,11 +186,12 @@ public class ContentPresenter implements ContentContract.Present {
     //雨强信息
     @Override
     public void getIntensityOfRainInfo(String start_time, String end_time, String adcd) {
-        Observable<ApiRainStInfo> observable = retrofitHelper.getServer().getIntensityOfRainInfo(start_time, end_time, adcd);
+        Observable<ApiRainStInfo> observable = retrofitHelper.getServer().getIntensityOfRainInfo(start_time, adcd);
         retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
             @Override
             public <T> void run(T t) {
                 ApiRainStInfo rainInfos = (ApiRainStInfo) t;
+                Timber.e(rainInfos.toString());
                 mView.setRainStTable(rainInfos.getData());
             }
         });

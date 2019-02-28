@@ -10,13 +10,12 @@
         android:id="@+id/dc_input_group"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
             android:orientation="horizontal">
 
             <TextView
@@ -38,13 +37,13 @@
                 android:background="#ffffff"
                 android:gravity="center"
                 android:textColor="#040000"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/end_time_layout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
@@ -67,13 +66,12 @@
                 android:background="#ffffff"
                 android:gravity="center"
                 android:textColor="#040000"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
@@ -104,15 +102,8 @@
         android:id="@+id/cancel"
         android:layout_width="80dp"
         android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="68dp"
-        android:layout_marginTop="160dp"
-        android:topLeftRadius="8dip"
-        android:topRightRadius="8dip"
-        android:bottomLeftRadius="8dip"
-        android:bottomRightRadius="8dip"
-        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/dc_input_group"
+        android:layout_marginTop="10dp"
         android:text="取消"
         android:background="@drawable/bt_shape"
         android:textColor="#040000"

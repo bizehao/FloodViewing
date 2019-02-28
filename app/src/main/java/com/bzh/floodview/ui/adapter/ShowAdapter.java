@@ -73,8 +73,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
                 String name = submenu.getItemName();
                 int sign = submenu.getSign();
                 LinkedHashMap<String,Integer> subMap = submenu.getSubMap();
-                Intent intent = null;
-                Log.e(TAG, "onClick: -*-*-*-*-*-*-*-*-*-"+name );
+                Intent intent;
                 switch (sign){
                     case 1:
                         intent = new Intent(mContext, ContentActivity.class);

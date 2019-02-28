@@ -162,6 +162,19 @@ public class ApiRainStInfo {
             public void setTtt(String ttt) {
                 this.ttt = ttt;
             }
+
+            @Override
+            public String toString() {
+                return "_$1hoursBean{" +
+                        "stcd='" + stcd + '\'' +
+                        ", stnm='" + stnm + '\'' +
+                        ", tm='" + tm + '\'' +
+                        ", drp='" + drp + '\'' +
+                        ", adcd='" + adcd + '\'' +
+                        ", adnm='" + adnm + '\'' +
+                        ", ttt='" + ttt + '\'' +
+                        '}';
+            }
         }
 
         public static class _$3hoursBean {
@@ -237,6 +250,19 @@ public class ApiRainStInfo {
 
             public void setTtt(String ttt) {
                 this.ttt = ttt;
+            }
+
+            @Override
+            public String toString() {
+                return "_$3hoursBean{" +
+                        "stcd='" + stcd + '\'' +
+                        ", stnm='" + stnm + '\'' +
+                        ", tm='" + tm + '\'' +
+                        ", drp='" + drp + '\'' +
+                        ", adcd='" + adcd + '\'' +
+                        ", adnm='" + adnm + '\'' +
+                        ", ttt='" + ttt + '\'' +
+                        '}';
             }
         }
 
@@ -314,6 +340,38 @@ public class ApiRainStInfo {
             public void setTtt(String ttt) {
                 this.ttt = ttt;
             }
+
+            @Override
+            public String toString() {
+                return "_$6hoursBean{" +
+                        "stcd='" + stcd + '\'' +
+                        ", stnm='" + stnm + '\'' +
+                        ", tm='" + tm + '\'' +
+                        ", drp='" + drp + '\'' +
+                        ", adcd='" + adcd + '\'' +
+                        ", adnm='" + adnm + '\'' +
+                        ", ttt='" + ttt + '\'' +
+                        '}';
+            }
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "_$1hours=" + _$1hours +
+                    ", _$3hours=" + _$3hours +
+                    ", _$6hours=" + _$6hours +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ApiRainStInfo{" +
+                "state=" + state +
+                ", message=" + message +
+                ", data=" + data +
+                ", subscripttime='" + subscripttime + '\'' +
+                '}';
     }
 }
