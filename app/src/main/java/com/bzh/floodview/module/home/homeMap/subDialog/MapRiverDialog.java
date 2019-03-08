@@ -78,11 +78,16 @@ public class MapRiverDialog extends BaseDialogFragment {
         String stlc = bundle.getString("stlc");
         String startTM = bundle.getString("startTM");
         String endTM = bundle.getString("endTM");
+        Timber.e("时间");
+        Timber.e(startTM);
+        Timber.e(endTM);
         Observable<BaseApi<ApiRiverMapData>> observable = mRetrofitHelper.getServer().getStateRiver(stcd, startTM, endTM);
         mRetrofitHelper.requestHandler(observable,getActivity(), new RetrofitHelper.callHandler<BaseApi<ApiRiverMapData>>() {
             @Override
             public void run(BaseApi<ApiRiverMapData> apiRiverMapDataBaseApi) {
                 ApiRiverMapData data = apiRiverMapDataBaseApi.getData();
+                Timber.e("数据显示");
+                Timber.e(data.toString());
                 tx_stnm.setText(title);
                 tx_address.setText(stlc);
                 if(data.getRiver() != null){
@@ -104,8 +109,8 @@ public class MapRiverDialog extends BaseDialogFragment {
                     float valQ;
                     float valZ;
                     for (int i = 0; i < data.getRivertimeList().size(); i++) {
-                        valQ = Float.valueOf(data.getRivertimeList().get(i).getQ());
-                        valZ = Float.valueOf(data.getRivertimeList().get(i).getZr());
+                        valQ = (float) data.getRivertimeList().get(i).getQ();
+                        valZ = (float)data.getRivertimeList().get(i).getZr();
                         yValues.add(valQ);
                         zValues.add(valZ);
                     }

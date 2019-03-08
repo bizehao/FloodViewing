@@ -26,6 +26,7 @@ import android.widget.Button;
 
 import com.bzh.floodview.module.home.homeIndex.content.ContentContract;
 import com.bzh.floodview.utils.chart.LineChartMarkView;
+import com.github.mikephil.charting.components.YAxis;
 import com.rey.material.widget.CheckBox;
 
 import android.widget.CompoundButton;
@@ -296,12 +297,8 @@ public class LeftFragment extends Fragment implements View.OnClickListener, Date
                         //设置曲线填充色 以及 MarkerView
                         Drawable drawable = getResources().getDrawable(R.drawable.fade_blue, null);
                         lineChartManager.setChartFillDrawable(drawable);
-                        lineChartManager.setMarkerView(getActivity(), new LineChartMarkView.LineValHandler() {
-                            @Override
-                            public String setXVal(int index) {
-                                return riverTwoLevels.get(index).getTtt();
-                            }
-                        });
+                        lineChartManager.setMarkerView(getActivity(), index -> riverTwoLevels.get(index).getTtt());
+
                     }
                     if (address.equals(Route + "waterInfo/reservoir_one")) { //水库
                         Tools.setViewInVisible(jingjie);

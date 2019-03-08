@@ -11,21 +11,18 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
-
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by loptop on 2017/6/2.
@@ -176,11 +173,15 @@ public class LineChartManager {
      */
     public void showMultiNormalLineChart(List<String> xAxisValues,List<List<Float>> yDataList, List<String> lineNames, List<Integer> colors) {
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        List<Entry> entries;
+        float min = 0;
         for (int i = 0; i < yDataList.size(); i++) {
-            ArrayList<Entry> entries = new ArrayList<>();
-
+            entries = new ArrayList<>();
             for (int j = 0; j < yDataList.get(i).size(); j++) {
                 entries.add(new Entry(j, yDataList.get(i).get(j)));
+                if( yDataList.get(i).get(j) < min){
+                    min = yDataList.get(i).get(j);
+                }
             }
             LineDataSet lineDataSet = new LineDataSet(entries, lineNames.get(i));
             initLineDataSet(lineDataSet, colors.get(i), LineDataSet.Mode.CUBIC_BEZIER);
@@ -189,13 +190,21 @@ public class LineChartManager {
         LineData lineData = new LineData(dataSets);
         //设置X轴的刻度数
         xAxis.setLabelCount(xAxisValues.size() - 1, false);
-        xAxis.setValueFormatter(new IAxisValueFormatter() { //x轴自定义
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return xAxisValues.get((int) value % xAxisValues.size());
-            }
-        });
+        //x轴自定义
+        xAxis.setValueFormatter((value, axis) -> xAxisValues.get((int) value % xAxisValues.size()));
         xAxis.setLabelCount(6,false);
+
+        /*final float min[] = {entries.get(0).getY()};
+        leftYAxis.setValueFormatter((value, axis) -> {
+            if(value < min[0]){
+                min[0] = value;
+            }
+            return String.format(Locale.ENGLISH,"%1.1f", value);//((int) (value * 100)) + "%"
+        });*/
+
+
+        leftYAxis.setAxisMinimum(min==0?0:min-0.5f);
+
         lineChart.setData(lineData);
     }
 
@@ -433,20 +442,22 @@ public class LineChartManager {
             }
         });
 
-        leftYAxis.setLabelCount(8);
+        //leftYAxis.setLabelCount(20);
         //leftYAxis.setDrawScale(true);
         leftYAxis.setDrawZeroLine(true); // draw a zero line
         leftYAxis.setZeroLineColor(Color.GRAY);
         leftYAxis.setZeroLineWidth(1f);
         leftYAxis.setAxisLineWidth(1f);
         leftYAxis.setAxisLineColor(Color.GRAY);
-        leftYAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return String.valueOf(value);//((int) (value * 100)) + "%"
-            }
-        });
 
+        final float min[] = {entries.get(0).getY()};
+        leftYAxis.setValueFormatter((value, axis) -> {
+            if(value < min[0]){
+                min[0] = value;
+            }
+            return String.format(Locale.ENGLISH,"%1.1f", value);//((int) (value * 100)) + "%"
+        });
+        leftYAxis.setAxisMinimum(min[0]==0?0:min[0]-0.5f);
         // 每一个LineDataSet代表一条线
         LineDataSet lineDataSet = new LineDataSet(entries, name);
         //LINEAR 折线图  CUBIC_BEZIER 圆滑曲线
@@ -560,5 +571,9 @@ public class LineChartManager {
         mv.setLineValHandler(lineValHandler);
         lineChart.setMarker(mv);
         lineChart.invalidate();
+    }
+
+    public YAxis getLeftYAxis() {
+        return leftYAxis;
     }
 }

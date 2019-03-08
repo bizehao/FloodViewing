@@ -44,9 +44,9 @@ public class ApiRiverMapData {
 
         private String stcd;
         private double z;
-        private int q;
-        private int chaochu;
-        private int wrz;
+        private double q;
+        private double chaochu;
+        private double wrz;
         private long ymdhm;
 
         public String getStcd() {
@@ -65,27 +65,27 @@ public class ApiRiverMapData {
             this.z = z;
         }
 
-        public int getQ() {
+        public double getQ() {
             return q;
         }
 
-        public void setQ(int q) {
+        public void setQ(double q) {
             this.q = q;
         }
 
-        public int getChaochu() {
+        public double getChaochu() {
             return chaochu;
         }
 
-        public void setChaochu(int chaochu) {
+        public void setChaochu(double chaochu) {
             this.chaochu = chaochu;
         }
 
-        public int getWrz() {
+        public double getWrz() {
             return wrz;
         }
 
-        public void setWrz(int wrz) {
+        public void setWrz(double wrz) {
             this.wrz = wrz;
         }
 
@@ -121,8 +121,8 @@ public class ApiRiverMapData {
          */
 
         private long ymdhm; //时间
-        private String q;//流量
-        private String zr;//水位值
+        private double q;//流量
+        private double zr;//水位值
         private String subscripttime;//统计图时间
 
         public String getSubscripttime() {
@@ -141,19 +141,19 @@ public class ApiRiverMapData {
             this.ymdhm = ymdhm;
         }
 
-        public String getQ() {
+        public double getQ() {
             return q;
         }
 
-        public void setQ(String q) {
+        public void setQ(double q) {
             this.q = q;
         }
 
-        public String getZr() {
+        public double getZr() {
             return zr;
         }
 
-        public void setZr(String zr) {
+        public void setZr(double zr) {
             this.zr = zr;
         }
 
