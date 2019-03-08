@@ -450,14 +450,18 @@ public class LineChartManager {
         leftYAxis.setAxisLineWidth(1f);
         leftYAxis.setAxisLineColor(Color.GRAY);
 
-        final float min[] = {entries.get(0).getY()};
+        final float min[] = {entries.get(0).getY(),entries.get(0).getY()};
         leftYAxis.setValueFormatter((value, axis) -> {
             if(value < min[0]){
                 min[0] = value;
             }
+            if(value > min[1]){
+                min[1] = value;
+            }
             return String.format(Locale.ENGLISH,"%1.1f", value);//((int) (value * 100)) + "%"
         });
-        leftYAxis.setAxisMinimum(min[0]==0?0:min[0]-0.5f);
+        leftYAxis.setAxisMinimum(min[0]-2f);
+        leftYAxis.setAxisMaximum(min[1]+2f);
         // 每一个LineDataSet代表一条线
         LineDataSet lineDataSet = new LineDataSet(entries, name);
         //LINEAR 折线图  CUBIC_BEZIER 圆滑曲线
