@@ -13,6 +13,8 @@ import com.bzh.floodview.R;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * @author 毕泽浩
  * @Description:
@@ -54,6 +56,7 @@ public class SubMapAdapter<T> extends RecyclerView.Adapter<SubMapAdapter<T>.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        Timber.e("展示 "+viewHolder);
         if (adapterRun != null) {
             adapterRun.run(i, viewHolder);
         }
