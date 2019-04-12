@@ -36,10 +36,19 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
+                    <CheckBox
+                        android:id="@+id/currentSiteBox"
+                        android:checked="true"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="2dp"
+                        />
+
+                    <!---->
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="2dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/now_location" />
 
@@ -57,6 +66,13 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
+                    <CheckBox
+                        android:id="@+id/rainfallStationBox"
+                        android:checked="true"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="2dp"
+                        />
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
@@ -76,6 +92,14 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/riverStationBox"
+                        android:checked="true"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="2dp"
+                        />
 
                     <ImageView
                         android:layout_width="25dp"
@@ -104,6 +128,13 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/reservoirSiteBox"
+                        android:checked="true"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="2dp"
+                        />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -125,6 +156,13 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/unknownSiteBox"
+                        android:checked="true"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="2dp"
+                        />
 
                     <ImageView
                         android:layout_width="20dp"
@@ -145,8 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="horizontal">
-                </LinearLayout>
+                    android:orientation="horizontal"></LinearLayout>
 
             </LinearLayout>
 
