@@ -10,6 +10,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -135,6 +137,8 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
     private Marker oldMarker; //上一个站点
     private BitmapDescriptor oldBitmapDescriptor; //上一个站点图表
 
+    List<OverlayOptions> options;
+
     //构建Marker图标
     BitmapDescriptor bitmapRain = BitmapDescriptorFactory.fromResource(R.drawable.rain_sign);
     BitmapDescriptor bitmapRiver = BitmapDescriptorFactory.fromResource(R.drawable.river_sign);
@@ -148,6 +152,33 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
 
     boolean bigOrSmall = false; //大还是小  true=大  false=小
 
+    @BindView(R.id.currentSiteBox)
+    CheckBox currentSiteBox;
+
+    @BindView(R.id.rainfallStationBox)
+    CheckBox rainfallStationBox;
+
+    @BindView(R.id.riverStationBox)
+    CheckBox riverStationBox;
+
+    @BindView(R.id.reservoirSiteBox)
+    CheckBox reservoirSiteBox;
+
+    @BindView(R.id.unknownSiteBox)
+    CheckBox unknownSiteBox;
+
+    Map<String, List<OverlayOptions>> mapForOptions = new HashMap<>();
+
+    private void change(String stationSign) {
+        if (mapForOptions.containsKey(stationSign)) {
+            List<OverlayOptions> list = mapForOptions.get(stationSign);
+            for (OverlayOptions option : list) {
+                System.out.println("=============");
+                ((MarkerOptions) option).visible(false);
+            }
+        }
+    }
+
     @Inject
     public MapFragment() {
     }
@@ -160,7 +191,6 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void initView(Bundle savedInstanceState) {
-
         mLoadingView.setVisibility(View.VISIBLE);
         mMapView.setVisibility(View.GONE);
         mDistrictSearch = DistrictSearch.newInstance();
@@ -188,7 +218,7 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() { //选项卡滚动切换监听
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(mSlidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED){
+                if (mSlidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED) {
                     mSlidingUpPanelLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
                 }
             }
@@ -258,22 +288,22 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                 String sttp = marker.getExtraInfo().getString("sttp");
                 switch (sttp) {
                     case "PP":
-                        if(marker.getIcon() != bitmapRain){
+                        if (marker.getIcon() != bitmapRain) {
                             marker.setIcon(bitmapRain);
                         }
                         break;
                     case "ZZ":
-                        if(marker.getIcon() != bitmapRiver){
+                        if (marker.getIcon() != bitmapRiver) {
                             marker.setIcon(bitmapRiver);
                         }
                         break;
                     case "RR":
-                        if(marker.getIcon() != bitmapRsvr){
+                        if (marker.getIcon() != bitmapRsvr) {
                             marker.setIcon(bitmapRsvr);
                         }
                         break;
                     default:
-                        if(marker.getIcon() != bitmapOther){
+                        if (marker.getIcon() != bitmapOther) {
                             marker.setIcon(bitmapOther);
                         }
                         break;
@@ -362,6 +392,17 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                             }
                         }
                     }
+                }
+            }
+        });
+
+        rainfallStationBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked){
+                    change("PP");
+                }else{
+                    System.out.println("应该让它显示");
                 }
             }
         });
@@ -528,7 +569,7 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                 }
             }
             if (beans != null) {
-                List<OverlayOptions> options = new ArrayList<>();
+                options = new ArrayList<>();
 
                 for (ApiStcd.DataBean dataBean : beans) {
                     if (dataBean.getLgtd() != null && dataBean.getLttd() != null) {
@@ -542,25 +583,49 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                         //构建MarkerOption，用于在地图上添加Marker
                         OverlayOptions option = new MarkerOptions()
                                 .position(point).title(dataBean.getStnm()).extraInfo(bundle);
+                        List<OverlayOptions> listOverlayOptions = null;
                         switch (dataBean.getSttp()) {
                             case "PP":
+                                if (!mapForOptions.containsKey("PP")) {
+                                    listOverlayOptions = new ArrayList<>();
+                                    mapForOptions.put("PP", listOverlayOptions);
+                                }
+                                listOverlayOptions = mapForOptions.get("PP");
                                 ((MarkerOptions) option).icon(bitmapRain);
                                 break;
                             case "ZZ":
+                                if (!mapForOptions.containsKey("ZZ")) {
+                                    listOverlayOptions = new ArrayList<>();
+                                    mapForOptions.put("ZZ", listOverlayOptions);
+                                }
+                                listOverlayOptions = mapForOptions.get("ZZ");
                                 ((MarkerOptions) option).icon(bitmapRiver);
                                 break;
                             case "RR":
+                                if (!mapForOptions.containsKey("RR")) {
+                                    listOverlayOptions = new ArrayList<>();
+                                    mapForOptions.put("RR", listOverlayOptions);
+                                }
+                                listOverlayOptions = mapForOptions.get("RR");
                                 ((MarkerOptions) option).icon(bitmapRsvr);
                                 break;
                             default:
+                                if (!mapForOptions.containsKey("EE")) {
+                                    listOverlayOptions = new ArrayList<>();
+                                    mapForOptions.put("EE", listOverlayOptions);
+                                }
+                                listOverlayOptions = mapForOptions.get("EE");
                                 ((MarkerOptions) option).icon(bitmapOther);
                                 break;
                         }
+                        listOverlayOptions.add(option);
                         options.add(option);
+
                     }
                 }
                 //在地图上添加Marker，并显示
                 List<Overlay> addOverlays = mBaiduMap.addOverlays(options);
+
 
                 for (Overlay overlay : addOverlays) {
                     overlayMap.put(overlay.getExtraInfo().getString("stcd"), ((Marker) overlay));
