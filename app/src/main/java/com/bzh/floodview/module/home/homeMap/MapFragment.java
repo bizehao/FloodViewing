@@ -402,10 +402,13 @@ public class MapFragment extends BaseFragment implements DatePickerDialog.OnDate
                 if(!isChecked){
                     change("PP");
                 }else{
-                    System.out.println("应该让它显示");
+                    bitmapRain = BitmapDescriptorFactory.fromResource(R.drawable.rain_sign);
+                    bitmapRainBig = BitmapDescriptorFactory.fromResource(R.drawable.rain_sign_big);
                 }
             }
         });
+
+
 
     }
 
