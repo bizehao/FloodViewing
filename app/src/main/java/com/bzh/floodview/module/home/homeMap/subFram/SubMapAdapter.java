@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bzh.floodview.R;
-
 import java.util.List;
 
 import timber.log.Timber;
@@ -56,7 +54,6 @@ public class SubMapAdapter<T> extends RecyclerView.Adapter<SubMapAdapter<T>.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Timber.e("展示 "+viewHolder);
         if (adapterRun != null) {
             adapterRun.run(i, viewHolder);
         }

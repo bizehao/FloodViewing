@@ -65,8 +65,6 @@ public class LineChartMarkView<T> extends MarkerView {
             Highlight high = highlights[0];
             Timber.e(high.toString());
             float mm = high.getX();
-            Timber.e("显示"+e.getX());
-            Timber.e("展示"+mm);
             //tvDate.setText(xAxisValueFormatter.getFormattedValue(e.getX(), null));//e.getX()
             tvDate.setText("时间:"+mLineValHandler.setXVal((int) mm));//e.getX()
         }
