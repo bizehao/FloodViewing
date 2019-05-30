@@ -15,8 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bzh.floodview.R;
-import com.bzh.floodview.ui.dialog.CustomDiaFrag;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

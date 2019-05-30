@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/chatkit/chatkit.iml" filepath="$PROJECT_DIR$/chatkit/chatkit.iml" />
       <module fileurl="file://$PROJECT_DIR$/compilerLib/compilerLib.iml" filepath="$PROJECT_DIR$/compilerLib/compilerLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/sofialibrary/sofialibrary.iml" filepath="$PROJECT_DIR$/sofialibrary/sofialibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/widgets/widgets.iml" filepath="$PROJECT_DIR$/widgets/widgets.iml" />
     </modules>
   </component>
 </project>

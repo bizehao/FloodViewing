@@ -15,7 +15,6 @@
  */
 
 package com.bzh.compilerlib.badge;
-
 import com.bzh.annotationlib.badge.BGABadge;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.ClassName;
@@ -23,13 +22,11 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;

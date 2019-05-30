@@ -74,17 +74,11 @@ public class CustomDiaFrag extends DialogFragment {
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(params);
 
-        tvComfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "确定", Toast.LENGTH_SHORT).show();
-            }
-        });
-        tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "取消", Toast.LENGTH_SHORT).show();
-                onDestroyView();
+        tvComfirm.setOnClickListener(v -> Toast.makeText(getActivity(), "确定", Toast.LENGTH_SHORT).show());
+        tvCancel.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "取消", Toast.LENGTH_SHORT).show();
+            if(!this.isRemoving()){
+                this.dismiss();
             }
         });
         return view;

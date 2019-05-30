@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -52,6 +53,7 @@ import com.bzh.floodview.module.home.homeIndex.IndexFragment;
 import com.bzh.floodview.module.home.homeMap.MapFragment;
 import com.bzh.floodview.module.home.homeChat.TalkFragment;
 import com.bzh.floodview.module.home.homeChat.talk.talkFriends.FriendsActivity;
+import com.bzh.floodview.module.setting.StationActivity;
 import com.bzh.floodview.sideslip.AboutusActivity;
 import com.bzh.floodview.sideslip.FeedbackActivity;
 import com.bzh.floodview.utils.AppManager;
@@ -139,6 +141,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
 
     private static final String TAG = "HomeActivity";
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView(Bundle savedInstanceState) {
         setSupportActionBar(mToolbar);
@@ -164,25 +167,25 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         //fragments[2] = talkFragment;
         //侧滑菜单 menu
         //mNavigationView.setCheckedItem(R.id.nav_login);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Intent instant;
-                switch (menuItem.getItemId()) {
-                    case R.id.nav_feedback_feedback:
-                        startActivity(new Intent(HomeActivity.this, FeedbackActivity.class));
-                        break;
-                    case R.id.nav_adout_me:
-                        startActivity(new Intent(HomeActivity.this, AboutusActivity.class));
-                        break;
-                    case R.id.nav_sign_out:
-                        AppManager.getAppManager().finishAllActivity();
-                        System.exit(0);
-                        break;
-                }
-                mDrawerLayout.closeDrawers();
-                return true;
+        mNavigationView.setNavigationItemSelectedListener(menuItem -> {
+            Intent instant;
+            switch (menuItem.getItemId()) {
+                case R.id.nav_my_stations:
+                    startActivity(new Intent(HomeActivity.this, StationActivity.class));
+                    break;
+                case R.id.nav_feedback_feedback:
+                    startActivity(new Intent(HomeActivity.this, FeedbackActivity.class));
+                    break;
+                case R.id.nav_adout_me:
+                    startActivity(new Intent(HomeActivity.this, AboutusActivity.class));
+                    break;
+                case R.id.nav_sign_out:
+                    AppManager.getAppManager().finishAllActivity();
+                    System.exit(0);
+                    break;
             }
+            mDrawerLayout.closeDrawers();
+            return true;
         });
         //底部菜单
         TextBadgeItem numberBadgeItem = new TextBadgeItem();

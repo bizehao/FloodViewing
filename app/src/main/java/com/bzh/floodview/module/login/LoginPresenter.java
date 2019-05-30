@@ -43,20 +43,19 @@ public class LoginPresenter implements LoginContract.Presenter {
         mView.openProgress();
         String username = mView.getUsername();
         String password = mView.getPassword();
-        Observable<BaseApi<ApiLoginData>> observable = retrofitHelper.getServer().login(username, password);
-        retrofitHelper.requestHandler(observable, (Context) mView, new RetrofitHelper.callHandler<BaseApi<ApiLoginData>>() {
+        Observable<BaseApi<Integer>> observable = retrofitHelper.getServer().login(username, password);
+        retrofitHelper.requestHandler(observable, (Context) mView, new RetrofitHelper.callHandler<BaseApi<Integer>>() {
             @Override
-            public void run(BaseApi<ApiLoginData> apiLoginDataBaseApi) {
+            public void run(BaseApi<Integer> apiLoginDataBaseApi) {
                 mView.closeProgress();
-                ApiLoginData apiLogin = apiLoginDataBaseApi.getData();
-                if (apiLogin.getState()) {
-                    App.setUser(apiLogin.getUsername(), apiLogin.getX_Auth_Token());
-                    mView.showMessage((String) apiLoginDataBaseApi.getMessage());
+                if (apiLoginDataBaseApi.getCode() == 200) {
+                    mView.showMessage("登录成功");
                     mView.goHome();
                     mainAttrs.setLoginSign(true);
+                    App.userId = apiLoginDataBaseApi.getData();
                     AppManager.getAppManager().finishActivity();
                 } else {
-                    mView.showMessage((String) apiLoginDataBaseApi.getMessage());
+                    mView.showMessage("登录失败");
                 }
             }
 

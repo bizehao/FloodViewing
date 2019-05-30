@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <com.bzh.widgets.textview.SuperTextView
+        android:id="@+id/ilri_tx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="1dp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:text="大青沟水库"
+        android:maxEms="2"
+        android:scrollHorizontally="false"
+        android:textSize="18sp" />
+
+    <CheckBox
+        android:id="@+id/ilri_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

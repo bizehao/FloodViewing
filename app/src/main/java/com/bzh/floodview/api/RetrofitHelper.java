@@ -1,6 +1,8 @@
 package com.bzh.floodview.api;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
@@ -45,7 +47,10 @@ public class RetrofitHelper {
     }
 
     //添加动态head
-    private OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new RequestInterceptor()).build();
+    private OkHttpClient client = new OkHttpClient.Builder()
+            .addInterceptor(new RequestCookiesInterceptor())
+            .addInterceptor(new ReceivedCookiesInterceptor())
+            .build();
 
     private GsonConverterFactory gsonFactory = GsonConverterFactory.create(new GsonBuilder().create());
 
@@ -57,24 +62,38 @@ public class RetrofitHelper {
     }
 
     //动态head
-    public class RequestInterceptor implements Interceptor {
+    public class RequestCookiesInterceptor implements Interceptor {
 
         @Override
-        public Response intercept(Chain chain) throws IOException {
+        public Response intercept(@NonNull Chain chain) throws IOException {
             Request original = chain.request();
-            Request request;
-            if (mainAttrs.getLoginSign().getValue() != null && mainAttrs.getLoginSign().getValue()) {
-                request = original.newBuilder()
-                        .header("X_Auth_Token", App.getToken())
-                        .method(original.method(), original.body())
-                        .build();
-            } else {
-                request = original.newBuilder()
-                        .method(original.method(), original.body())
-                        .build();
-            }
+            Request request = original.newBuilder()
+                    .header("cookie", App.cookid)
+                    .method(original.method(), original.body())
+                    .build();
 
             return chain.proceed(request);
+        }
+    }
+
+    public class ReceivedCookiesInterceptor implements Interceptor {
+        @Override
+        public Response intercept(@NonNull Chain chain) throws IOException {
+            Response originalResponse = chain.proceed(chain.request());
+
+            if (App.cookid.equals("")) {
+                if (!originalResponse.headers("Set-Cookie").isEmpty()) {
+                    for (String header : originalResponse.headers("Set-Cookie")) {
+                        int signal = header.indexOf("JSESSIONID");
+                        if(signal != -1){
+                            App.cookid = header.substring(0,header.indexOf(';'));
+                        }
+
+                    }
+                }
+            }
+
+            return originalResponse;
         }
     }
 
@@ -109,8 +128,8 @@ public class RetrofitHelper {
                         callBack.run(t);
                     }
                 }, throwable -> {
+                    Timber.e(throwable.getMessage());
                     callBack.handlerError();
-                    System.out.println(throwable.getMessage());
                 });
     }
 

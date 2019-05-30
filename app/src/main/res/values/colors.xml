@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#353333</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#353333</color>
     <color name="colorAccent">#e1940f</color>
     <color name="blue">#177ed3</color>
     <!-- 保险蓝色字体颜色 3598da-->

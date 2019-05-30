@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.R;
@@ -61,12 +62,9 @@ public class IndexFragment extends BaseFragment {
         initDatas();
         initShow();
         Observable<BaseApi<List<ApiCounty>>> observable = retrofitHelper.getServer().getCounty();
-        retrofitHelper.requestHandler(observable, getActivity(), new RetrofitHelper.callHandler<BaseApi<List<ApiCounty>>>() {
-            @Override
-            public void run(BaseApi<List<ApiCounty>> listBaseApi) {
-                List<ApiCounty> counties = listBaseApi.getData();
-                mainAttrs.setCounties(counties);
-            }
+        retrofitHelper.requestHandler(observable, getActivity(), listBaseApi -> {
+            List<ApiCounty> counties = listBaseApi.getData();
+            mainAttrs.setCounties(counties);
         });
     }
 
@@ -95,7 +93,7 @@ public class IndexFragment extends BaseFragment {
             @Override
             public void onGlobalLayout() {
                 recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                showAdapter = new ShowAdapter(submenus,recyclerView.getHeight() / submenus.size() * 2 - 35);
+                showAdapter = new ShowAdapter(submenus, recyclerView.getHeight() / submenus.size() * 2 - 35);
                 recyclerView.setAdapter(showAdapter);
             }
         });

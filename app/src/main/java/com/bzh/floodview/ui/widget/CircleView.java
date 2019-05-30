@@ -13,7 +13,7 @@ import com.bzh.floodview.R;
 
 /**
  * @author 毕泽浩
- * @Description:
+ * @Description: 圆形
  * @time 2018/10/26 14:36
  */
 public class CircleView extends View {

@@ -5,6 +5,7 @@ import com.bzh.floodview.model.ApiCounty;
 import com.bzh.floodview.model.ApiFriends;
 import com.bzh.floodview.model.ApiRainInfo;
 import com.bzh.floodview.model.ApiRainStInfo;
+import com.bzh.floodview.model.ApiStations;
 import com.bzh.floodview.model.BaseApi;
 import com.bzh.floodview.model.back.Feedback;
 import com.bzh.floodview.model.login.ApiLoginData;
@@ -44,117 +45,128 @@ public interface RetrofitService {
 
     //登陆
     @FormUrlEncoded
-    @POST("user/login")
-    Observable<BaseApi<ApiLoginData>> login(@Field("username") String username,
+    @POST("usercontroller/login")
+    Observable<BaseApi<Integer>> login(@Field("username") String username,
                                             @Field("password") String password);
 
     //注销
-    @GET("user/login-out")
+    @GET("server/user/login-out")
     Observable<ApiCommon> loginOut(@Query("username") String username);
 
     //获取用户信息,搜索用户
-    @GET("user/get-user-info")
+    @GET("server/user/get-user-info")
     Observable<ApiUserInfo> getUserInfo(@Query("username") String username);
 
     //注册用户
     @FormUrlEncoded
-    @POST("user/register")
+    @POST("server/user/register")
     Observable<ApiRegister> register(@FieldMap Map<String, String> requestRegister);
 
     //获取用户信息,搜索用户(模糊搜索,多个用户)
-    @GET("user/get-user-infos")
+    @GET("server/user/get-user-infos")
     Observable<ApiUserInfos> getUserInfos(@Query("username") String username);
 
     //获取推荐用户
-    @GET("user/recommendFriend")
+    @GET("server/user/recommendFriend")
     Observable<ApiUserInfos> getRecUser(@Query("username") String username);
 
     //添加好友
     @FormUrlEncoded
-    @POST("user/addFriend")
+    @POST("server/user/addFriend")
     Observable<ApiaddFriends> addFriends(@Field("username") String username,
                                          @Field("friendName") String friendName,
                                          @Field("remarkName") String remarkName);
 
     //查询好友信息
-    @GET("user/getFriends")
+    @GET("server/user/getFriends")
     Observable<ApiFriends> getFriends(@Query("username") String username);
 
 
     //上传图片
     @Multipart
-    @POST("user/uploadPng")
+    @POST("server/user/uploadPng")
     Observable<ResponseBody> uploadPng(@Part("username") RequestBody username, @Part MultipartBody.Part headPortrait);
 
     //删除好友
-    @GET("user/deleteFriend")
+    @GET("server/user/deleteFriend")
     Observable<ApiCommon> delFriend(@Query("username") String username, @Query("friendName") String friendName);
 
 
     //降雨信息
-    @GET("rainInfo/rainfalls_all")
+    @GET("server/rainInfo/rainfalls_all")
     Observable<ApiRainInfo> getRainfallInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
 
     //雨强信息
-    @GET("rainInfo/rainIntensity_all")
+    @GET("server/rainInfo/rainIntensity_all")
     Observable<ApiRainStInfo> getIntensityOfRainInfo(@Query("stm") String stm,@Query("addvcd") String adcd);
 
     //河道信息
-    @GET("waterInfo/river_all")
+    @GET("server/waterInfo/river_all")
     Observable<ApiRiverInfo> getRiverInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
 
     //水库信息
-    @GET("waterInfo/reservoir_all")
+    @GET("server/waterInfo/reservoir_all")
     Observable<ApiRsvrInfo> getRsvrInfo(@Query("stm") String stm, @Query("etm") String etm,@Query("addvcd") String adcd);
 
     //汛情摘要降雨量
-    @GET("floodAbstract/floodAbstract_rain_all")
+    @GET("server/floodAbstract/floodAbstract_rain_all")
     Observable<ApiRainInfo> getFloodRainInfo(@Query("stm") String stm, @Query("etm") String etm, @Query("nums") String nums,@Query("addvcd")String adcd);
 
     //县域信息
-    @GET("OtherController/allAddvcds")
+    @GET("server/OtherController/allAddvcds")
     Observable<BaseApi<List<ApiCounty>>> getCounty();
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //地图相关
 
     //获取坐标信息
-    @GET("mapController/getStcd")
+    @GET("server/mapController/getStcd")
     Observable<ApiStcd> getAoordinate();
 
     //获取降雨量的站点信息
-    @GET("mapController/rainfallInformation")
+    @GET("server/mapController/rainfallInformation")
     Observable<BaseApi<List<ApiRainMapData>>> getStateRain(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend") String etm);
 
     //获取河道水情的站点信息
-    @GET("mapController/riverStationInformation")
+    @GET("server/mapController/riverStationInformation")
     Observable<BaseApi<ApiRiverMapData>> getStateRiver(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend") String etm);
 
     //获取水库水位的站点信息
-    @GET("mapController/reservoirWaterLevelStationInformation")
+    @GET("server/mapController/reservoirWaterLevelStationInformation")
     Observable<BaseApi<ApiRsvrMapData>> getStateRsvr(@Query("stcd") String stcd, @Query("tmstart") String stm, @Query("tmend") String etm);
 
     //降雨量表格
-    @GET("mapController/rainfallTable")
+    @GET("server/mapController/rainfallTable")
     Observable<BaseApi<List<ApiRainTable>>> getRainTable(@Query("tmstart") String stm, @Query("tmend") String etm);
 
     //河道表格
-    @GET("mapController/theRiverForms")
+    @GET("server/mapController/theRiverForms")
     Observable<BaseApi<List<ApiRiverTable>>> getRiverTable(@Query("tmstart") String stm, @Query("tmend") String etm);
 
     //水库表格
-    @GET("mapController/reservoirForm")
+    @GET("server/mapController/reservoirForm")
     Observable<BaseApi<List<ApiRsvrTable>>> getRsvrTable(@Query("tmstart") String stm, @Query("tmend") String etm);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-    @GET("auth/say")
+    @GET("server/auth/say")
     Observable<BaseApi<Test>> getSay();
 
     //添加意见反馈
-    @POST("addFeedBack")
+    @POST("server/addFeedBack")
     Observable<BaseApi<Boolean>> getaddFeedBack(@Query("contents") String contents, @Query("uName") String uname );
 
-    @GET("")
+    @GET("server/")
     Observable<BaseApi<Administrativearea>> getAdministrativearea();
+
+    ///////////////////////////2019-05-23新增模块///////////////////////
+
+    //获取县域站号
+    @GET("server/stationController/selectSSA")
+    Observable<BaseApi<List<ApiStations>>> getAdcdAndStations(@Query("id") int id);
+
+    //给当前用户添加县域站号
+    @FormUrlEncoded
+    @POST("server/stationController/addUserStcd")
+    Observable<BaseApi<String>> addUserStcd(@Field("id") int id,@Field("list")List<String> list);
 
 }

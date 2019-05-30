@@ -3,7 +3,10 @@
     <group android:checkableBehavior="single">
 
 
-
+        <item
+            android:id="@+id/nav_my_stations"
+            android:icon="@mipmap/nav_menu_feedback_feedback"
+            android:title="我的站点" />
         <item
             android:id="@+id/nav_feedback_feedback"
             android:icon="@mipmap/nav_menu_feedback_feedback"

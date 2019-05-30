@@ -41,6 +41,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':sofialibrary')
     implementation project(':chatkit')
+    implementation project(':widgets')
 
     //气泡
     implementation project(':apilibrary')

@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     public String getUsername() {
 
-        return "111111";//loginUserText.getText().toString();
+        return "123456";//loginUserText.getText().toString();
     }
 
     @Override
