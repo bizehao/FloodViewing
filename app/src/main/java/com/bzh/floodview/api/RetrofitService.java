@@ -3,12 +3,11 @@ package com.bzh.floodview.api;
 import com.bzh.floodview.model.ApiCommon;
 import com.bzh.floodview.model.ApiCounty;
 import com.bzh.floodview.model.ApiFriends;
+import com.bzh.floodview.model.ApiLogin;
 import com.bzh.floodview.model.ApiRainInfo;
 import com.bzh.floodview.model.ApiRainStInfo;
 import com.bzh.floodview.model.ApiStations;
 import com.bzh.floodview.model.BaseApi;
-import com.bzh.floodview.model.back.Feedback;
-import com.bzh.floodview.model.login.ApiLoginData;
 import com.bzh.floodview.model.mapData.ApiRainMapData;
 import com.bzh.floodview.model.mapData.ApiRainTable;
 import com.bzh.floodview.model.ApiRegister;
@@ -46,15 +45,15 @@ public interface RetrofitService {
     //登陆
     @FormUrlEncoded
     @POST("usercontroller/login")
-    Observable<BaseApi<Integer>> login(@Field("username") String username,
-                                            @Field("password") String password);
+    Observable<BaseApi<ApiLogin>> login(@Field("username") String username,
+                                        @Field("password") String password);
 
     //注销
     @GET("server/user/login-out")
     Observable<ApiCommon> loginOut(@Query("username") String username);
 
     //获取用户信息,搜索用户
-    @GET("server/user/get-user-info")
+    @GET("server/chatController/get-user-info")
     Observable<ApiUserInfo> getUserInfo(@Query("username") String username);
 
     //注册用户
@@ -63,32 +62,32 @@ public interface RetrofitService {
     Observable<ApiRegister> register(@FieldMap Map<String, String> requestRegister);
 
     //获取用户信息,搜索用户(模糊搜索,多个用户)
-    @GET("server/user/get-user-infos")
+    @GET("server/chatController/get-user-infos")
     Observable<ApiUserInfos> getUserInfos(@Query("username") String username);
 
     //获取推荐用户
-    @GET("server/user/recommendFriend")
+    @GET("server/chatController/recommendFriend")
     Observable<ApiUserInfos> getRecUser(@Query("username") String username);
 
     //添加好友
     @FormUrlEncoded
-    @POST("server/user/addFriend")
+    @POST("server/chatController/addFriend")
     Observable<ApiaddFriends> addFriends(@Field("username") String username,
                                          @Field("friendName") String friendName,
                                          @Field("remarkName") String remarkName);
 
     //查询好友信息
-    @GET("server/user/getFriends")
+    @GET("server/chatController/getFriends")
     Observable<ApiFriends> getFriends(@Query("username") String username);
 
 
     //上传图片
     @Multipart
-    @POST("server/user/uploadPng")
+    @POST("server/chatController/uploadPng")
     Observable<ResponseBody> uploadPng(@Part("username") RequestBody username, @Part MultipartBody.Part headPortrait);
 
     //删除好友
-    @GET("server/user/deleteFriend")
+    @GET("server/chatController/deleteFriend")
     Observable<ApiCommon> delFriend(@Query("username") String username, @Query("friendName") String friendName);
 
 

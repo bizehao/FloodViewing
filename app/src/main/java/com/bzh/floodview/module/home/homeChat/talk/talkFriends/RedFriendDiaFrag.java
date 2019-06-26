@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dagger.android.support.DaggerAppCompatDialogFragment;
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 /**
  * @author 毕泽浩
@@ -112,33 +113,31 @@ public class RedFriendDiaFrag extends DaggerAppCompatDialogFragment {
     //展示好友列表
     public void shouUsers(List<ApiUserInfos.DataBean> friends) {
         adapter = new AddFriendsRecycleViewAdapter(getActivity(), friends);
-        adapter.setListener(new AddFriendsRecycleViewAdapter.evenClickListener() { //点击添加好友
-            @Override
-            public void setOnClickListener(ApiUserInfos.DataBean dataBean, int position) {
-                String name = dataBean.getUsername();
-                Observable<ApiaddFriends> observable = retrofitHelper.getServer().addFriends(App.getUsername(), name, "");
-                retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
-                    @Override
-                    public <T> void run(T t) {
-                        ApiaddFriends apiaddFriends = (ApiaddFriends) t;
-                        if (apiaddFriends.isData()) {
-                            FriendsInfo friendsInfo = new FriendsInfo(dataBean.getUsername(),
-                                    dataBean.getName(),
-                                    dataBean.getHeadportrait(),
-                                    dataBean.getDescript(),
-                                    dataBean.getAddress(),
-                                    dataBean.getMotto(),
-                                    dataBean.getUsername());
-                            AppDatabase.getAppDatabase().friendsInfoDao().insert(friendsInfo);//将新添加的好友缓存进数据库里
-                            adapter.onRefreshView(position);//动态刷新这一行数据
-                        }
-                        AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
-                        dialog.setTitle("提示：");//设置对话框标题
-                        dialog.setMessage(apiaddFriends.getRequestMessage());//设置文字显示内容
-                        dialog.show();//显示对话框
+        //点击添加好友
+        adapter.setListener((dataBean, position) -> {
+            String name = dataBean.getUsername();
+            Observable<ApiaddFriends> observable = retrofitHelper.getServer().addFriends(App.username, name, "");
+            retrofitHelper.successHandler(observable, new RetrofitHelper.callBack() {
+                @Override
+                public <T> void run(T t) {
+                    ApiaddFriends apiaddFriends = (ApiaddFriends) t;
+                    if (apiaddFriends.isData()) {
+                        FriendsInfo friendsInfo = new FriendsInfo(dataBean.getUsername(),
+                                dataBean.getName(),
+                                dataBean.getHeadportrait(),
+                                dataBean.getDescript(),
+                                dataBean.getAddress(),
+                                dataBean.getMotto(),
+                                dataBean.getUsername());
+                        AppDatabase.getAppDatabase().friendsInfoDao().insert(friendsInfo);//将新添加的好友缓存进数据库里
+                        adapter.onRefreshView(position);//动态刷新这一行数据
                     }
-                });
-            }
+                    AlertDialog dialog = new AlertDialog.Builder(getActivity()).create();
+                    dialog.setTitle("提示：");//设置对话框标题
+                    dialog.setMessage(apiaddFriends.getRequestMessage());//设置文字显示内容
+                    dialog.show();//显示对话框
+                }
+            });
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
@@ -158,6 +157,7 @@ public class RedFriendDiaFrag extends DaggerAppCompatDialogFragment {
                         if (list.get(i).getUsername().equals(dataBean.get(j).getUsername()) && !dataBean.get(j).isExit()) {
                             System.out.println(dataBean.get(j).getUsername());
                             dataBean.get(j).setExit(true);
+                            dataBean.get(j).setUsername(dataBean.get(j).getUsername()+"("+list.get(i).getRemarkname()+")");
                         }
                     }
                 }

@@ -1,22 +1,13 @@
 package com.bzh.floodview.module.login;
 
 import android.content.Context;
-import android.widget.Toast;
-
 import com.bzh.floodview.App;
 import com.bzh.floodview.MainAttrs;
 import com.bzh.floodview.api.RetrofitHelper;
 import com.bzh.floodview.model.ApiLogin;
 import com.bzh.floodview.model.BaseApi;
-import com.bzh.floodview.model.login.ApiLoginData;
 import com.bzh.floodview.utils.AppManager;
-
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Inject;
-
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 /**
  * @author 毕泽浩
@@ -43,16 +34,17 @@ public class LoginPresenter implements LoginContract.Presenter {
         mView.openProgress();
         String username = mView.getUsername();
         String password = mView.getPassword();
-        Observable<BaseApi<Integer>> observable = retrofitHelper.getServer().login(username, password);
-        retrofitHelper.requestHandler(observable, (Context) mView, new RetrofitHelper.callHandler<BaseApi<Integer>>() {
+        Observable<BaseApi<ApiLogin>> observable = retrofitHelper.getServer().login(username, password);
+        retrofitHelper.requestHandler(observable, (Context) mView, new RetrofitHelper.callHandler<BaseApi<ApiLogin>>() {
             @Override
-            public void run(BaseApi<Integer> apiLoginDataBaseApi) {
+            public void run(BaseApi<ApiLogin> apiLoginDataBaseApi) {
                 mView.closeProgress();
                 if (apiLoginDataBaseApi.getCode() == 200) {
                     mView.showMessage("登录成功");
                     mView.goHome();
                     mainAttrs.setLoginSign(true);
-                    App.userId = apiLoginDataBaseApi.getData();
+                    App.userId = apiLoginDataBaseApi.getData().getUserId();
+                    App.username = apiLoginDataBaseApi.getData().getUsername();
                     AppManager.getAppManager().finishActivity();
                 } else {
                     mView.showMessage("登录失败");

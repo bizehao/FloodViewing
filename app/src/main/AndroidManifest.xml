@@ -28,11 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".module.test.SampleTestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".module.setting.StationActivity" />
 
@@ -52,6 +48,11 @@
 
         <activity android:name=".MainActivity"> <!-- add  android:theme="@style/AppTheme.Launcher" -->
            <!-- 首页面 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".module.login.LoginActivity"

@@ -52,6 +52,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class TalkFragment extends BaseFragment {
 
@@ -60,7 +61,9 @@ public class TalkFragment extends BaseFragment {
     @BindView(R.id.is_online)
     FrameLayout mFrameLayout;
 
-    private WebSocketChatClient webSocketChatClient = WebSocketChatClient.getWebSocketInstance();
+    @Inject
+    WebSocketChatClient webSocketChatClient;
+
     @Inject
     Gson gson;
     @Inject
@@ -94,16 +97,7 @@ public class TalkFragment extends BaseFragment {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        mainAttrs.getLoginSign().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                if (aBoolean != null && aBoolean) {
-                    online();
-                } else {
-                    noOnline();
-                }
-            }
-        });
+        online();
     }
 
     //在线的处理
@@ -194,22 +188,6 @@ public class TalkFragment extends BaseFragment {
         webSocketChatClient.setDialogHandler(talk -> {
             mTalkViewModel.setMessageInfoLiveData(new MessageInfo(talk, false));
         });
-    }
-
-    //不在线的处理
-    public void noOnline() {
-        //加载出错过度页面
-        mPageLayout = new PageLayout.Builder(getActivity())
-                .initPage(mFrameLayout)
-                .setCustomView(LayoutInflater.from(getActivity()).inflate(R.layout.layout_custom, null))
-                .setOnRetryListener(new PageLayout.OnRetryClickListener() {
-                    @Override
-                    public void onRetry() {
-                        LoginActivity.open(getActivity());
-                    }
-                })
-                .create();
-        mPageLayout.showError();
     }
 
     //添加会话他人发送

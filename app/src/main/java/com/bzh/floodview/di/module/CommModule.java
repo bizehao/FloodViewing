@@ -19,6 +19,7 @@ import javax.inject.Singleton;
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import timber.log.Timber;
 
 /**
  * @author 毕泽浩

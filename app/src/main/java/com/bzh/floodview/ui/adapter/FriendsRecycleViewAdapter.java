@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bzh.floodview.R;
 import com.bzh.floodview.data.model.FriendsInfo;
 import com.bzh.floodview.model.Friend;
-//import com.bzh.floodview.utils.PinyinUtils;
+import com.bzh.floodview.utils.PinyinUtils;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import timber.log.Timber;
 
 /**
  * @author 毕泽浩
@@ -54,9 +55,9 @@ public class FriendsRecycleViewAdapter extends RecyclerView.Adapter<FriendsRecyc
                 friends.add(new Friend(friendsInfo.getUsername(),
                         friendsInfo.getRemarkname(),
                         friendsInfo.getHeadportrait(),
-                        /*PinyinUtils.getPinYin(friendsInfo.getRemarkname()))*/""));
+                        PinyinUtils.getPinYin(friendsInfo.getRemarkname())));
             }
-            sort(friends);
+            sortList(friends);
             for (int i = 0; i < friends.size(); i++) {
                 //当前城市拼音首字母
                 String currentLetter = "";//PinyinUtils.getFirstLetter(friends.get(i).getPinyin());
@@ -172,7 +173,8 @@ public class FriendsRecycleViewAdapter extends RecyclerView.Adapter<FriendsRecyc
     }
 
     //排序
-    public void sort(List<Friend> friends) {
+    private void sortList(List<Friend> friends) {
+        Timber.e("长度"+friends.size());
         List<Friend> f1 = new ArrayList<>(); //字母集合
         List<Friend> f2 = new ArrayList<>(); //数组集合
         for (Friend friend : friends) {

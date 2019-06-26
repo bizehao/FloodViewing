@@ -25,6 +25,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 public class HomePresenter implements HomeContract.Presenter {
 
@@ -68,26 +69,23 @@ public class HomePresenter implements HomeContract.Presenter {
         retrofitHelper.successHandler(friends, new RetrofitHelper.callBack() { //缓存该用户的好友信息
             @Override
             public <T> void run(T t) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ApiFriends apiUserInfo = (ApiFriends) t;
-                        //daoSession.getMessageInfoDao().deleteAll();
-                        List<ApiFriends.DataBean> list = apiUserInfo.getData();
-                        List<FriendsInfo> infos = new ArrayList<>();
-                        for (ApiFriends.DataBean item : list) {
-                            FriendsInfo info = new FriendsInfo();
-                            info.setUsername(item.getUsername());
-                            info.setName(item.getName());
-                            info.setAddress(item.getAddress());
-                            info.setDescript(item.getDescript());
-                            info.setHeadportrait(item.getHeadportrait());
-                            info.setMotto(item.getMotto());
-                            info.setRemarkname(item.getRemarkName());
-                            infos.add(info);
-                        }
-                        AppDatabase.getAppDatabase().friendsInfoDao().insert(infos);
+                new Thread(() -> {
+                    ApiFriends apiUserInfo = (ApiFriends) t;
+                    //daoSession.getMessageInfoDao().deleteAll();
+                    List<ApiFriends.DataBean> list = apiUserInfo.getData();
+                    List<FriendsInfo> infos = new ArrayList<>();
+                    for (ApiFriends.DataBean item : list) {
+                        FriendsInfo info = new FriendsInfo();
+                        info.setUsername(item.getUsername());
+                        info.setName(item.getName());
+                        info.setAddress(item.getAddress());
+                        info.setDescript(item.getDescript());
+                        info.setHeadportrait(item.getHeadportrait());
+                        info.setMotto(item.getMotto());
+                        info.setRemarkname(item.getRemarkName());
+                        infos.add(info);
                     }
+                    AppDatabase.getAppDatabase().friendsInfoDao().insert(infos);
                 }).start();
             }
         });
