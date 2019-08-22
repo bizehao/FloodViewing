@@ -11,9 +11,9 @@ import timber.log.Timber;
 
 public class App extends DaggerApplication {
 
-    public static final String ip = "192.168.1.197:8762/";//222.128.66.136:5225/floodserver/
+    public static final String ip = "192.168.1.220:8762/";//222.128.52.101:5225/floodserver/
 
-    public static final String socketIp = "192.168.1.197:8763/";//222.128.66.136:5302/
+    public static final String socketIp = "192.168.1.220:8763/";//222.128.52.101:5302/
 
     //当前会话的cookie
     public static String cookid = "";
